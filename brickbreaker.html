@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <title>Brick Breaker</title>
+  <meta name="description" content="Justin Neighbors website">
+  <meta name="author" content="Justin Neighbors">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"">
+  <link rel=" manifest" href="site.webmanifest">
+  <link rel="apple-touch-icon" href="icon.png">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link rel="stylesheet" href="css/normalize.css">
+  <link rel="stylesheet" href="css/main.css">
+  <meta name="theme-color" content="#00004d">
+</head>
+
+<body>
+  <!--[if IE]>
+    <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p>
+  <![endif]-->
+  <header class="navbar-expand-lg w-100 fixed-top">
+    <div class="d-inline-flex w-100" role="navigation">
+      <a class="d-inline pl-2" href="/"><img src="/neighbors.gif" alt="logo" class="pt-2" style="height:44px;"></a>
+      <nav class="navbar navbar-expand-lg w-100 py-0" role="navigation" title="Main Row of Main Navigation">
+        <ul class="nav navbar-nav d-inline ml-auto">
+          <li class="d-inline"><a href="/history.html" class="px-2" title="History">History</a></li>
+          <li class="dropdown d-inline">
+            <a href="#" class="dropdown-toggle px-2" data-toggle="dropdown" role="button" aria-haspopup="true"
+              aria-expanded="false">Games <span class="caret"></span></a>
+            <ul class="dropdown-menu mt-4">
+              <li><a href="/brickbreaker.html" title="History">Brick Breaker</a></li>
+              <li role="separator" class="dropdown-divider"></li>
+              <li><a href="/tennis.html" title="History">Tennis</a></li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+  <hr class="m-0" />
+  <div id="brickbreaker" class="container-fluid">
+    <ol class="breadcrumb p-0 m-0">
+      <li><a href="/" title="Home">Home</a></li>
+      <li class="active">Brick Breaker</li>
+    </ol>
+    <h1 class="px-0 mx-0 my-2">Brick Breaker</h1>
+    <canvas id="gameCanvas" width="10" height="10"></canvas>
+  </div>
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
+  </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous">
+  </script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
+  </script>
+  <script src="https://unpkg.com/vue"></script>
+  <script src="js/bb.js"></script>
+  <script src="js/vendor/modernizr-3.7.1.min.js"></script>
+  <!--<script>
+    window.ga = function () { ga.q.push(arguments) }; ga.q = []; ga.l = +new Date;
+    ga('create', 'UA-139952944-1', 'auto'); ga('set','transport','beacon'); ga('send', 'pageview')
+  </script>
+  <script src="https://www.google-analytics.com/analytics.js" async defer></script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-139952944-1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'UA-139952944-1');
+  </script>-->
+</body>
+
+</html>
