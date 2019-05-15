@@ -1,8 +1,8 @@
 {
-  "short_name": "",
-  "name": "",
+  "short_name": "Neighbors",
+  "name": "Neighbors",
   "icons": [{
-    "src": "icon.png",
+    "src": "favicon.png",
     "type": "image/png",
     "sizes": "192x192"
   }],

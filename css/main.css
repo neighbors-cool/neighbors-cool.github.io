@@ -102,23 +102,38 @@ textarea {
    Author's custom styles
    ========================================================================== */
 
-
-body { 
-    margin-top: 50px;
-    color: #fff;
-    background-color: #000;
+@media (min-width: 425px) {
+    body { 
+        margin-top: 50px;
+        color: #fff;
+        background-color: #000;
+    }    
+}
+@media (max-width: 424px) {
+    body { 
+        margin-top: 76px;
+        color: #fff;
+        background-color: #000;
+    }    
 }
 
 header { 
     background-color: #000;
 }
-
+h1 {
+    padding-left: 0!important;
+    padding-right: 0!important;
+    margin-bottom: .5rem!important;
+    margin-top: .5rem!important;
+    margin-left: 0!important;
+    margin-right: 0!important;
+}
 .breadcrumb {
     background-color:transparent;
 }
 .breadcrumb>li+li:before,
 .navbar-nav>li+li:before {
-    padding: 0 0 0 5px;
+    padding: 0;
     color: #ccc;
     content: "/\00a0";
 }
