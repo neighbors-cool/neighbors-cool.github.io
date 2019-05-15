@@ -21,7 +21,7 @@ window.onload = function() {
     canvas = document.getElementById('gameCanvas');
     var dim = getViewportDimension();
     canvas.width = dim.w - 20;
-    canvas.height = dim.h - 180;
+    canvas.height = dim.h - 140;
     canvasContext = canvas.getContext('2d');
 
     var framesPerSecond = 30;
@@ -37,7 +37,7 @@ window.onload = function() {
         var mousePos = calculateMousePos(evt);
         paddle1Y = mousePos.y - (PADDLE_HEIGHT / 2);
     });
-}
+};
 
 function getViewportDimension() {
     var e = window, a = 'inner';
@@ -46,6 +46,11 @@ function getViewportDimension() {
         e = document.documentElement || document.body;
     }
     return {w:e[a + 'Width'], h:e[a + 'Height']};
+}
+
+function setText() {
+  canvasContext.fillStyle = "white";
+  canvasContext.font = "30px Roboto";
 }
 
 function handleMouseClick(evt) {
@@ -132,11 +137,11 @@ function drawEverything() {
     // Draw Background
     colorRect(0, 0, canvas.width, canvas.height, 'black');
     if (showingWinScreen) {
-        canvasContext.fillStyle = 'white';
+        setText();
         if (player1Score >= WINNING_SCORE) {
-            canvasContext.fillText("Left Player Won!", 350, 200);
+            canvasContext.fillText("You Won!", 350, 200);
         } else if (player2Score >= WINNING_SCORE) {
-            canvasContext.fillText("Right Player Won!", 350, 200);
+            canvasContext.fillText("You lost...", 350, 200);
         }
         canvasContext.fillText("Click to Continue", 350, 500);
         return;
@@ -152,6 +157,7 @@ function drawEverything() {
     // Draw Ball
     colorCircle(ballX, ballY, 10, 'white');
 
+    setText();
     canvasContext.fillText(player1Score, 100, 100);
     canvasContext.fillText(player2Score, canvas.width - 100, 100);
 }

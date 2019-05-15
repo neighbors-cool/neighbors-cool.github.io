@@ -116,8 +116,9 @@ header {
 .breadcrumb {
     background-color:transparent;
 }
-.breadcrumb>li+li:before {
-    padding: 0 5px;
+.breadcrumb>li+li:before,
+.navbar-nav>li+li:before {
+    padding: 0 0 0 5px;
     color: #ccc;
     content: "/\00a0";
 }

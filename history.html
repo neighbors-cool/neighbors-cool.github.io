@@ -3,14 +3,13 @@
 
 <head>
   <meta charset="utf-8">
-  <title>Neighbors</title>
+  <title>History</title>
   <meta name="description" content="Justin Neighbors website">
   <meta name="author" content="Justin Neighbors">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"">
   <link rel=" manifest" href="site.webmanifest">
   <link rel="apple-touch-icon" href="icon.png">
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   <link rel="stylesheet" href="css/normalize.css">
   <link rel="stylesheet" href="css/main.css">
   <meta name="theme-color" content="#00004d">
@@ -21,24 +20,26 @@
     <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p>
   <![endif]-->
   <header class="navbar-expand-lg w-100 fixed-top">
-    <div class="d-inline-flex w-100" role="navigation">
-      <a class="d-inline pl-2" href="/"><img src="/neighbors.gif" alt="logo" class="pt-2" style="height:44px;"></a>
-      <nav class="navbar navbar-expand-lg w-100 py-0" role="navigation" title="Main Row of Main Navigation">
-        <ul class="nav navbar-nav d-inline ml-auto">
-          <li class="d-inline"><a href="/history.html" class="px-2" title="History">History</a></li>
-          <li class="dropdown d-inline">
-            <a href="#" class="dropdown-toggle px-2" data-toggle="dropdown" role="button" aria-haspopup="true"
-              aria-expanded="false">Games <span class="caret"></span></a>
-            <ul class="dropdown-menu mt-4">
-              <li><a href="/brickbreaker.html" title="History">Brick Breaker</a></li>
-              <li role="separator" class="dropdown-divider"></li>
-              <li><a href="/tennis.html" title="History">Tennis</a></li>
-            </ul>
-          </li>
-        </ul>
-      </nav>
-    </div>
-  </header>
+      <div class="d-inline-flex w-100" role="navigation">
+        <a class="d-inline pl-2" href="/"><img src="/neighbors.gif" alt="logo" class="pt-2" style="height:44px;"></a>
+        <nav class="navbar navbar-expand-lg w-100 py-0" role="navigation" title="Main Row of Main Navigation">
+          <ul class="nav navbar-nav d-inline">
+            <li class="d-inline"><a href="/history.html" class="p-0" title="History">History</a></li>
+            <li class="dropdown d-inline">
+              <a href="#" class="dropdown-toggle p-0" data-toggle="dropdown" role="button" aria-haspopup="true"
+                aria-expanded="false">Games <span class="caret"></span></a>
+              <ul class="dropdown-menu mt-3" style="float:left;position:absolute;">
+                <li><a href="/brickbreaker.html" title="Brick Breaker">Brick Breaker</a></li>
+                <li role="separator" class="dropdown-divider"></li>
+                <li><a href="/tennis.html" title="Tennis">Tennis</a></li>
+                <li role="separator" class="dropdown-divider"></li>
+                <li><a href="/snake.html" title="Snake">Snake</a></li>
+              </ul>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </header>
   <hr class="m-0" />
   <div id="history" class="container-fluid">
     <ol class="breadcrumb p-0">
@@ -105,18 +106,12 @@
       using <a :href="getWiki('TensorFlow')" target="_blank">Tensor Flow</a>.
     </p>
   </div>
-  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
-  </script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
-    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous">
-  </script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
-  </script>
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.min.js"></script>
-  <script src="js/history.js"></script>
   <script src="js/vendor/modernizr-3.7.1.min.js"></script>
+  <script src="js/history.js"></script>
   <script>
     window.ga = function () { ga.q.push(arguments) }; ga.q = []; ga.l = +new Date;
     ga('create', 'UA-139952944-1', 'auto'); ga('set','transport','beacon'); ga('send', 'pageview')

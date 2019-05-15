@@ -44,12 +44,10 @@ window.onload = function () {
         // var now = new Date().getTime();
         moveEverything();
         drawEverything();
-        // var execTime = (new Date().getTime() - now);
-        // if(times.hasOwnProperty(execTime)) {
-        //     times[execTime] += 1;
-        // } else {
-        //     times[execTime] = 1;
-        // }
+        if(paused && started_yet) {
+            setText();
+            canvasContext.fillText('Paused', textStartX, centerScreenY + 50);
+        }
     }, (1000 / framesPerSecond));
 
     canvas.addEventListener('mousedown', handleMouseClick);
@@ -71,7 +69,7 @@ function setup() {
     paddleY = canvas.height - PADDING - PADDLE_HEIGHT;
     centerScreenX = canvas.width / 2;
     centerScreenY = canvas.height / 2;
-    textStartX = centerScreenX - 20;
+    textStartX = centerScreenX - 50;
     brick_columns = Math.floor(canvas.width / (BRICK_WIDTH + 10));
     brick_rows = (Math.floor(brick_columns / 3) < 6 ? 6 : Math.floor(brick_columns / 3));
     if(((BRICK_HEIGHT + 5) * brick_rows) > (canvas.height / 2)) {
@@ -88,9 +86,14 @@ function getViewportDimension() {
     return {w:e[a + 'Width'], h:e[a + 'Height']};
 }
 
+function setText() {
+  canvasContext.fillStyle = "white";
+  canvasContext.font = "30px Roboto";
+}
+
 function moveEverything() {
     checkForWin();
-    if (showingWinScreen || paused) {
+    if(showingWinScreen || paused) {
         return;
     }
     // Move the ball
@@ -170,18 +173,18 @@ function drawEverything() {
     // Draw Background
     colorRect(0, 0, canvas.width, canvas.height, 'black');
     // Show lives
-    canvasContext.fillStyle = 'white';
-    canvasContext.fillText('Lives: ' + lives, textStartX, centerScreenY);
+    setText();
+    canvasContext.fillText('Lives: ' + lives, textStartX, 25);
     // Draw bricks
     drawBricks();
     if (showingWinScreen) {
-        canvasContext.fillStyle = 'white';
+        setText();
         if (lives === 0) {
-            canvasContext.fillText('You lose...', textStartX, centerScreenY + 50);
+            canvasContext.fillText('You lose...', textStartX, centerScreenY);
         } else if (lives > 0) {
-            canvasContext.fillText('You Win!', textStartX, centerScreenY + 50);
+            canvasContext.fillText('You Win!', textStartX, centerScreenY);
         }
-        canvasContext.fillText('Click to Continue', textStartX, centerScreenY + 100);
+        canvasContext.fillText('Click to Continue', textStartX, centerScreenY + 50);
         return;
     }
     // Draw Paddle
@@ -194,11 +197,9 @@ function drawEverything() {
     colorCircle(ballX, ballY, ballColor);
 
     if (paused) {
+        setText();
         if(!started_yet) {
-            canvasContext.fillText('Start!', textStartX, centerScreenY + 100);
-            started_yet = true;
-        } else {
-            canvasContext.fillText('Paused', textStartX, centerScreenY + 100);
+            canvasContext.fillText('Start!', textStartX, centerScreenY + 50);
         }
     }
 }
@@ -237,21 +238,18 @@ function handleMouseClick(evt) {
         paused = true;
         createBricks();
     } else {
-        if (paused) {
-            paused = false;
-        } else {
-            paused = true;
-            // var keys = [];
-            // for (var key in times) {
-            //     if (times.hasOwnProperty(key)) {
-            //         keys.push(key);
-            //     }
-            // }
-            // keys.sort ();
-            // for (i in keys) {
-            //     console.log(keys[i] +"="+times[keys[i]]);
-            // }
-        }
+        paused = !paused;
+        started_yet = true;
+        // var keys = [];
+        // for (var key in times) {
+        //     if (times.hasOwnProperty(key)) {
+        //         keys.push(key);
+        //     }
+        // }
+        // keys.sort ();
+        // for (i in keys) {
+        //     console.log(keys[i] +"="+times[keys[i]]);
+        // }
     }
 }
 

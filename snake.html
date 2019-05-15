@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="utf-8">
-  <title>Neighbors</title>
+  <title>Snake</title>
   <meta name="description" content="Justin Neighbors website">
   <meta name="author" content="Justin Neighbors">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"">
@@ -20,41 +20,41 @@
     <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p>
   <![endif]-->
   <header class="navbar-expand-lg w-100 fixed-top">
-    <div class="d-inline-flex w-100" role="navigation">
-      <a class="d-inline pl-2" href="/"><img src="/neighbors.gif" alt="logo" class="pt-2" style="height:44px;"></a>
-      <nav class="navbar navbar-expand-lg w-100 py-0" role="navigation" title="Main Row of Main Navigation">
-        <ul class="nav navbar-nav d-inline">
-          <li class="d-inline"><a href="/history.html" class="p-0" title="History">History</a></li>
-          <li class="dropdown d-inline">
-            <a href="#" class="dropdown-toggle p-0" data-toggle="dropdown" role="button" aria-haspopup="true"
-              aria-expanded="false">Games <span class="caret"></span></a>
-            <ul class="dropdown-menu mt-3" style="float:left;position:absolute;">
-              <li><a href="/brickbreaker.html" title="Brick Breaker">Brick Breaker</a></li>
-              <li role="separator" class="dropdown-divider"></li>
-              <li><a href="/tennis.html" title="Tennis">Tennis</a></li>
-              <li role="separator" class="dropdown-divider"></li>
-              <li><a href="/snake.html" title="Snake">Snake</a></li>
+        <div class="d-inline-flex w-100" role="navigation">
+          <a class="d-inline pl-2" href="/"><img src="/neighbors.gif" alt="logo" class="pt-2" style="height:44px;"></a>
+          <nav class="navbar navbar-expand-lg w-100 py-0" role="navigation" title="Main Row of Main Navigation">
+            <ul class="nav navbar-nav d-inline">
+              <li class="d-inline"><a href="/history.html" class="p-0" title="History">History</a></li>
+              <li class="dropdown d-inline">
+                <a href="#" class="dropdown-toggle p-0" data-toggle="dropdown" role="button" aria-haspopup="true"
+                  aria-expanded="false">Games <span class="caret"></span></a>
+                <ul class="dropdown-menu mt-3" style="float:left;position:absolute;">
+                  <li><a href="/brickbreaker.html" title="Brick Breaker">Brick Breaker</a></li>
+                  <li role="separator" class="dropdown-divider"></li>
+                  <li><a href="/tennis.html" title="Tennis">Tennis</a></li>
+                  <li role="separator" class="dropdown-divider"></li>
+                  <li><a href="/snake.html" title="Snake">Snake</a></li>
+                </ul>
+              </li>
             </ul>
-          </li>
-        </ul>
-      </nav>
-    </div>
-  </header>
+          </nav>
+        </div>
+      </header>
   <hr class="m-0" />
-  <div id="app" class="container-fluid">
-    <h1 class="px-0 mx-0 my-2">Home</h1>
-    <div class="LI-profile-badge" data-version="v1" data-size="medium" data-locale="en_US" data-type="vertical" data-theme="dark" data-vanity="justinneighbors">
-      <a class="LI-simple-link" href='https://www.linkedin.com/in/justinneighbors?trk=profile-badge'>Justin Neighbors</a>
-      <br />Senior Software Developer for <a href="https://www.transferology.com">Transferology.com.</a> at <a href="https://www.collegesource.com">CollegeSource, Inc.</a>
-      <br />Master of Science in Software Development at <a href="https://www.bu.edu">Boston University</a>.
-      <br />Bachelor of Science in Computer Science at the <a href="https://www.usi.edu">University of Southern Indiana</a>.
-    </div>
+  <div id="snake" class="container-fluid">
+    <ol class="breadcrumb p-0 m-0">
+      <li><a href="/" title="Home">Home</a></li>
+      <li class="active">Snake</li>
+    </ol>
+    <h1 class="px-0 mx-0 my-2">Snake</h1>
+    <canvas id="gameCanvas" width="10" height="10"></canvas>
   </div>
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.min.js"></script>
   <script src="js/vendor/modernizr-3.7.1.min.js"></script>
+  <script src="js/snake.js"></script>
   <script>
     window.ga = function () { ga.q.push(arguments) }; ga.q = []; ga.l = +new Date;
     ga('create', 'UA-139952944-1', 'auto'); ga('set','transport','beacon'); ga('send', 'pageview')
