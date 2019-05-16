@@ -7,6 +7,7 @@ Vue.component('menu-bar', {
             bb: '/brickbreaker.html',
             tennis: '/tennis.html',
             snake: '/snake.html',
+            projects: '/projects.html',
         };
     },
     template: `<header class="navbar-expand-lg w-100 fixed-top">
@@ -25,6 +26,12 @@ Vue.component('menu-bar', {
               <li><a :href="tennis" title="Tennis">Tennis</a></li>
               <li role="separator" class="dropdown-divider"></li>
               <li><a :href="snake" title="Snake">Snake</a></li>
+            </ul>
+          </li>
+          <li class="dropdown d-inline">
+            <a href="#" class="dropdown-toggle p-0" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Projects<span class="caret"></span></a>
+            <ul class="dropdown-menu mt-3" style="float:left;position:absolute;">
+              <li><a :href="projects" title="Projects">Projects</a></li>
             </ul>
           </li>
         </ul>
