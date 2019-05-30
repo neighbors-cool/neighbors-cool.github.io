@@ -99,16 +99,23 @@ textarea {
    Author's custom styles
    ========================================================================== */
 
-@media (min-width: 425px) {
+@media (min-width: 541px) {
     body { 
         margin-top: 50px;
         color: #fff;
         background-color: #000;
     }    
 }
-@media (max-width: 424px) {
+@media (min-width: 402px) and (max-width: 540px) {
     body { 
         margin-top: 76px;
+        color: #fff;
+        background-color: #000;
+    }    
+}
+@media (max-width: 401px) {
+    body { 
+        margin-top: 110px;
         color: #fff;
         background-color: #000;
     }    
