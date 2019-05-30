@@ -37,6 +37,7 @@ Vue.component('menu-bar', {
         </ul>
       </nav>
     </div>
+    <hr class="m-0" />
   </header>`
 });
 new Vue({ el: '#menubar' });
