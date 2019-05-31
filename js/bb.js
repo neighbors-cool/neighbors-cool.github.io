@@ -178,6 +178,7 @@ function drawEverything() {
     // Draw bricks
     drawBricks();
     if (showingWinScreen) {
+        started_yet = false;
         setText();
         if (lives === 0) {
             canvasContext.fillText('You lose...', textStartX, centerScreenY);
