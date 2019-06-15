@@ -101,21 +101,14 @@ textarea {
 
 @media (min-width: 541px) {
     body { 
-        margin-top: 50px;
+        margin-top: 55px;
         color: #fff;
         background-color: #000;
     }    
 }
-@media (min-width: 402px) and (max-width: 540px) {
+@media (max-width: 540px) {
     body { 
-        margin-top: 76px;
-        color: #fff;
-        background-color: #000;
-    }    
-}
-@media (max-width: 401px) {
-    body { 
-        margin-top: 110px;
+        margin-top: 60px;
         color: #fff;
         background-color: #000;
     }    
