@@ -31,6 +31,11 @@ var centerScreenX;
 var centerScreenY;
 var clientRectLeft;
 var textStartX;
+// Mobile Buttons
+var lastEvent;
+var leftButtonX = 0;
+var buttonY = 0;
+var rightButtonX = 0;
 
 var times = {};
 
@@ -45,17 +50,24 @@ window.onload = function () {
         moveEverything();
         drawEverything();
         if(paused && started_yet) {
-            setText();
+            setText("white");
             canvasContext.fillText('Paused', textStartX, centerScreenY + 50);
         }
     }, (1000 / framesPerSecond));
 
-    canvas.addEventListener('mousedown', handleMouseClick);
-    canvas.addEventListener('mousemove', function (evt) {
-        // if (!paused) {
-            paddleX = evt.clientX - clientRectLeft - (PADDLE_WIDTH / 2);
-        // }
-    });
+    if(canvas.width >= 556) {
+        document.addEventListener('keydown', handleKeyPressEvent);
+        canvas.addEventListener('mousemove', function (evt) {
+                paddleX = evt.clientX - clientRectLeft - (PADDLE_WIDTH / 2);
+        });
+    } else {
+        canvas.addEventListener('mousedown', function(evt) {
+            lastEvent = evt;
+        });
+        canvas.addEventListener('mouseup', function(evt) {
+            lastEvent = evt;
+        });
+    }
 };
 
 function setup() {
@@ -64,11 +76,11 @@ function setup() {
     canvas.width = dim.w - 20;
     canvas.height = dim.h - 140;
     canvasContext = canvas.getContext('2d');
-    
-    paddleX = centerScreenX;
-    paddleY = canvas.height - PADDING - PADDLE_HEIGHT;
     centerScreenX = canvas.width / 2;
     centerScreenY = canvas.height / 2;
+    
+    paddleX = centerScreenX - (PADDLE_WIDTH / 2);
+    paddleY = canvas.height - PADDING - PADDLE_HEIGHT;
     textStartX = centerScreenX - 50;
     brick_columns = Math.floor(canvas.width / (BRICK_WIDTH + 10));
     brick_rows = (Math.floor(brick_columns / 3) < 6 ? 6 : Math.floor(brick_columns / 3));
@@ -86,8 +98,8 @@ function getViewportDimension() {
     return {w:e[a + 'Width'], h:e[a + 'Height']};
 }
 
-function setText() {
-  canvasContext.fillStyle = "white";
+function setText(color) {
+  canvasContext.fillStyle = color;
   canvasContext.font = "30px Roboto";
 }
 
@@ -173,13 +185,22 @@ function drawEverything() {
     // Draw Background
     colorRect(0, 0, canvas.width, canvas.height, 'black');
     // Show lives
-    setText();
+    setText("white");
     canvasContext.fillText('Lives: ' + lives, textStartX, 25);
     // Draw bricks
     drawBricks();
+
+    if(canvas.width < 556) {
+        drawButtons();
+        handleClick(lastEvent);
+        if(lastEvent != undefined && lastEvent.type == 'mouseup'){
+            lastEvent = undefined;
+        }
+    }
+
     if (showingWinScreen) {
         started_yet = false;
-        setText();
+        setText("white");
         if (lives === 0) {
             canvasContext.fillText('You lose...', textStartX, centerScreenY);
         } else if (lives > 0) {
@@ -198,7 +219,7 @@ function drawEverything() {
     colorCircle(ballX, ballY, ballColor);
 
     if (paused) {
-        setText();
+        setText("white");
         if(!started_yet) {
             canvasContext.fillText('Start!', textStartX, centerScreenY + 50);
         }
@@ -229,7 +250,27 @@ function reset() {
     ballY = canvas.height - PADDING - PADDLE_HEIGHT - BALL_RADIUS - 10;
 }
 
-function handleMouseClick(evt) {
+// Desktop pause
+function handleKeyPressEvent(evt) {
+    console.log(evt);
+    if(evt.keyCode == 32) { 
+        if (showingWinScreen) {
+            lives = NUMBER_OF_LIVES;
+            ballX = centerScreenX;
+            ballY = canvas.height - PADDING - PADDLE_HEIGHT - BALL_RADIUS - 10;
+            ballSpeedY = getRandomInt(6, 9) * -1;
+            showingWinScreen = false;
+            paused = true;
+            createBricks();
+        } else {
+            paused = !paused;
+            started_yet = true;
+        }
+    }
+}
+
+// Mobile 'click'
+function handleClick(evt) {
     if (showingWinScreen) {
         lives = NUMBER_OF_LIVES;
         ballX = centerScreenX;
@@ -238,20 +279,49 @@ function handleMouseClick(evt) {
         showingWinScreen = false;
         paused = true;
         createBricks();
-    } else {
-        paused = !paused;
-        started_yet = true;
-        // var keys = [];
-        // for (var key in times) {
-        //     if (times.hasOwnProperty(key)) {
-        //         keys.push(key);
-        //     }
-        // }
-        // keys.sort ();
-        // for (i in keys) {
-        //     console.log(keys[i] +"="+times[keys[i]]);
-        // }
+    } else if(evt != undefined) {
+        let typeDown = (evt.type == 'mousedown');
+        let clickX = evt.clientX-16;
+        let clickY = evt.clientY-94;
+        if(clickY >= buttonY && clickY <= buttonY + 35) {
+            if(clickX >= leftButtonX && clickX <= leftButtonX + 40) {
+                // Move paddle left
+                if(paddleX <= 20) {
+                    paddleX = 0;
+                } else {
+                    paddleX -= 20;
+                }
+            } else if(clickX >= rightButtonX && clickX <= rightButtonX + 40) {
+                // Move paddle right
+                if(paddleX + PADDLE_WIDTH >= canvas.width) {
+                    paddleX = canvas.width - PADDLE_WIDTH;
+                } else {
+                    paddleX += 20;
+                }
+            } else if(!typeDown) {
+                paused = !paused;
+                started_yet = true;
+            }
+        } else if(!typeDown) {
+            paused = !paused;
+            started_yet = true;
+        }
     }
+}
+
+function drawButtons() {
+    let left = canvas.width / 6;
+    let top = canvas.height / 6;
+    leftButtonX = canvas.width - left - 45;
+    buttonY = canvas.height - top;
+    rightButtonX = canvas.width - left;
+
+    colorRect(leftButtonX, buttonY, 40, 35, "white");
+    colorRect(rightButtonX, buttonY, 40, 35, "white");
+
+    setText("black");
+    canvasContext.fillText('<', canvas.width - left - 35, canvas.height - top + 28);
+    canvasContext.fillText('>', canvas.width - left + 12, canvas.height - top + 28);
 }
 
 function drawBricks() {
