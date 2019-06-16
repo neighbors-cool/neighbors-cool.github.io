@@ -19,7 +19,7 @@ var paddleY = 0;
 var paddleX = 0;
 const PADDLE_WIDTH = 100;
 const PADDLE_HEIGHT = 10;
-const PADDING = 5;
+const PADDING = 10;
 
 var bricks = [];
 const BRICK_WIDTH = 60;
@@ -57,15 +57,14 @@ window.onload = function () {
 
     if(canvas.width >= 556) {
         document.addEventListener('keydown', handleKeyPressEvent);
-        canvas.addEventListener('mousemove', function (evt) {
-                paddleX = evt.clientX - clientRectLeft - (PADDLE_WIDTH / 2);
+        canvas.addEventListener('mousemove', function (event) {
+            paddleX = event.clientX - clientRectLeft - (PADDLE_WIDTH / 2);
         });
     } else {
-        canvas.addEventListener('mousedown', function(evt) {
-            lastEvent = evt;
-        });
-        canvas.addEventListener('mouseup', function(evt) {
-            lastEvent = evt;
+        canvas.addEventListener('click', handleClick);
+        canvas.addEventListener('touchmove', function (event) {
+            paddleX = event.targetTouches[0].clientX - clientRectLeft - (PADDLE_WIDTH / 2);
+            return false;
         });
     }
 };
@@ -192,21 +191,17 @@ function drawEverything() {
 
     if(canvas.width < 556) {
         drawButtons();
-        handleClick(lastEvent);
-        if(lastEvent != undefined && lastEvent.type == 'mouseup'){
-            lastEvent = undefined;
-        }
     }
 
     if (showingWinScreen) {
         started_yet = false;
         setText("white");
         if (lives === 0) {
-            canvasContext.fillText('You lose...', textStartX, centerScreenY);
+            canvasContext.fillText('You lose...', textStartX - 30, centerScreenY);
         } else if (lives > 0) {
             canvasContext.fillText('You Win!', textStartX, centerScreenY);
         }
-        canvasContext.fillText('Click to Continue', textStartX, centerScreenY + 50);
+        canvasContext.fillText('Click to Continue', textStartX-30, centerScreenY + 50);
         return;
     }
     // Draw Paddle
@@ -252,7 +247,6 @@ function reset() {
 
 // Desktop pause
 function handleKeyPressEvent(evt) {
-    console.log(evt);
     if(evt.keyCode == 32) { 
         if (showingWinScreen) {
             lives = NUMBER_OF_LIVES;
@@ -279,30 +273,12 @@ function handleClick(evt) {
         showingWinScreen = false;
         paused = true;
         createBricks();
-    } else if(evt != undefined) {
-        let typeDown = (evt.type == 'mousedown');
-        let clickX = evt.clientX-16;
-        let clickY = evt.clientY-94;
-        if(clickY >= buttonY && clickY <= buttonY + 35) {
-            if(clickX >= leftButtonX && clickX <= leftButtonX + 40) {
-                // Move paddle left
-                if(paddleX <= 20) {
-                    paddleX = 0;
-                } else {
-                    paddleX -= 20;
-                }
-            } else if(clickX >= rightButtonX && clickX <= rightButtonX + 40) {
-                // Move paddle right
-                if(paddleX + PADDLE_WIDTH >= canvas.width) {
-                    paddleX = canvas.width - PADDLE_WIDTH;
-                } else {
-                    paddleX += 20;
-                }
-            } else if(!typeDown) {
-                paused = !paused;
-                started_yet = true;
-            }
-        } else if(!typeDown) {
+        return;
+    }
+    let clickX = evt.clientX-16;
+    let clickY = evt.clientY-94;
+    if(clickY >= buttonY && clickY <= buttonY + 35) {
+        if(clickX >= rightButtonX && clickX <= rightButtonX + 40) {
             paused = !paused;
             started_yet = true;
         }
@@ -312,16 +288,14 @@ function handleClick(evt) {
 function drawButtons() {
     let left = canvas.width / 6;
     let top = canvas.height / 6;
-    leftButtonX = canvas.width - left - 45;
     buttonY = canvas.height - top;
     rightButtonX = canvas.width - left;
 
-    colorRect(leftButtonX, buttonY, 40, 35, "white");
     colorRect(rightButtonX, buttonY, 40, 35, "white");
 
     setText("black");
-    canvasContext.fillText('<', canvas.width - left - 35, canvas.height - top + 28);
-    canvasContext.fillText('>', canvas.width - left + 12, canvas.height - top + 28);
+    var playPause = (paused ? '|>' : '| |');
+    canvasContext.fillText(playPause, canvas.width - left + 10, canvas.height - top + 28);
 }
 
 function drawBricks() {
