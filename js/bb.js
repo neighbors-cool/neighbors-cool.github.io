@@ -20,6 +20,7 @@ var paddleX = 0;
 const PADDLE_WIDTH = 100;
 const PADDLE_HEIGHT = 10;
 const PADDING = 10;
+const HALF_PADDLE = PADDLE_WIDTH / 2;
 
 var bricks = [];
 const BRICK_WIDTH = 60;
@@ -58,13 +59,12 @@ window.onload = function () {
     if(canvas.width >= 556) {
         document.addEventListener('keydown', handleKeyPressEvent);
         canvas.addEventListener('mousemove', function (event) {
-            paddleX = event.clientX - clientRectLeft - (PADDLE_WIDTH / 2);
+            paddleX = event.clientX - clientRectLeft - HALF_PADDLE;
         });
     } else {
         canvas.addEventListener('click', handleClick);
         canvas.addEventListener('touchmove', function (event) {
-            paddleX = event.targetTouches[0].clientX - clientRectLeft - (PADDLE_WIDTH / 2);
-            return false;
+            paddleX = event.targetTouches[0].clientX - clientRectLeft - HALF_PADDLE;
         });
     }
 };
@@ -78,7 +78,7 @@ function setup() {
     centerScreenX = canvas.width / 2;
     centerScreenY = canvas.height / 2;
     
-    paddleX = centerScreenX - (PADDLE_WIDTH / 2);
+    paddleX = centerScreenX - HALF_PADDLE;
     paddleY = canvas.height - PADDING - PADDLE_HEIGHT;
     textStartX = centerScreenX - 50;
     brick_columns = Math.floor(canvas.width / (BRICK_WIDTH + 10));
@@ -162,7 +162,7 @@ function moveEverything() {
     if ((ballX + BALL_RADIUS) >= paddleX && (ballX - BALL_RADIUS) < (paddleX + PADDLE_WIDTH) && (ballY + BALL_RADIUS) >= paddleY) {
         // Ball is colliding with paddle
         ballSpeedY = -Math.abs(ballSpeedY);
-        let deltaX = ballX - (paddleX + (PADDLE_WIDTH / 2));
+        let deltaX = ballX - (paddleX + HALF_PADDLE);
         ballSpeedX = deltaX * 0.4;
         return;
     }
@@ -216,7 +216,11 @@ function drawEverything() {
     if (paused) {
         setText("white");
         if(!started_yet) {
-            canvasContext.fillText('Start!', textStartX, centerScreenY + 50);
+            if(canvas.width < 556) {
+                canvasContext.fillText("Start!", textStartX , centerScreenY + 50);
+            } else {
+                canvasContext.fillText("Press Space to Start/Pause!", textStartX - 50, centerScreenY + 50);
+            }
         }
     }
 }

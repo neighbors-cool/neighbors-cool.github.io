@@ -5,32 +5,39 @@ var ballY = 0;
 var ballSpeedX = 10;
 var ballSpeedY = 4;
 
+var framesPerSecond = 30;
+
 var player1Score = 0;
 var player2Score = 0;
 const WINNING_SCORE = 3;
 
 var showingWinScreen = false;
+var started_yet = false;
+var paused = true;
 
 var paddle1Y = 250;
 var paddle2Y = 250;
 const PADDLE_WIDTH = 10;
 const PADDLE_HEIGHT = 100;
 const PADDING = 5;
+const BLOCK_SIZE = 20;
 
 window.onload = function() {
-    canvas = document.getElementById('gameCanvas');
-    var dim = getViewportDimension();
-    canvas.width = dim.w - 20;
-    canvas.height = dim.h - 140;
-    canvasContext = canvas.getContext('2d');
-
-    var framesPerSecond = 30;
-    ballX = canvas.width / 2;
-    ballY = canvas.height / 2;
+    setup();
     setInterval(function() {
-        moveEverything();
-        drawEverything();
+        if(!paused) {
+            moveEverything();
+            drawEverything();
+        } else if(started_yet) {
+            setText();
+            canvasContext.fillText(
+                "Paused",
+                (Math.floor(canvas.width / BLOCK_SIZE) / 3) * BLOCK_SIZE,
+                (Math.floor(canvas.height / BLOCK_SIZE) / 3) * BLOCK_SIZE
+            );
+        }
     }, 1000 / framesPerSecond);
+    document.addEventListener("keydown", keyPush);
 
     canvas.addEventListener('mousedown', handleMouseClick);
     canvas.addEventListener('mousemove', function(evt) {
@@ -38,6 +45,19 @@ window.onload = function() {
         paddle1Y = mousePos.y - (PADDLE_HEIGHT / 2);
     });
 };
+
+function setup() {
+  canvas = document.getElementById("gameCanvas");
+  var dim = getViewportDimension();
+  canvas.width = dim.w - 20;
+  canvas.height = dim.h - 140;
+  canvasContext = canvas.getContext("2d");
+  ballX = canvas.width / 2;
+  ballY = canvas.height / 2;
+
+  moveEverything();
+  drawEverything();
+}
 
 function getViewportDimension() {
     var e = window, a = 'inner';
@@ -160,6 +180,17 @@ function drawEverything() {
     setText();
     canvasContext.fillText(player1Score, 100, 100);
     canvasContext.fillText(player2Score, canvas.width - 100, 100);
+
+    if(paused) {
+      setText();
+      if(!started_yet) {
+        canvasContext.fillText(
+          "Press Space to Start/Pause!",
+          (Math.floor(canvas.width / BLOCK_SIZE) / 3) * BLOCK_SIZE,
+          (Math.floor(canvas.height / BLOCK_SIZE) / 3) * BLOCK_SIZE
+        );
+      }
+    }
 }
 
 function colorRect(leftX, topY, width, height, drawColor) {
@@ -173,4 +204,13 @@ function colorCircle(centerX, centerY, radius, drawColor) {
     // centerX, centerY, radius, startDraw, endDraw, counterClockwise
     canvasContext.arc(centerX, centerY, radius, 0, Math.PI * 2, true);
     canvasContext.fill();
+}
+
+function keyPush(evt) {
+  switch (evt.keyCode) {
+    case 32: //Space
+      paused = !paused;
+      started_yet = true;
+      break;
+  }
 }
