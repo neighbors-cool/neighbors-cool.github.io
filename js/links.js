@@ -1,5 +1,5 @@
-var history = new Vue({
-    el: '#history',
+var links = new Vue({
+    el: '#index',
     data: {
       tfoURL: 'http://www.transferology.com/',
       tfolURL: 'http://www.transferologylab.com/',

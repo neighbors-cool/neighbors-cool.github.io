@@ -13,8 +13,8 @@
    ========================================================================== */
 
 html {
-    color: #fff;
-    background-color: #000;
+    color: #000;
+    background-color: #fff;
     font-size: 1em;
     line-height: 1.4;
 }
@@ -102,20 +102,20 @@ textarea {
 @media (min-width: 541px) {
     body { 
         margin-top: 55px;
-        color: #fff;
-        background-color: #000;
+        color: #000;
+        background-color: #fff;
     }    
 }
 @media (max-width: 540px) {
     body { 
         margin-top: 60px;
-        color: #fff;
-        background-color: #000;
+        color: #000;
+        background-color: #fff;
     }    
 }
 
 header { 
-    background-color: #000;
+    background-color: #fff;
 }
 h1 {
     padding-left: 0!important;
@@ -125,17 +125,17 @@ h1 {
     margin-left: 0!important;
     margin-right: 0!important;
 }
-.breadcrumb {
-    background-color:transparent;
+.header,
+.header:hover {
+    text-decoration: none;
+    font-family: -webkit-pictograph;
+    font-size: 35px;
+    color:#025;
 }
-.breadcrumb>li+li:before,
 .navbar-nav>li+li:before {
     padding: 0;
     color: #ccc;
     content: "/\00a0";
-}
-.breadcrumb>li {
-    font-weight: bold;
 }
 ul.links {
     list-style: none;
@@ -144,13 +144,6 @@ ul.navbar-nav>li>a {
     padding: 1rem;
     font-size: 1.5rem;
 }
-.dropdown-menu {
-    background-color: #000;
-    outline-color: white;
-    outline-style: solid;
-    outline-width: thick;
-}
-
 #gameCanvas{
     margin:0;padding:0;overflow:hidden;
 }
