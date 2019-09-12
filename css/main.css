@@ -99,50 +99,45 @@ textarea {
    Author's custom styles
    ========================================================================== */
 
-@media (min-width: 541px) {
-    body { 
-        margin-top: 55px;
-        color: #000;
-        background-color: #fff;
-    }    
+body {
+  margin-top: 50px;
+  color: #000;
 }
-@media (max-width: 540px) {
-    body { 
-        margin-top: 60px;
-        color: #000;
-        background-color: #fff;
-    }    
-}
-
 header { 
     background-color: #fff;
+    border-bottom: 1px solid #036;
 }
 h1 {
-    padding-left: 0!important;
-    padding-right: 0!important;
-    margin-bottom: .5rem!important;
-    margin-top: .5rem!important;
-    margin-left: 0!important;
-    margin-right: 0!important;
+    margin-bottom: .3rem;
+    margin-top: .3rem;
+}
+img {
+  border: thick solid #036;
+  border-radius: 10px;
+}
+a {
+    color:#036;
+}
+a:hover {
+  color: #0057AD;
+  text-decoration: underline;
 }
 .header,
 .header:hover {
     text-decoration: none;
     font-family: -webkit-pictograph;
     font-size: 35px;
-    color:#025;
 }
 .navbar-nav>li+li:before {
     padding: 0;
     color: #ccc;
     content: "/\00a0";
 }
-ul.links {
-    list-style: none;
+.profile-pic {
+    height: 150px;
 }
-ul.navbar-nav>li>a {
-    padding: 1rem;
-    font-size: 1.5rem;
+.image {
+    height: 200px;
 }
 #gameCanvas{
     margin:0;padding:0;overflow:hidden;
