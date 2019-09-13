@@ -17,6 +17,7 @@ html {
     background-color: #fff;
     font-size: 1em;
     line-height: 1.4;
+    scroll-behavior: smooth;
 }
 /*
  * Remove text-shadow in selection highlight:
@@ -100,8 +101,9 @@ textarea {
    ========================================================================== */
 
 body {
-  margin-top: 50px;
-  color: #000;
+    margin-top: 50px;
+    color: #000;
+    font-family: -webkit-pictograph;
 }
 header { 
     background-color: #fff;
@@ -112,32 +114,56 @@ h1 {
     margin-top: .3rem;
 }
 img {
-  border: thick solid #036;
-  border-radius: 10px;
+    border: thick solid #036;
+    border-radius: 10px;
 }
-a {
+a,h2,h3,h4,button.btn-link {
     color:#036;
 }
 a:hover {
-  color: #0057AD;
-  text-decoration: underline;
+    color: #0057AD;
+    text-decoration: underline;
 }
 .header,
 .header:hover {
     text-decoration: none;
-    font-family: -webkit-pictograph;
     font-size: 35px;
+}
+.header-btn,
+.header-btn:hover,
+.header-btn:focus {
+    text-decoration: none;
+    align-self: flex-end;
+    font-size: 1.3rem;
+    margin-bottom: 7px;
 }
 .navbar-nav>li+li:before {
     padding: 0;
     color: #ccc;
     content: "/\00a0";
 }
-.profile-pic {
-    height: 150px;
+@media (max-width: 540px) {
+    .profile-pic {
+        height: 345px;
+    }
+}
+@media (min-width: 541px) {
+    .profile-pic {
+        height: 245px;
+    }
 }
 .image {
     height: 200px;
+}
+.anchor {
+    position: relative;
+    top: -70px;
+}
+.dropdown-item.active,
+.dropdown-item:active {
+  color: #fff;
+  text-decoration: none;
+  background-color: #036;
 }
 #gameCanvas{
     margin:0;padding:0;overflow:hidden;
