@@ -148,7 +148,7 @@ textarea {
 
   header {
     background-color: #fff;
-    border-bottom: 1px solid rgb(0, 70, 139);
+    border-bottom: 1px solid rgb(0, 54, 109);
   }
 
   html,
@@ -158,7 +158,7 @@ textarea {
   }
 
   img {
-    border: thick solid rgb(0, 70, 139);
+    border: thick solid rgb(0, 54, 109);
   }
 
   a,
@@ -166,7 +166,7 @@ textarea {
   h3,
   h4,
   button.btn-link {
-    color: rgb(0, 70, 139);
+    color: rgb(0, 54, 109);
   }
 
   a:hover {
@@ -177,13 +177,13 @@ textarea {
   .dropdown-item:focus,
   .dropdown-item:hover {
     color: #fff;
-    background-color: rgb(0, 70, 139);
+    background-color: rgb(0, 54, 109);
   }
 }
 
 body {
   margin-top: 50px;
-  font-size:18px;
+  font-size:19px;
   font-family: -webkit-pictograph;
 }
 
