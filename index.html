@@ -24,9 +24,9 @@
     <!--[if IE]>
     <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p>
   <![endif]-->
-    <header class="navbar-expand-lg fixed-top px-4">
+    <header class="navbar-expand-lg fixed-top px-md-4 px-2">
       <div class="d-flex justify-content-between" role="navigation">
-        <h2><a href="#" class="header local-link ml-2">&lt;N /&gt; Justin Neighbors</a></h2>
+        <h2><a href="#" class="header local-link ml-md-2">&lt;N /&gt; Justin Neighbors</a></h2>
         <a href="#career" class="header-btn local-link d-none d-md-block">Career</a>
         <a href="#education" class="header-btn local-link d-none d-md-block">Education</a>
         <a href="#projects" class="header-btn local-link d-none d-md-block">Projects</a>
@@ -43,7 +43,7 @@
     <div id="index" role="main" class="container-fluid pt-4 px-md-4">
       <section>
         <div class="d-md-inline-flex">
-          <img class="mb-3 profile-pic" src="img/justin_stream.jpg" alt="Justin Neighbors Image">
+          <img class="mb-3 lazyload profile-pic" data-src="img/justin_stream.jpg" alt="Justin Neighbors Image">
           <ul class="align-self-center pl-3 pl-md-5">
             <li class="mb-2">Senior Software Developer at <a href="https://www.collegesource.com" title="CollegeSource, Inc.">CollegeSource, Inc.</a></li>
             <li class="mb-2">Master of Science in Software Development at <a href="https://www.bu.edu" title="Boston University">Boston University</a>.</li>
@@ -128,14 +128,14 @@
             <h3 class="mt-3">Machine Learning – Neural Network</h3>
             <p>Using Student Statistics to Predict Target Transfer Schools</p>
             <a href="https://justintneighbors.blog/2019/07/16/machine-learning-neural-network/" title="Neural Network Blog">
-              <img src="img/nn.png" alt="Neural Network" class="image">
+              <img data-src="img/nn.png" alt="Neural Network" class="lazyload image">
             </a>
           </li>
           <li>
             <h3 class="mt-3">Q Learning with Snake</h3>
             <p>Training a Q Learning Model to Play Snake</p>
             <a href="https://justintneighbors.blog/2019/07/16/q-learning-and-snake/" title="Q Learning with Snake Blog">
-              <img src="img/q-learning.png" alt="Q Learning with Snake" class="image">
+              <img data-src="img/q-learning.png" alt="Q Learning with Snake" class="lazyload image">
             </a>
           </li>
           <li>
@@ -147,7 +147,7 @@
                 <a href="brickbreaker.html" title="Play Brick Breaker Game">Play Brick Breaker</a>
                 <br />
                 <a href="https://justintneighbors.blog/javascript-html-canvas-games/" title="Brick Breaker Game Blog">
-                  <img src="img/brickbreaker.png" alt="Brick Breaker Game" class="image">
+                  <img data-src="img/brickbreaker.png" alt="Brick Breaker Game" class="lazyload image">
                 </a>
               </li>
               <li>
@@ -155,7 +155,7 @@
                 <a href="snake.html" title="Play Snake Game">Play Snake</a>
                 <br />
                 <a href="https://justintneighbors.blog/javascript-html-canvas-games/" title="Snake Game Blog">
-                  <img src="img/snake.png" alt="Snake Game" class="image">
+                  <img data-src="img/snake.png" alt="Snake Game" class="lazyload image">
                 </a>
               </li>
             </ul>
@@ -178,6 +178,7 @@
     <script src="js/vendor/popper.min.js"></script>
     <script src="js/vendor/bootstrap.min.js"></script>
     <script src="js/vendor/modernizr-3.7.1.min.js"></script>
+    <script src="js/vendor/lazysizes.min.js"></script>
     <script src="js/custom.js"></script>
   </body>
 

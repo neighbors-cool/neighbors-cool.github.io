@@ -104,7 +104,7 @@ textarea {
   }
 
   header {
-    border-bottom: 1px solid #ccc;
+    border-bottom: 1px solid rgb(230, 230, 230);
   }
 
   html,
@@ -113,7 +113,7 @@ textarea {
   .dropdown-item:active,
   .dropdown-item:focus,
   .dropdown-item:hover {
-    color: #ccc;
+    color: rgb(230, 230, 230);
     background-color: #000;
   }
 
@@ -125,11 +125,11 @@ textarea {
   h3,
   h4,
   button.btn-link {
-    color: #ccc;
+    color: rgb(230, 230, 230);
   }
 
   header a {
-    color: #ccc;
+    color: rgb(230, 230, 230);
   }
 
   #index a {
