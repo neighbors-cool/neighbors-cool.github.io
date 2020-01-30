@@ -20,13 +20,18 @@
 </head>
 
 <body>
+  <header class="navbar-expand-lg fixed-top px-4">
+    <div role="navigation">
+      <h2><a href="https://www.neighbors.cool/" class="header ml-2">&lt;N /&gt; Justin Neighbors</a></h2>
+    </div>
+  </header>
   <!--[if IE]>
     <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p>
   <![endif]-->
   <!--<div id="menubar">
     <menu-bar></menu-bar>
   </div>-->
-  <div id="brickbreaker" class="container-fluid">
+  <div id="brickbreaker" role="main" class="container-fluid">
     <!--<span id="breadcrumb">
       <bread-crumb title="Brick Breaker"></bread-crumb>
     </span>
@@ -40,6 +45,7 @@
         </a>
       </span>
     </span>-->
+    <h2 class="pt-2 pl-4">Brick Breaker</h2>
     <canvas id="gameCanvas" width="10" height="10"></canvas>
   </div>
   <script src="js/vendor/jquery.min.js"></script>
