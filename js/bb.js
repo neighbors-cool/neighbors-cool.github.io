@@ -72,8 +72,8 @@ window.onload = function () {
 function setup() {
     canvas = document.getElementById('gameCanvas');
     var dim = getViewportDimension();
-    canvas.width = dim.w - 20;
-    canvas.height = dim.h - 140;
+    canvas.width = dim.w - 60;
+    canvas.height = dim.h - 220;
     canvasContext = canvas.getContext('2d');
     centerScreenX = canvas.width / 2;
     centerScreenY = canvas.height / 2;
@@ -251,7 +251,8 @@ function reset() {
 
 // Desktop pause
 function handleKeyPressEvent(evt) {
-    if(evt.keyCode == 32) { 
+    if(evt.keyCode == 32) {
+        evt.preventDefault();
         if (showingWinScreen) {
             lives = NUMBER_OF_LIVES;
             ballX = centerScreenX;

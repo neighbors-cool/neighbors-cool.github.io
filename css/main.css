@@ -148,42 +148,49 @@ textarea {
 
   header {
     background-color: #fff;
-    border-bottom: 1px solid rgb(0, 54, 109);
+    border-bottom: 1px solid #121733;
   }
 
   html,
   body {
-    color: #000;
+    color: #121733;
     background-color: #fff;
   }
 
   img {
-    border: thick solid rgb(0, 54, 109);
+    border: thick solid #121733;
   }
 
-  a,
-  h2,
-  h3,
-  h4,
-  button.btn-link {
-    color: rgb(0, 54, 109);
+  a,h1,h2,h3,h4,h5 {
+    color: #121733;
   }
 
   a:hover {
-    color: rgb(0, 128, 255);
+    color: #0057AD;
+  }
+
+  button.btn-menu {
+    color: #fff;
+    background-color: #121733;
+  }
+
+  button.btn-menu:hover {
+    color: #fff;
+    background-color: #0057AD;
   }
 
   .dropdown-item:active,
   .dropdown-item:focus,
   .dropdown-item:hover {
     color: #fff;
-    background-color: rgb(0, 54, 109);
+    background-color: #121733;
   }
 }
 
 body {
   margin-top: 50px;
-  font-size:19px;
+  font-size:20px;
+  line-height: 32px;
   font-family: -webkit-pictograph;
 }
 
@@ -191,7 +198,11 @@ img {
   border-radius: 10px;
 }
 
-a:hover {
+a:hover, a.underline {
+  text-decoration: underline;
+}
+
+h3>a, h4>a {
   text-decoration: underline;
 }
 
@@ -239,13 +250,60 @@ h1,h2 {
   }
 }
 
-.image {
+.image-sm {
   width: 200px;
+}
+
+.image-md {
+  width: 500px;
+}
+
+.image-lg {
+  width: 800px;
 }
 
 .anchor {
   position: relative;
   top: -70px;
+}
+
+hr {
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+}
+
+.hr-l {
+  width: 50%;
+}
+
+.hr-r {
+  width: 50%;
+  margin-left: 50%;
+}
+
+.hr-mid {
+  width: 50%;
+  margin-left: 25%;
+}
+
+.scrolling-img {
+  background-color:#000;
+  background-size: cover;
+  min-height: 300px;
+  overflow: hidden;
+  background-attachment: fixed;
+  position: relative;
+  min-width: 100vw;
+  margin-left: 50%;
+  left: -50vw;
+}
+
+.nightsky-img {
+  background-image: url(/img/nightsky.jpg);
+}
+
+.mountains-img {
+  background-image: url(/img/mountains.jpg);
 }
 
 #gameCanvas {

@@ -3,12 +3,12 @@ const BLOCK_SIZE = 20;
 const APPLE_SIZE = 15;
 var canvas;
 var canvasContext;
-var framesPerSecond = 20;
+var framesPerSecond = 15;
 var headX = 5;
 var headY = 5;
 var appleX = 15;
 var appleY = 15;
-var speedX = 0;
+var speedX = 1;
 var speedY = 0;
 var trail = [];
 var tail = BASE_TAIL;
@@ -39,12 +39,14 @@ window.onload = function() {
 function setup() {
   canvas = document.getElementById("gameCanvas");
   var dim = getViewportDimension();
-  canvas.width = dim.w - 20;
-  canvas.height = dim.h - 140;
+  canvas.width = dim.w - 60;
+  canvas.height = dim.h - 220;
   canvasContext = canvas.getContext("2d");
   block_columns = Math.floor(canvas.width / BLOCK_SIZE);
   block_rows = Math.floor(canvas.height / BLOCK_SIZE);
 
+  headX = Math.floor(Math.random() * block_columns);
+  headY = Math.floor(Math.random() * block_rows);
   appleX = Math.floor(Math.random() * block_columns);
   appleY = Math.floor(Math.random() * block_rows);
 
@@ -104,7 +106,7 @@ function drawEverything() {
 
   // Draw Score
   setText();
-  canvasContext.fillText((tail - BASE_TAIL).toLocaleString() + ' : ' + highScore.toLocaleString(), 20, 20);
+  canvasContext.fillText((tail - BASE_TAIL).toLocaleString() + ' : ' + highScore.toLocaleString(), 40, 40);
 
   // Draw body
   canvasContext.fillStyle = "lime";
@@ -156,30 +158,35 @@ function drawEverything() {
 function keyPush(evt) {
   switch (evt.keyCode) {
     case 37: //UP
+      evt.preventDefault();
       if(speedX !== 1) {
         speedX = -1;
         speedY = 0;
       }
       break;
     case 38: //LEFT
+      evt.preventDefault();
       if(speedY !== 1) {
         speedX = 0;
         speedY = -1;
       }
       break;
     case 39: //DOWN
+      evt.preventDefault();
       if(speedX !== -1) {
         speedX = 1;
         speedY = 0;
       }
       break;
     case 40: //RIGHT
+      evt.preventDefault();
       if(speedY !== -1) {
         speedX = 0;
         speedY = 1;
       }
       break;
     case 32: //Space
+      evt.preventDefault();
       paused = !paused;
       started_yet = true;
       break;
