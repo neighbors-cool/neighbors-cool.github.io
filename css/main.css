@@ -237,13 +237,14 @@ h1,h2 {
   .profile-pic {
     width: 99%;
   }
-  .image-sm,.iframe-sm {
+  .image-sm {
     width: 200px;
   }
   .image-md,.iframe-md {
     width: 340px;
+    height: 192px;
   }
-  .image-lg,.iframe-lg {
+  .image-lg {
     width: 340px;
   }
 }
@@ -255,13 +256,14 @@ h1,h2 {
   .profile-pic {
     width: 415px;
   }
-  .image-sm.iframe-sm {
+  .image-sm {
     width: 200px;
   }
-  .image-md.iframe-md {
+  .image-md,.iframe-md {
     width: 560px;
+    height: 315px;
   }
-  .image-lg.iframe-lg {
+  .image-lg {
     width: 800px;
   }
 }
