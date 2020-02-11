@@ -234,9 +234,17 @@ h1,h2 {
   .header {
     font-size: 28px;
   }
-
   .profile-pic {
     width: 99%;
+  }
+  .image-sm,.iframe-sm {
+    width: 200px;
+  }
+  .image-md,.iframe-md {
+    width: 340px;
+  }
+  .image-lg,.iframe-lg {
+    width: 340px;
   }
 }
 
@@ -244,22 +252,18 @@ h1,h2 {
   .header {
     font-size: 35px;
   }
-
   .profile-pic {
     width: 415px;
   }
-}
-
-.image-sm {
-  width: 200px;
-}
-
-.image-md {
-  width: 500px;
-}
-
-.image-lg {
-  width: 800px;
+  .image-sm.iframe-sm {
+    width: 200px;
+  }
+  .image-md.iframe-md {
+    width: 560px;
+  }
+  .image-lg.iframe-lg {
+    width: 800px;
+  }
 }
 
 .anchor {
