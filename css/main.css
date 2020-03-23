@@ -304,12 +304,8 @@ hr {
   left: -50vw;
 }
 
-.nightsky-img {
-  background-image: url(/img/nightsky.jpg);
-}
-
 .mountains-img {
-  background-image: url(/img/mountains.jpg);
+  background-image: url(/img/mountain-peaks-clouds-and-landscape.jpg);
 }
 
 #gameCanvas {
