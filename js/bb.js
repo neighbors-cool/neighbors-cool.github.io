@@ -123,6 +123,7 @@ function drawEverything() {
     drawBricks();
 
     if (showingWinScreen) {
+        setText("white");
         started_yet = false;
         canvasContext.fillText('Next Level!', centerScreenX - 60, centerScreenY);
         canvasContext.fillText('Click to Continue', centerScreenX - 90, centerScreenY + 50);
@@ -130,6 +131,7 @@ function drawEverything() {
     }
 
     if (showingLoseScreen) {
+        setText("white");
         started_yet = false;
         if(lives === 0) {
             canvasContext.fillText('You lose... Score: ' + score, centerScreenX - 90, centerScreenY + 20);

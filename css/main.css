@@ -139,6 +139,10 @@ textarea {
   a:hover {
     color: #3399FF;
   }
+
+  .dropdown {
+    background-color: #fff;
+  }
 }
 
 @media (prefers-color-scheme: light) {
@@ -191,7 +195,7 @@ body {
   margin-top: 50px;
   font-size:20px;
   line-height: 32px;
-  font-family: -webkit-pictograph;
+  font-family: Palatino, Palatino Linotype, Palatino LT STD, Book Antiqua, Georgia, serif;
 }
 
 img {
@@ -229,13 +233,17 @@ h1,h2 {
   font-size: 1.3rem;
   margin-bottom: 7px;
 }
+.profile-pic {
+  display: block;
+  max-width:415px;
+  max-height:313px;
+  width: auto;
+  height: auto;
+}
 
 @media (max-width: 540px) {
   .header {
     font-size: 28px;
-  }
-  .profile-pic {
-    width: 99%;
   }
   .image-sm {
     width: 200px;
@@ -252,9 +260,6 @@ h1,h2 {
 @media (min-width: 541px) {
   .header {
     font-size: 35px;
-  }
-  .profile-pic {
-    width: 415px;
   }
   .image-sm {
     width: 200px;

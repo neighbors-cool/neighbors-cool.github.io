@@ -29,8 +29,8 @@ window.onload = function() {
       drawEverything();
     }
   }, 1000 / framesPerSecond);
-  document.addEventListener('keydown', keyPush);
-  document.addEventListener('click', handleClick);
+  canvas.addEventListener('keydown', keyPush);
+  canvas.addEventListener('click', handleClick);
   document.addEventListener('touchstart', function (e) {
     // stop touch event
     e.stopPropagation();
@@ -38,7 +38,7 @@ window.onload = function() {
     prevX = e.touches[0].clientX;
     prevY = e.touches[0].clientY;
   });
-  document.addEventListener('touchmove', function (e) {
+  canvas.addEventListener('touchmove', function (e) {
     // stop touch event
     e.stopPropagation();
     e.preventDefault();
@@ -65,7 +65,7 @@ window.onload = function() {
         evt = new KeyboardEvent('keydown', {'key': 'ArrowDown'}); 
       }
     }
-    document.dispatchEvent(evt);
+    canvas.dispatchEvent(evt);
   }, false);
 };
 
@@ -95,10 +95,8 @@ function setText() {
   canvasContext.fillStyle = 'white';
   if(canvas.width >= 556) {
     canvasContext.font = "30px Roboto";
-    distanceFromRight = 300;
   } else {
     canvasContext.font = "22px Roboto";
-    distanceFromRight = 200;
   }
 }
 
@@ -108,10 +106,7 @@ function getViewportDimension() {
     a = "client";
     e = document.documentElement || document.body;
   }
-  return {
-    w: e[a + "Width"],
-    h: e[a + "Height"]
-  };
+  return {w: e[a + "Width"], h: e[a + "Height"]};
 }
 
 function disableScroll() { 
@@ -124,7 +119,6 @@ function disableScroll() {
 function enableScroll() { 
 	window.onscroll = function() {}; 
 } 
-
 
 function moveEverything() {
   // Update the head location
