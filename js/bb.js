@@ -70,7 +70,6 @@ window.onload = function () {
 function setup() {
     canvas = document.getElementById('gameCanvas');
     let dim = getViewportDimension();
-    console.log(dim);
     if(dim.w <= 767) {
         canvas.width = dim.w - 40;
     } else {

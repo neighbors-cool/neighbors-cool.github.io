@@ -3,7 +3,7 @@ const BLOCK_SIZE = 20;
 const APPLE_SIZE = 15;
 var canvas;
 var canvasContext;
-var framesPerSecond = 15;
+var framesPerSecond = 10;
 var headX = 5;
 var headY = 5;
 var appleX = 15;
@@ -18,28 +18,65 @@ var block_rows = 20;
 var started_yet = false;
 var paused = true;
 
+var prevX = 0;
+var prevY = 0;
+
 window.onload = function() {
   setup();
   setInterval(function() {
     if(!paused) {
       moveEverything();
       drawEverything();
-    } else if(started_yet) {
-      setText();
-      canvasContext.fillText(
-        "Paused",
-        (block_columns / 3) * BLOCK_SIZE,
-        (block_rows / 3) * BLOCK_SIZE
-      );
     }
   }, 1000 / framesPerSecond);
-  document.addEventListener("keydown", keyPush);
+  document.addEventListener('keydown', keyPush);
+  document.addEventListener('click', handleClick);
+  document.addEventListener('touchstart', function (e) {
+    // stop touch event
+    e.stopPropagation();
+    e.preventDefault();
+    prevX = e.touches[0].clientX;
+    prevY = e.touches[0].clientY;
+  });
+  document.addEventListener('touchmove', function (e) {
+    // stop touch event
+    e.stopPropagation();
+    e.preventDefault();
+
+    var evt;
+    var diffX = prevX - e.touches[0].clientX;
+    var diffY = prevY - e.touches[0].clientY;
+    if(Math.max(Math.abs(diffX), Math.abs(diffY)) == Math.abs(diffX)) {
+      // X Moved Most
+      if(diffX > 0) {
+        // Move Left
+        evt = new KeyboardEvent('keydown', {'key': 'ArrowLeft'}); 
+      } else {
+        // Move Right
+        evt = new KeyboardEvent('keydown', {'key': 'ArrowRight'}); 
+      }
+    } else {
+      // Y Moved Most
+      if(diffY > 0) {
+        // Move Up
+        evt = new KeyboardEvent('keydown', {'key': 'ArrowUp'}); 
+      } else {
+        // Move Down
+        evt = new KeyboardEvent('keydown', {'key': 'ArrowDown'}); 
+      }
+    }
+    document.dispatchEvent(evt);
+  }, false);
 };
 
 function setup() {
   canvas = document.getElementById("gameCanvas");
   var dim = getViewportDimension();
-  canvas.width = dim.w - 60;
+  if(dim.w <= 767) {
+    canvas.width = dim.w - 40;
+  } else {
+    canvas.width = dim.w - 60;
+  }
   canvas.height = dim.h - 220;
   canvasContext = canvas.getContext("2d");
   block_columns = Math.floor(canvas.width / BLOCK_SIZE);
@@ -55,8 +92,14 @@ function setup() {
 }
 
 function setText() {
-  canvasContext.fillStyle = "white";
-  canvasContext.font = "30px Roboto";
+  canvasContext.fillStyle = 'white';
+  if(canvas.width >= 556) {
+    canvasContext.font = "30px Roboto";
+    distanceFromRight = 300;
+  } else {
+    canvasContext.font = "22px Roboto";
+    distanceFromRight = 200;
+  }
 }
 
 function getViewportDimension() {
@@ -70,6 +113,18 @@ function getViewportDimension() {
     h: e[a + "Height"]
   };
 }
+
+function disableScroll() { 
+	scrollTop = document.documentElement.scrollTop;
+  window.onscroll = function() { 
+    window.scrollTo(0, scrollTop); 
+  };
+} 
+
+function enableScroll() { 
+	window.onscroll = function() {}; 
+} 
+
 
 function moveEverything() {
   // Update the head location
@@ -111,12 +166,7 @@ function drawEverything() {
   // Draw body
   canvasContext.fillStyle = "lime";
   for (var i = 0; i < trail.length; i++) {
-    canvasContext.fillRect(
-      trail[i].x * BLOCK_SIZE,
-      trail[i].y * BLOCK_SIZE,
-      APPLE_SIZE,
-      APPLE_SIZE
-    );
+    canvasContext.fillRect(trail[i].x * BLOCK_SIZE, trail[i].y * BLOCK_SIZE, APPLE_SIZE, APPLE_SIZE);
     if(i<trail.length-1 && trail[i].x == headX && trail[i].y == headY) {
       // Hit self
       if((tail - BASE_TAIL) > highScore) {
@@ -135,60 +185,62 @@ function drawEverything() {
 
   // Draw Apple
   canvasContext.fillStyle = "red";
-  console.log(appleX);
-  canvasContext.fillRect(
-    appleX * BLOCK_SIZE,
-    appleY * BLOCK_SIZE,
-    APPLE_SIZE,
-    APPLE_SIZE
-  );
+  canvasContext.fillRect(appleX * BLOCK_SIZE, appleY * BLOCK_SIZE, APPLE_SIZE, APPLE_SIZE);
 
   if(paused) {
     setText();
     if(!started_yet) {
-      canvasContext.fillText(
-        "Press Space to Start/Pause!",
-        (block_columns / 3) * BLOCK_SIZE,
-        (block_rows / 3) * BLOCK_SIZE
-      );
+      canvasContext.fillText("Click/Tap to Start/Pause!", (canvas.width / 2) - 130, (block_rows / 3) * BLOCK_SIZE);
     }
   }
 }
 
+function handlePause() {
+  started_yet = true;
+  if(paused) {
+    paused = false;
+    disableScroll();
+  } else {
+    paused = true;
+    setText();
+    canvasContext.fillText("Paused", (canvas.width / 2) - 40, (block_rows / 3) * BLOCK_SIZE);
+    enableScroll();
+  }
+}
+
+function handleClick(evt) {
+  evt.preventDefault();
+  handlePause();
+}
+
 function keyPush(evt) {
-  switch (evt.keyCode) {
-    case 37: //UP
-      evt.preventDefault();
+  evt.preventDefault();
+  switch (evt.key) {
+    case 'ArrowLeft':
       if(speedX !== 1) {
         speedX = -1;
         speedY = 0;
       }
       break;
-    case 38: //LEFT
-      evt.preventDefault();
+    case 'ArrowUp':
       if(speedY !== 1) {
         speedX = 0;
         speedY = -1;
       }
       break;
-    case 39: //DOWN
-      evt.preventDefault();
+    case 'ArrowRight':
       if(speedX !== -1) {
         speedX = 1;
         speedY = 0;
       }
       break;
-    case 40: //RIGHT
-      evt.preventDefault();
+    case 'ArrowDown':
       if(speedY !== -1) {
         speedX = 0;
         speedY = 1;
       }
       break;
-    case 32: //Space
-      evt.preventDefault();
-      paused = !paused;
-      started_yet = true;
-      break;
+    case ' ': //Space
+      handlePause();
   }
 }
