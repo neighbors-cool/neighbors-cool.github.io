@@ -30,6 +30,7 @@ let brick_columns = 7;
 let centerScreenX;
 let centerScreenY;
 let clientRectLeft;
+let distanceFromRight = 300;
 
 // Mobile Buttons
 let leftButtonX = 0;
@@ -45,23 +46,36 @@ window.onload = function () {
         drawEverything();
     }, (1000 / framesPerSecond));
 
-    if(canvas.width >= 556) {
-        document.addEventListener('keydown', handleKeyPressEvent);
-        canvas.addEventListener('mousemove', function (event) {
-            paddle.pos.x = event.clientX - clientRectLeft - paddle.halfWidth;
-        });
-    } else {
-        canvas.addEventListener('click', handleClick);
-        canvas.addEventListener('touchmove', function (event) {
-            paddle.pos.x = event.targetTouches[0].clientX - clientRectLeft - paddle.halfWidth;
-        });
-    }
+    canvas.addEventListener('mousemove', function (event) {
+        paddle.pos.x = event.clientX - clientRectLeft - paddle.halfWidth;
+    });
+    canvas.addEventListener('click', handleClick);
+    // Convert a touch move into a mousemove
+    canvas.addEventListener('touchmove', function (e) {
+        // stop touch event
+        e.stopPropagation();
+        e.preventDefault();
+    
+        // translate to mouse event
+        var clkEvt = document.createEvent('MouseEvent');
+        clkEvt.initMouseEvent('mousemove', true, true, window, e.detail, 
+                    e.touches[0].screenX, e.touches[0].screenY, 
+                    e.touches[0].clientX, e.touches[0].clientY, 
+                    false, false, false, false, 
+                    0, null);
+        canvas.dispatchEvent(clkEvt);
+    }, false);
 };
 
 function setup() {
     canvas = document.getElementById('gameCanvas');
     let dim = getViewportDimension();
-    canvas.width = dim.w - 60;
+    console.log(dim);
+    if(dim.w <= 767) {
+        canvas.width = dim.w - 40;
+    } else {
+        canvas.width = dim.w - 60;
+    }
     canvas.height = dim.h - 220;
     canvasContext = canvas.getContext('2d');
     centerScreenX = canvas.width / 2;
@@ -103,19 +117,14 @@ function drawEverything() {
 
     // Show lives
     setText("white");
-    canvasContext.fillText('Level: ' + level + ' -  Lives: ' + lives, canvas.width - 300, 25);
+    canvasContext.fillText('Level: ' + level + ' -  Lives: ' + lives, canvas.width - distanceFromRight, 25);
     canvasContext.fillText('Score: ' + score, 5, 25);
 
     // Draw bricks
     drawBricks();
 
-    if(canvas.width < 556) {
-        drawButtons();
-    }
-
     if (showingWinScreen) {
         started_yet = false;
-        setText("white");
         canvasContext.fillText('Next Level!', centerScreenX - 60, centerScreenY);
         canvasContext.fillText('Click to Continue', centerScreenX - 90, centerScreenY + 50);
         return;
@@ -123,7 +132,6 @@ function drawEverything() {
 
     if (showingLoseScreen) {
         started_yet = false;
-        setText("white");
         if(lives === 0) {
             canvasContext.fillText('You lose... Score: ' + score, centerScreenX - 90, centerScreenY + 20);
         } else {
@@ -139,15 +147,10 @@ function drawEverything() {
     }
 
     if (paused) {
-        setText("white");
         if(started_yet) {
             canvasContext.fillText('Paused', centerScreenX - 30, centerScreenY + 50);
         } else {
-            if(canvas.width < 556) {
-                canvasContext.fillText("Start!", centerScreenX - 50 , centerScreenY + 50);
-            } else {
-                canvasContext.fillText("Press Space to Start/Pause!", centerScreenX - 150, centerScreenY + 50);
-            }
+            canvasContext.fillText("Click/Tap to Start/Pause!", centerScreenX - 100, centerScreenY + 50);
         }
     }
 }
@@ -161,94 +164,41 @@ function checkForWin() {
     showingWinScreen = true;
 }
 
-// Desktop pause
-function handleKeyPressEvent(evt) {
-    if(evt.keyCode == 32) {
-        evt.preventDefault();
-        if (showingWinScreen) {
-            if(level % 2 === 0 && lives !== 0) {
-                // Give an extra life on odd levels > 1
-                lives++;
-            }
-            level++;
-            rewardScore = (1000 * level);
-            showingWinScreen = false;
-            paused = true;
-            for(let ball of balls) {
-                ball.reset();
-            }
-            createBricks();
-            createBalls();
-        } else if(showingLoseScreen) {
-            showingLoseScreen = false;
-            paused = true;
-            createBalls();
-            if(lives === 0) {
-                started_yet = false;
-                level = 1;
-                score = 0;
-                rewardScore = (1000 * level);
-                lives = NUMBER_OF_LIVES;
-                for(let ball of balls) {
-                    ball.reset();
-                }
-                createBricks();
-            }
-        } else {
-            paused = !paused;
-            started_yet = true;
-        }
-    }
-}
-
-// Mobile 'click'
+// 'click/tap' to start/pause 
 function handleClick(evt) {
     if (showingWinScreen) {
         if(level % 2 === 0 && lives !== 0) {
+            // Give an extra life on odd levels > 1
             lives++;
         }
         level++;
+        rewardScore = (1000 * level);
         showingWinScreen = false;
         paused = true;
         for(let ball of balls) {
             ball.reset();
         }
         createBricks();
-        return;
-    }
-    if(showingLoseScreen) {
-        level = 1;
-        lives = NUMBER_OF_LIVES;
+        createBalls();
+    } else if(showingLoseScreen) {
         showingLoseScreen = false;
         paused = true;
-        started_yet = false;
-        for(let ball of balls) {
-            ball.reset();
+        createBalls();
+        if(lives === 0) {
+            started_yet = false;
+            level = 1;
+            score = 0;
+            rewardScore = (1000 * level);
+            lives = NUMBER_OF_LIVES;
+            for(let ball of balls) {
+                ball.reset();
+            }
+            createBricks();
         }
-        createBricks();
-        return;
+    } else {
+        paused = !paused;
+        started_yet = true;
     }
-    let clickX = evt.clientX-16;
-    let clickY = evt.clientY-94;
-    if(clickY >= buttonY && clickY <= buttonY + 35) {
-        if(clickX >= rightButtonX && clickX <= rightButtonX + 40) {
-            paused = !paused;
-            started_yet = true;
-        }
-    }
-}
-
-function drawButtons() {
-    let left = canvas.width / 6;
-    let top = canvas.height / 6;
-    buttonY = canvas.height - top;
-    rightButtonX = canvas.width - left;
-
-    colorRect(rightButtonX, buttonY, 40, 35, "white");
-
-    setText("black");
-    let playPause = (paused ? '|>' : '| |');
-    canvasContext.fillText(playPause, canvas.width - left + 10, canvas.height - top + 28);
 }
 
 function getViewportDimension() {
@@ -267,7 +217,13 @@ function constrain(n, low, high) {
 
 function setText(color) {
   canvasContext.fillStyle = color;
-  canvasContext.font = "30px Roboto";
+  if(canvas.width >= 556) {
+    canvasContext.font = "30px Roboto";
+    distanceFromRight = 300;
+  } else {
+    canvasContext.font = "22px Roboto";
+    distanceFromRight = 200;
+  }
 }
 
 function getRandomInt(min, max) {
