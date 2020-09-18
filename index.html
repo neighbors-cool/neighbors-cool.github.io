@@ -37,14 +37,13 @@
     <![endif]-->
     <header class="navbar-expand-lg fixed-top px-md-4 px-2">
       <div class="d-flex justify-content-between" role="navigation">
-        <h2><a href="/#" class="header local-link ml-md-2">&lt;N /&gt; Justin Neighbors</a></h2>
-        <a href="/#career" class="header-btn local-link d-none d-md-block">Career</a>
-        <a href="/#education" class="header-btn local-link d-none d-md-block">Education</a>
-        <a href="/#projects" class="header-btn local-link d-none d-md-block">Projects</a>
-        <div class="align-self-center dropdown d-block d-md-none">
-          <button class="btn btn-sm btn-menu dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
-            aria-haspopup="true" aria-expanded="false">Menu</button>
-          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+        <h1 class="d-inline-block"><a href="/#" class="header local-link ml-md-2 text-nowrap"><span class="logo-sm">&lt;N /&gt;</span>&nbsp;Justin Neighbors</a></h1>
+        <a href="/#career" class="header-btn local-link d-none d-md-inline-block">Career</a>
+        <a href="/#education" class="header-btn local-link d-none d-md-inline-block">Education</a>
+        <a href="/#projects" class="header-btn local-link d-none d-md-inline-block">Projects</a>  
+        <div class='dropdown d-inline-block d-md-none float-right'>
+          <button id="dropdown-toggle" class="btn btn-sm btn-menu pointerCursor dropdown-toggle float-right" type="button" aria-haspopup="true" aria-expanded="false">Menu</button>
+          <div id="menu" class='menu pointerCursor hide'>
             <a class="dropdown-item local-link" href="/#career">Career</a>
             <a class="dropdown-item local-link" href="/#education">Education</a>
             <a class="dropdown-item local-link" href="/#projects">Projects</a>
@@ -63,7 +62,7 @@
           <picture>
             <source type="image/webp" srcset="/img/justin_stream.webp">
             <source type="image/jpeg" srcset="/img/justin_stream.jpg">
-            <img class="mb-3 profile-pic" src="/img/justin_stream.jpg" alt="Justin Neighbors Image">
+            <img id="profile-pic" class="mb-3 profile-pic" src="/img/justin_stream.jpg" alt="Justin Neighbors Image">
           </picture>          
           <ul class="align-self-center pl-3 pl-md-5">
             <li class="mb-2">Senior Software Developer at <a href="https://www.collegesource.com" class="underline" title="CollegeSource, Inc.">CollegeSource, Inc.</a></li>
@@ -210,6 +209,13 @@
       </div>
       <br />
     </footer>
+    <script type="text/javascript">
+      function handleImageWidth() {
+        document.getElementById('profile-pic').style.maxWidth = (window.innerWidth - 26) + 'px';
+      }
+      window.onresize = handleImageWidth;
+      window.onload = handleImageWidth;
+    </script>
     <script src="/js/vendor/workbox-sw.js"></script>
     <script src="/js/vendor/lazysizes.min.js" async></script>
     <script src="/js/vendor/modernizr.min.js" async></script>

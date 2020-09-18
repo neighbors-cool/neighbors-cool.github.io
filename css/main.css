@@ -114,7 +114,7 @@ textarea {
   .dropdown-item:focus,
   .dropdown-item:hover {
     color: rgb(230, 230, 230);
-    background-color: #000;
+    background-color: #000 !important;
   }
 
   img {
@@ -140,7 +140,7 @@ textarea {
     color: #3399FF;
   }
 
-  .dropdown {
+  .dropdown-toggle {
     background-color: #fff;
   }
 }
@@ -187,7 +187,7 @@ textarea {
   .dropdown-item:focus,
   .dropdown-item:hover {
     color: #fff;
-    background-color: #121733;
+    background-color: #121733 !important;
   }
 }
 
@@ -217,10 +217,41 @@ h3>a, h4>a {
   text-decoration: underline;
 }
 
-.dropdown-item.active,
-.dropdown-item:active {
-  text-decoration: none;
+/* START Mobile Menu */
+
+#menu {
+  background-color: white;
+  position: absolute;
+  right: 0;
+  bottom: auto;
+  top: 60px;
 }
+
+.hide {
+  max-height: 0 !important;
+}
+
+.dropdown {
+  margin-bottom: .5em;
+  margin-top: .5em;
+}
+
+.dropdown .dropdown-toggle {
+  margin: .3em .3em .3em .3em;
+}
+
+.dropdown .menu {
+  transition: max-height .3s ease-out;
+  max-height: 20em;
+  overflow: hidden;
+}
+
+.dropdown .menu .dropdown-item {
+  margin: .3em .3em .3em .3em;
+  margin-top: 0.3em;
+}
+
+/* END Mobile Menu */
 
 h1,h2 {
   margin-bottom: .3rem;
@@ -246,6 +277,17 @@ h1,h2 {
   max-height:313px;
   width: auto;
   height: auto;
+}
+
+@media (max-width: 429px) {
+  .logo-sm {
+    display: none;
+  }
+}
+@media (min-width: 430px) {
+  .logo-sm {
+    display: inline-block;
+  }
 }
 
 @media (max-width: 540px) {

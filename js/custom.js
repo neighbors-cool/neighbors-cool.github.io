@@ -11,4 +11,15 @@ document.addEventListener("DOMContentLoaded", function(event) {
       }
     }
   }
+  document.getElementById('dropdown-toggle').addEventListener('click', function(event) { event.preventDefault();event.stopPropagation();toggleMenu(true); });
+  document.getElementsByTagName('body')[0].addEventListener('click', function(event) { event.preventDefault();event.stopPropagation();toggleMenu(false); });
 });
+
+function toggleMenu(btnClick) {
+  var menu = document.getElementById('menu');
+  if(btnClick && menu.classList.contains('hide')) {
+    menu.classList.remove('hide');
+  } else if(!menu.classList.contains('hide')) {
+    menu.classList.add('hide');
+  }
+}
