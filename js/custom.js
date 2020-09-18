@@ -11,8 +11,8 @@ document.addEventListener("DOMContentLoaded", function(event) {
       }
     }
   }
-  document.getElementById('dropdown-toggle').addEventListener('click', function(event) { event.preventDefault();event.stopPropagation();toggleMenu(true); });
-  document.getElementsByTagName('body')[0].addEventListener('click', function(event) { event.preventDefault();event.stopPropagation();toggleMenu(false); });
+  document.getElementById('dropdown-toggle').addEventListener('click', function(event) { event.stopPropagation();toggleMenu(true);return false; });
+  document.getElementsByTagName('body')[0].addEventListener('click', function(event) { event.stopPropagation();toggleMenu(false);return false; });
 });
 
 function toggleMenu(btnClick) {
