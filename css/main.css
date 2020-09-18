@@ -191,11 +191,18 @@ textarea {
   }
 }
 
+@supports(padding: max(0px)) {
+  .post {
+      padding-left: max(12px, env(safe-area-inset-left));
+      padding-right: max(12px, env(safe-area-inset-right));
+  }
+}
+
 body {
   margin-top: 50px;
   font-size:20px;
   line-height: 32px;
-  font-family: Palatino, Palatino Linotype, Palatino LT STD, Book Antiqua, Georgia, serif;
+  font-family: 'Libre Baskerville', serif;
 }
 
 img {
@@ -309,8 +316,12 @@ hr {
   left: -50vw;
 }
 
-.mountains-img {
+.no-webp .mountains-img {
   background-image: url(/img/mountain-peaks-clouds-and-landscape.jpg);
+}
+
+.webp .mountains-img {
+  background-image: url(/img/mountain-peaks-clouds-and-landscape.webp);
 }
 
 #gameCanvas {

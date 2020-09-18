@@ -5,17 +5,29 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta http-equiv="Cache-Control" content="public, max-age=31536000">
+    <meta http-equiv="content-language" content="en-us">
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="keywords" content="justin,neighbors,machine,learning,game,career,education">
+    <meta name="robots" content="index,follow">
+    <meta name="googlebot" content="index,follow">
+    <meta property="og:title" content="Neighbors - Machine Learning">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://www.neighbors.cool/p/ml.html">
+    <meta property="og:image" content="https://www.neighbors.cool/img/nn-model.png">
+
     <title>Neighbors - ML</title>
     <meta name="description" content="Machine Learning Project">
     <meta name="author" content="Justin Neighbors">
-    <meta http-equiv="Cache-Control" content="public"/>
+    <meta http-equiv="Cache-Control" content="public" max-age="31536000"/>
+    <meta name="msapplication-TileColor" content="#003366">
+    <meta name="theme-color" content="#ffffff">
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
     <link rel="manifest" href="/manifest.json">
     <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#003366">
-    <meta name="msapplication-TileColor" content="#003366">
-    <meta name="theme-color" content="#ffffff">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Libre+Baskerville&display=swap">
     <link rel="stylesheet" href="/css/bootstrap.min.css" media="nope!" onload="this.media='all'">
     <link rel="stylesheet" href="/css/normalize.css" media="nope!" onload="this.media='all'">
     <link rel="stylesheet" href="/css/main.css" media="nope!" onload="this.media='all'">
@@ -62,7 +74,11 @@
             choice, right or wrong, using back-propagation.
           </div>
           <div class="pt-3 pt-lg-0">
-            <img src="/img/nn-model.png" alt="Neural Network" class="image-md" async />
+            <picture>
+                <source type="image/webp" srcset="/img/nn-model.webp">
+                <source type="image/jpeg" srcset="/img/nn-model.png">
+                <img src="/img/nn-model.png" alt="Neural Network" class="image-md" async />
+            </picture> 
           </div>
         </div>
         <hr class="hr-mid" />
@@ -87,9 +103,9 @@
       </div>
       <br />
     </footer>
-    <script src="/js/vendor/jquery-3.4.1.min.js"></script>
-    <script src="/js/vendor/bootstrap.bundle.min.js"></script>
+    <script src="/js/vendor/workbox-sw.js"></script>
     <script src="/js/vendor/lazysizes.min.js" async></script>
+    <script src="/js/plugins.js"></script>
     <script src="/js/custom.js" async></script>
   </body>
 

@@ -1,7 +1,5 @@
 
-importScripts('https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js');
 if (workbox) {
-    console.log("Yay! Workbox is loaded !");
     workbox.precaching.precacheAndRoute([]);
 /*  cache images in the e.g others folder; edit to other folders you got
    and config in the sw-config.js file
