@@ -201,20 +201,9 @@ textarea {
 body {
   margin-top: 50px;
   font-size:20px;
-  line-height: 32px;
   font-family: 'Libre Baskerville', serif;
 }
 
-/* latin-ext */
-@font-face {
-  font-family: 'Libre Baskerville';
-  font-style: normal;
-  font-weight: 400;
-  font-display: swap;
-  src: local('Libre Baskerville'), local('LibreBaskerville-Regular'), url(https://fonts.gstatic.com/s/librebaskerville/v9/kmKnZrc3Hgbbcjq75U4uslyuy4kn0qNXaxMICA.woff2) format('woff2');
-  unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
-}
-/* latin */
 @font-face {
   font-family: 'Libre Baskerville';
   font-style: normal;
@@ -294,8 +283,9 @@ h1,h2 {
   display: block;
   max-width:415px;
   max-height:313px;
-  width: auto;
-  height: auto;
+}
+.image-sm {
+  width: 200px;
 }
 
 @media (max-width: 429px) {
@@ -313,9 +303,6 @@ h1,h2 {
   .header {
     font-size: 28px;
   }
-  .image-sm {
-    width: 200px;
-  }
   .image-md,.iframe-md {
     width: 340px;
     height: 192px;
@@ -326,12 +313,6 @@ h1,h2 {
 }
 
 @media (min-width: 541px) {
-  .header {
-    font-size: 35px;
-  }
-  .image-sm {
-    width: 200px;
-  }
   .image-md,.iframe-md {
     width: 560px;
     height: 315px;
