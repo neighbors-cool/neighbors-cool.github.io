@@ -25,14 +25,14 @@
             "short_name": "BB",
             "description": "Play Brick Breaker!",
             "url": "/g/brickbreaker.html",
-            "icons": [{ "src": "/img/brickbreaker-200.png", "sizes": "222x200" }]
+            "icons": [{ "src": "/img/brickbreaker.png", "sizes": "234x115" }]
         },
         {
             "name": "Snake",
             "short_name": "Snake",
             "description": "Play Snake!",
             "url": "/g/snake.html",
-            "icons": [{ "src": "/img/snake-160.png", "sizes": "160x131" }]
+            "icons": [{ "src": "/img/snake.png", "sizes": "200x113" }]
         }
     ]
 }

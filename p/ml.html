@@ -1,9 +1,8 @@
 <!DOCTYPE html>
 <html class="no-js" lang="en">
-
   <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, viewport-fit=cover">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta http-equiv="Cache-Control" content="public, max-age=31536000">
     <meta http-equiv="content-language" content="en-us">
@@ -27,23 +26,23 @@
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
     <link rel="manifest" href="/manifest.json">
     <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#003366">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
-    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/bootstrap-neighbors.min.css">
+    <link rel="stylesheet" href="/css/main.min.css">
   </head>
 
   <body>
     <!--[if IE]>
       <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p>
     <![endif]-->
-    <header class="navbar-expand-lg fixed-top px-md-4 px-2">
-      <div class="d-flex justify-content-between" role="navigation">
+    <header class="fixed-top px-md-4 px-2">
+      <nav class="d-flex justify-content-between" role="navigation">
         <h1 class="d-inline-block"><a href="/#" class="header local-link text-nowrap"><span class="logo-sm">&lt;N /&gt;</span>&nbsp;Justin Neighbors</a></h1>
         <a href="/#career" class="header-btn local-link d-none d-md-inline-block">Career</a>
         <a href="/#education" class="header-btn local-link d-none d-md-inline-block">Education</a>
-        <a href="/#projects" class="header-btn local-link d-none d-md-inline-block">Projects</a>  
-        <div class='dropdown d-inline-block d-md-none float-right'>
-          <button id="dropdown-toggle" class="btn btn-sm btn-menu pointerCursor dropdown-toggle float-right" type="button" aria-haspopup="true" aria-expanded="false">Menu</button>
-          <div id="menu" class='menu pointerCursor hide'>
+        <a href="/#projects" class="header-btn local-link d-none d-md-inline-block">Projects</a>
+        <div class="dropdown d-inline-block d-md-none" aria-hidden="true">
+          <button type="button" id="btn-menu" class="btn btn-sm btn-menu pointerCursor dropdown-toggle" aria-haspopup="true" aria-expanded="false">Menu</button>
+          <div id="menu" class='menu pointerCursor'>
             <a class="dropdown-item local-link" href="/#career">Career</a>
             <a class="dropdown-item local-link" href="/#education">Education</a>
             <a class="dropdown-item local-link" href="/#projects">Projects</a>
@@ -54,7 +53,7 @@
             <a class="dropdown-item local-link" href="/g/snake.html">Snake</a>
           </div>
         </div>
-      </div>
+      </nav>
     </header>
     <div id="index" role="main" class="container-fluid pt-4 px-md-4">
       <section>
@@ -101,9 +100,9 @@
       </div>
       <br />
     </footer>
-    <script src="/js/vendor/workbox-sw.js"></script>
     <script src="/js/vendor/lazysizes.min.js" async></script>
-    <script src="/js/plugins.js"></script>
+    <script src="/js/vendor/modernizr.min.js" async></script>
+    <script src="/js/plugins.js" async></script>
     <script src="/js/custom.js" async></script>
   </body>
 

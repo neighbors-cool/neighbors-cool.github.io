@@ -13,11 +13,12 @@
     <meta property="og:title" content="Neighbors">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://www.neighbors.cool/">
-    <meta property="og:image" content="https://www.neighbors.cool/img/justin_stream.jpg">
+    <meta property="og:image" content="https://www.neighbors.cool/img/justin_stream_sm.jpg">
 
     <title>Neighbors</title>
     <meta name="description" content="Justin Neighbors website">
     <meta name="author" content="Justin Neighbors">
+    <meta http-equiv="Cache-Control" content="public" max-age="31536000"/>
     <meta name="msapplication-TileColor" content="#003366">
     <meta name="theme-color" content="#ffffff">
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
@@ -25,23 +26,23 @@
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
     <link rel="manifest" href="/manifest.json">
     <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#003366">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
-    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/bootstrap-neighbors.min.css">
+    <link rel="stylesheet" href="/css/main.min.css">
   </head>
 
   <body>
     <!--[if IE]>
       <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p>
     <![endif]-->
-    <header class="navbar-expand-lg fixed-top px-md-4 px-2">
-      <div class="d-flex justify-content-between" role="navigation">
+    <header class="fixed-top px-md-4 px-2">
+      <nav class="d-flex justify-content-between" role="navigation">
         <h1 class="d-inline-block"><a href="/#" class="header local-link text-nowrap"><span class="logo-sm">&lt;N /&gt;</span>&nbsp;Justin Neighbors</a></h1>
         <a href="/#career" class="header-btn local-link d-none d-md-inline-block">Career</a>
         <a href="/#education" class="header-btn local-link d-none d-md-inline-block">Education</a>
-        <a href="/#projects" class="header-btn local-link d-none d-md-inline-block">Projects</a>  
-        <div class='dropdown d-inline-block d-md-none float-right'>
-          <button id="dropdown-toggle" class="btn btn-sm btn-menu pointerCursor dropdown-toggle float-right" type="button" aria-haspopup="true" aria-expanded="false">Menu</button>
-          <div id="menu" class='menu pointerCursor hide'>
+        <a href="/#projects" class="header-btn local-link d-none d-md-inline-block">Projects</a>
+        <div class="dropdown d-inline-block d-md-none" aria-hidden="true">
+          <button type="button" id="btn-menu" class="btn btn-sm btn-menu pointerCursor dropdown-toggle" aria-haspopup="true" aria-expanded="false">Menu</button>
+          <div id="menu" class="menu pointerCursor">
             <a class="dropdown-item local-link" href="/#career">Career</a>
             <a class="dropdown-item local-link" href="/#education">Education</a>
             <a class="dropdown-item local-link" href="/#projects">Projects</a>
@@ -52,15 +53,15 @@
             <a class="dropdown-item local-link" href="/g/snake.html">Snake</a>
           </div>
         </div>
-      </div>
+      </nav>
     </header>
     <div id="index" role="main" class="container-fluid pt-4 px-md-4">
       <section>
         <div class="d-md-inline-flex">
           <picture>
-            <source type="image/webp" srcset="/img/justin_stream.webp">
-            <source type="image/jpeg" srcset="/img/justin_stream.jpg">
-            <img id="profile-pic" class="mb-3 profile-pic" src="/img/justin_stream.jpg" width="414" height="313" alt="Justin Neighbors Image">
+            <source type="image/webp" srcset="/img/justin_stream_sm.webp">
+            <source type="image/jpeg" srcset="/img/justin_stream_sm.jpg">
+            <img id="profile-pic" class="mb-3 profile-pic" src="/img/justin_stream_sm.jpg" alt="Justin Neighbors Image">
           </picture>          
           <ul class="align-self-center pl-3 pl-md-5">
             <li class="mb-2">Senior Software Developer at <a href="https://www.collegesource.com" class="underline" title="CollegeSource, Inc.">CollegeSource, Inc.</a></li>
@@ -171,7 +172,7 @@
                 <picture>
                   <source type="image/webp" srcset="/img/brickbreaker.webp">
                   <source type="image/jpeg" srcset="/img/brickbreaker.png">
-                  <img data-src="/img/brickbreaker.png" alt="Brick Breaker Game" width="200" height="113" class="lazyload image-sm">
+                  <img data-src="/img/brickbreaker.png" alt="Brick Breaker Game" class="lazyload image-sm">
                 </picture>
               </li>
               <li>
@@ -179,7 +180,7 @@
                 <picture>
                   <source type="image/webp" srcset="/img/snake.webp">
                   <source type="image/jpeg" srcset="/img/snake.png">
-                  <img data-src="/img/snake.png" alt="Snake Game" width="200" height="133" class="lazyload image-sm">
+                  <img data-src="/img/snake.png" alt="Snake Game" class="lazyload image-sm">
                 </picture>
               </li>
             </ul>
@@ -194,8 +195,9 @@
         <div class="text-center">
           <h2><a href="/" class="header local-link" style="white-space:nowrap;">&lt;N /&gt;</a></h2>&nbsp;
         </div>
+        <!--
         <div class="d-none d-md-block">
-          <script type='text/javascript' src='https://ko-fi.com/widgets/widget_2.js' async></script>
+          <script type='text/javascript' src='https://ko-fi.com/widgets/widget_2.js'></script>
           <script type='text/javascript'>kofiwidget2.init('Support Me on Ko-fi', '#5946b8', 'A0A2WE4R');kofiwidget2.draw();</script> 
           &nbsp;
           <span style="background-color:white;">
@@ -204,6 +206,7 @@
             </a>
           </span>
         </div>
+        -->
       </div>
       <br />
     </footer>
@@ -211,10 +214,9 @@
       function handleImageWidth() {
         document.getElementById('profile-pic').style.maxWidth = (window.innerWidth - 26) + 'px';
       }
-      window.onresize = handleImageWidth;
-      window.onload = handleImageWidth;
+      window.addEventListener('resize', handleImageWidth);
+      window.addEventListener('load', handleImageWidth);
     </script>
-    <script src="/js/vendor/workbox-sw.js"></script>
     <script src="/js/vendor/lazysizes.min.js" async></script>
     <script src="/js/vendor/modernizr.min.js" async></script>
     <script src="/js/plugins.js" async></script>

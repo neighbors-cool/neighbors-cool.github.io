@@ -1,7 +1,11 @@
+// Check that service workers are supported
+if ('serviceWorker' in navigator) {
+  // Use the window load event to keep the page load performant
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('/service-worker.js');
+  });
+}
 document.addEventListener("DOMContentLoaded", function(event) {
-  if ("serviceWorker" in navigator) {
-    navigator.serviceWorker.register("../sw.js");
-  }
   var anchors = document.getElementsByTagName('a');
   if(!!anchors && !!anchors.length) {
     for(var i = 0; i < anchors.length; i++) {
@@ -11,15 +15,25 @@ document.addEventListener("DOMContentLoaded", function(event) {
       }
     }
   }
-  document.getElementById('dropdown-toggle').addEventListener('click', function(event) { event.stopPropagation();toggleMenu(true);return false; });
-  document.getElementsByTagName('body')[0].addEventListener('click', function(event) { event.stopPropagation();toggleMenu(false);return false; });
+  document.getElementById('btn-menu').addEventListener('click', toggleMenu);
+  var dditems = document.getElementsByClassName('dropdown-item');
+  for(var i = 0; i < dditems.length; i++) {
+    dditems[i].addEventListener('click', toggleMenu);
+  }
+  if(document.getElementById('menu').parentElement.offsetHeight > 0) {
+    menu.parentElement.setAttribute('aria-hidden', false);
+  }
 });
 
-function toggleMenu(btnClick) {
+function toggleMenu() {
   var menu = document.getElementById('menu');
-  if(btnClick && menu.classList.contains('hide')) {
-    menu.classList.remove('hide');
-  } else if(!menu.classList.contains('hide')) {
-    menu.classList.add('hide');
+  if(menu.classList.contains('show')) {
+    menu.classList.remove('show');
+    menu.setAttribute('aria-hidden', true);
+    document.getElementById('btn-menu').setAttribute('aria-expanded', false);
+  } else {
+    menu.classList.add('show');
+    menu.setAttribute('aria-hidden', false);
+    document.getElementById('btn-menu').setAttribute('aria-expanded', true);
   }
 }
