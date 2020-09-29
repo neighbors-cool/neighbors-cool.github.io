@@ -1,3 +1,6 @@
+function byId(id) {
+  return document.getElementById(id);
+}
 // Check that service workers are supported
 if ('serviceWorker' in navigator) {
   // Use the window load event to keep the page load performant
@@ -5,7 +8,7 @@ if ('serviceWorker' in navigator) {
     navigator.serviceWorker.register('/service-worker.js');
   });
 }
-document.addEventListener("DOMContentLoaded", function(event) {
+window.addEventListener('load', () => {
   var anchors = document.getElementsByTagName('a');
   if(!!anchors && !!anchors.length) {
     for(var i = 0; i < anchors.length; i++) {
@@ -15,25 +18,25 @@ document.addEventListener("DOMContentLoaded", function(event) {
       }
     }
   }
-  document.getElementById('btn-menu').addEventListener('click', toggleMenu);
+  byId('menuButton').addEventListener('click', toggleMenu);
   var dditems = document.getElementsByClassName('dropdown-item');
   for(var i = 0; i < dditems.length; i++) {
     dditems[i].addEventListener('click', toggleMenu);
   }
-  if(document.getElementById('menu').parentElement.offsetHeight > 0) {
-    menu.parentElement.setAttribute('aria-hidden', false);
+  if(byId('menuDiv').offsetHeight > 0) {
+    byId('menuDiv').setAttribute('aria-hidden', false);
   }
 });
 
 function toggleMenu() {
-  var menu = document.getElementById('menu');
+  var menu = byId('menu');
   if(menu.classList.contains('show')) {
     menu.classList.remove('show');
     menu.setAttribute('aria-hidden', true);
-    document.getElementById('btn-menu').setAttribute('aria-expanded', false);
+    byId('menuButton').setAttribute('aria-expanded', false);
   } else {
     menu.classList.add('show');
     menu.setAttribute('aria-hidden', false);
-    document.getElementById('btn-menu').setAttribute('aria-expanded', true);
+    byId('menuButton').setAttribute('aria-expanded', true);
   }
 }
