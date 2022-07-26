@@ -251,19 +251,6 @@ function colorRect(leftX, topY, width, height, drawColor) {
 	canvasContext.fillRect(leftX, topY, width, height);
 }
 
-// p5js.map
-/*function map(n, start1, stop1, start2, stop2, withinBounds) {
-	const newval = (n - start1) / (stop1 - start1) * (stop2 - start2) + start2;
-	if (!withinBounds) {
-	  return newval;
-	}
-	if (start2 < stop2) {
-	  return this.constrain(newval, start2, stop2);
-	} else {
-	  return this.constrain(newval, stop2, start2);
-	}
-}*/
-
 function createBricks() {
 	bricks = [];
 	let leftPad = (canvas.width - (brick_columns * (BRICK_WIDTH + BRICK_WIDTH_PADDING)) + BRICK_WIDTH_PADDING) / 2;
@@ -294,21 +281,15 @@ function createNewBall() {
 	let ball = new Ball();
 	ball.reset();
 	balls.push(ball);
-};
+}
 
 class Vector {
 	constructor(x, y) {
-		this.x = 0;
-		this.y = 0;
-		if (x) {
-			this.x = x;
-		}
-		if (y) {
-			this.y = y;
-		}
-		this.toString = function () {
-			return 'x:' + this.x + ', y:' + this.y;
-		};
+		this.x = (x ? x : 0);
+		this.y = (y ? y : 0);
+	}
+	toString() {
+		return 'x:' + this.x + ', y:' + this.y;
 	}
 }
 
@@ -316,22 +297,22 @@ class Brick {
 	constructor(x, y, color) {
 		this.pos = new Vector(x, y);
 		this.color = color;
+	}
 
-		this.draw = function () {
-			colorRect(this.pos.x, this.pos.y, BRICK_WIDTH, BRICK_HEIGHT, this.color);
-		};
+	draw() {
+		colorRect(this.pos.x, this.pos.y, BRICK_WIDTH, BRICK_HEIGHT, this.color);
+	}
 
-		this.hit = function () {
-			score += (10 * level);
+	hit() {
+		score += (10 * level);
 
-			if (score >= rewardScore) {
-				rewardScore += rewardScore;
-				createNewBall();
-			}
-			bricks = bricks.filter(function(brick) {
-				return this !== brick;
-			}, this);
-		};
+		if (score >= rewardScore) {
+			rewardScore += rewardScore;
+			createNewBall();
+		}
+		bricks = bricks.filter(function(brick) {
+			return this !== brick;
+		}, this);
 	}
 }
 
@@ -342,11 +323,10 @@ class Paddle {
 		this.height = 10;
 		this.padding = 10;
 		this.halfWidth = this.width / 2;
-
-		// Draw Paddle
-		this.draw = function () {
-			colorRect(this.pos.x, this.pos.y, this.width, this.height, 'white');
-		};
+	}
+	// Draw Paddle
+	draw() {
+		colorRect(this.pos.x, this.pos.y, this.width, this.height, 'white');
 	}
 }
 
@@ -357,175 +337,185 @@ class Ball {
 		this.radius = 10;
 		this.colorControl = 0;
 		this.color = '';
-
-		this.setBallBoarder = function() {
-			this.top = this.pos.y - this.radius;
-			this.bottom = this.pos.y + this.radius;
-			this.left = this.pos.x - this.radius;
-			this.right = this.pos.x + this.radius;
-		}
 		this.setBallBoarder();
+	}
 
-		// Draw Ball
-		this.draw = function () {
-			if ((this.colorControl % (framesPerSecond / 5)) === 0) {
-				this.color = 'hsl(' + getRandomInt(0, 360) + ', 100%, 50%)';
-				this.colorControl = 0;
-			}
-			this.colorControl++;
-			canvasContext.fillStyle = this.color;
-			canvasContext.beginPath();
-			// centerX, centerY, radius, startDraw, endDraw, counterClockwise
-			canvasContext.arc(this.pos.x, this.pos.y, this.radius, 0, Math.PI * 2, true);
-			canvasContext.fill();
-		};
+	setBallBoarder() {
+		this.top = this.pos.y - this.radius;
+		this.bottom = this.pos.y + this.radius;
+		this.left = this.pos.x - this.radius;
+		this.right = this.pos.x + this.radius;
+	}
 
-		// Move the ball
-		this.move = function () {
-			// Set boundary and default motion
-			if (this.vel.x === 0) {
-				this.vel.x--;
-			} else {
-				this.vel.x = constrain(this.vel.x, -9, 9);
-			}
-			if (this.vel.y === 0) {
-				this.vel.y--;
-			}
-			
-			// If ball is at brick height, use pixel perfect-ish
-			if(this.top <= lowestBrick) {
-				let testingPixelPerfect = true;
-				let xTarget = (this.pos.x + this.vel.x);
-				let yTarget = (this.pos.y + this.vel.y);
-				while(testingPixelPerfect) {
-					if(this.vel.x > 0) {
-						if(this.pos.x < xTarget) {
-							this.pos.x += 0.1;
-						} else {
-							this.pos.x = xTarget;
-						}
+	// Draw Ball
+	draw() {
+		if ((this.colorControl % (framesPerSecond / 5)) === 0) {
+			this.color = 'hsl(' + getRandomInt(0, 360) + ', 100%, 50%)';
+			this.colorControl = 0;
+		}
+		this.colorControl++;
+		canvasContext.fillStyle = this.color;
+		canvasContext.beginPath();
+		// centerX, centerY, radius, startDraw, endDraw, counterClockwise
+		canvasContext.arc(this.pos.x, this.pos.y, this.radius, 0, Math.PI * 2, true);
+		canvasContext.fill();
+	}
+
+	// Move the ball
+	move() {
+
+		// Set default motion
+		if (this.vel.x === 0) {
+			this.vel.x--;
+		}
+		if (this.vel.y === 0) {
+			this.vel.y--;
+		}
+		
+		let xTarget = (this.pos.x + this.vel.x);
+		let yTarget = (this.pos.y + this.vel.y);
+
+		// Set the max magnitude
+		let hyp = Math.hypot(this.vel.x, this.vel.y);
+		if(hyp !== 0 || hyp > 9) {
+			xTarget = (this.pos.x + constrain(((this.vel.x / hyp) * 9), -6, 6));
+			yTarget = (this.pos.y + constrain(((this.vel.y / hyp) * 9), -6, 6));
+		}
+
+		// If ball is at brick height, use pixel perfect-ish
+		if(this.top <= lowestBrick) {
+			let testingPixelPerfect = true;
+
+			while(testingPixelPerfect) {
+				if(this.vel.x > 0) {
+					if(this.pos.x < xTarget) {
+						this.pos.x += 0.1;
 					} else {
-						if(this.pos.x > xTarget) {
-							this.pos.x -= 0.1;
-						} else {
-							this.pos.x = xTarget;
-						}
+						this.pos.x = xTarget;
 					}
-					
-					if(this.vel.y > 0) {
-						if(this.pos.y < yTarget) {
-							this.pos.y += 0.1;
-						} else {
-							this.pos.y = yTarget;
-						}
+				} else {
+					if(this.pos.x > xTarget) {
+						this.pos.x -= 0.1;
 					} else {
-						if(this.pos.y > yTarget) {
-							this.pos.y -= 0.1;
-						} else {
-							this.pos.y = yTarget;
-						}
-					}
-					
-					this.setBallBoarder();
-
-					// If the ball hit something or if its where its supposed to be
-					if(this.checkForBrickHit() || (this.pos.x === xTarget && this.pos.y === yTarget)) {
-						testingPixelPerfect = false;
+						this.pos.x = xTarget;
 					}
 				}
-			} else {
-				this.pos.x += this.vel.x;
-				this.pos.y += this.vel.y;
+				
+				if(this.vel.y > 0) {
+					if(this.pos.y < yTarget) {
+						this.pos.y += 0.1;
+					} else {
+						this.pos.y = yTarget;
+					}
+				} else {
+					if(this.pos.y > yTarget) {
+						this.pos.y -= 0.1;
+					} else {
+						this.pos.y = yTarget;
+					}
+				}
+				
 				this.setBallBoarder();
-			}
-		};
 
-		this.reset = function () {
-			this.vel.x = getRandomInt(-8, 8);
-			this.vel.y = -4 - level;
-			this.pos.x = centerScreenX - this.radius;
-			this.pos.y = canvas.height - paddle.padding - paddle.height - this.radius - 10;
-		};
-
-		this.checkForBrickHit = function () {
-			// First check to see if ball is at brick height
-			if(this.top > lowestBrick) {
-				return false;
-			}
-
-			// Check if Brick Hit
-			for (let brick of bricks) {
-				// Check that the ball is vertically in line with the brick
-				if (this.right >= brick.pos.x && this.left <= (brick.pos.x + BRICK_WIDTH)) {
-					// Check that the ball is horizontally in line with the brick
-					if (this.bottom >= brick.pos.y && this.top <= (brick.pos.y + BRICK_HEIGHT)) {
-						brick.hit();
-
-						// Decide where the Ball hit the Brick
-						let distFromLeftEdge = Math.abs(Math.round(this.right - brick.pos.x));
-						let distFromRightEdge = Math.abs(Math.round(this.left - (brick.pos.x + BRICK_WIDTH)));
-						let distFromTopEdge = Math.abs(Math.round(this.bottom - brick.pos.y));
-						let distFromBottomEdge = Math.abs(Math.round(this.top - (brick.pos.y + BRICK_HEIGHT)));
-						let minDist = Math.min(distFromLeftEdge, distFromRightEdge, distFromTopEdge, distFromBottomEdge);
-						if (minDist === distFromTopEdge) {
-							// Bounce Up
-							this.vel.y = -Math.abs(Math.round(this.vel.y));
-						} else if (minDist === distFromBottomEdge) {
-							// Bounce Down
-							this.vel.y = Math.abs(Math.round(this.vel.y));
-						} else if (minDist === distFromLeftEdge) {
-							// Bounce Left
-							this.vel.x = -Math.abs(Math.round(this.vel.x));
-						} else {
-							// Bounce Right
-							this.vel.x = Math.abs(Math.round(this.vel.x));
-						}
-						brick = undefined;
-						return true;
-					}
+				// If the ball hit something or if its where its supposed to be
+				if(this.checkForBrickHit()
+					|| (this.pos.x === xTarget && this.pos.y === yTarget)
+					|| (this.top > lowestBrick)) {
+						testingPixelPerfect = false;
 				}
 			}
-			return false;
-		};
+		} else {
+			this.pos.x += this.vel.x;
+			this.pos.y += this.vel.y;
+			this.setBallBoarder();
+		}
+	}
 
-		this.checkForPaddleHit = function () {
-			if (this.right >= paddle.pos.x
-				&& this.left <= (paddle.pos.x + paddle.width)
-				&& this.bottom >= paddle.pos.y - (paddle.height / 2)) {
-				// Ball is colliding with paddle
-				this.vel.y = -Math.abs(Math.round(this.vel.y));
-				let deltaX = this.pos.x - (paddle.pos.x + paddle.halfWidth);
-				this.vel.x = Math.round(deltaX * angle);
-				return true;
-			}
-			return false;
-		};
+	reset() {
+		this.vel.x = getRandomInt(-2, 2);
+		this.vel.y = getRandomInt(-3, -4) - level;
+		this.pos.x = centerScreenX - this.radius;
+		this.pos.y = canvas.height - paddle.padding - paddle.height - this.radius - 10;
+	}
 
-		this.checkForBottomScreenHit = function() {
-			if (this.bottom >= canvas.height) {
-				// Ball hit bottom of screen
-				return true;
-			}
+	checkForBrickHit() {
+		// First check to see if ball is at brick height
+		if(this.top > lowestBrick) {
 			return false;
 		}
 
-		this.checkForBoarderHit = function () {
-			// Check for Top Screen Border Collision
-			if (this.top <= 0) {
-				this.vel.y = Math.abs(Math.round(this.vel.y));
-				return true;
+		// Check if Brick Hit
+		for (let brick of bricks) {
+			// Check that the ball is vertically in line with the brick
+			if (this.right >= brick.pos.x && this.left <= (brick.pos.x + BRICK_WIDTH)) {
+				// Check that the ball is horizontally in line with the brick
+				if (this.bottom >= brick.pos.y && this.top <= (brick.pos.y + BRICK_HEIGHT)) {
+					brick.hit();
+
+					// Decide where the Ball hit the Brick
+					let distFromLeftEdge = Math.abs(this.right - brick.pos.x);
+					let distFromRightEdge = Math.abs(this.left - (brick.pos.x + BRICK_WIDTH));
+					let distFromTopEdge = Math.abs(this.bottom - brick.pos.y);
+					let distFromBottomEdge = Math.abs(this.top - (brick.pos.y + BRICK_HEIGHT));
+					let minDist = Math.min(distFromLeftEdge, distFromRightEdge, distFromTopEdge, distFromBottomEdge);
+					if (minDist === distFromTopEdge) {
+						// Bounce Up
+						this.vel.y = -Math.abs(this.vel.y);
+					} else if (minDist === distFromBottomEdge) {
+						// Bounce Down
+						this.vel.y = Math.abs(this.vel.y);
+					} else if (minDist === distFromLeftEdge) {
+						// Bounce Left
+						this.vel.x = -Math.abs(this.vel.x);
+					} else {
+						// Bounce Right
+						this.vel.x = Math.abs(this.vel.x);
+					}
+					brick = undefined;
+					return true;
+				}
 			}
-			// Check for Left or Right Screen Border Collision
-			if (this.right >= canvas.width) {
-				// Right Screen, Bounce Left
-				this.vel.x = -Math.abs(Math.round(this.vel.x));
-				return true;
-			} else if (this.left <= 0) {
-				// Left Screen Bounce Right
-				this.vel.x = Math.abs(Math.round(this.vel.x));
-				return true;
-			}
-			return false;
-		};
+		}
+		return false;
+	}
+
+	checkForPaddleHit() {
+		if (this.right >= paddle.pos.x
+			&& this.left <= (paddle.pos.x + paddle.width)
+			&& this.bottom >= paddle.pos.y - (paddle.height / 2)) {
+			// Ball is colliding with paddle
+			this.vel.y = -Math.abs(this.vel.y);
+			let deltaX = this.pos.x - (paddle.pos.x + paddle.halfWidth);
+			this.vel.x = Math.round(deltaX * angle);
+			return true;
+		}
+		return false;
+	}
+
+	checkForBottomScreenHit() {
+		if (this.bottom >= canvas.height) {
+			// Ball hit bottom of screen
+			return true;
+		}
+		return false;
+	}
+
+	checkForBoarderHit() {
+		// Check for Top Screen Border Collision
+		if (this.top <= 0) {
+			this.vel.y = Math.abs(this.vel.y);
+			return true;
+		}
+		// Check for Left or Right Screen Border Collision
+		if (this.right >= canvas.width) {
+			// Right Screen, Bounce Left
+			this.vel.x = -Math.abs(this.vel.x);
+			return true;
+		} else if (this.left <= 0) {
+			// Left Screen Bounce Right
+			this.vel.x = Math.abs(this.vel.x);
+			return true;
+		}
+		return false;
 	}
 }
