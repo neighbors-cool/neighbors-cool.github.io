@@ -35,7 +35,15 @@
       <link rel="stylesheet" href="/css/bootstrap-neighbors.min.css">
       <link rel="stylesheet" href="/css/main.min.css">
     </noscript>
-    <style type="text/css">@media (prefers-color-scheme: dark){.darkmode{display:list-item}header{border-bottom:1px solid rgb(230, 230, 230)}.dropdown-item:active,.dropdown-item:focus,.dropdown-item:hover,body,header,html{color:rgb(230, 230, 230);background-color:#000 !important}img{border:thick solid #fff}button.btn-link,h2,h3,h4{color:rgb(230, 230, 230)}header a{color:rgb(230, 230, 230)}#index a{color:#fff}a:hover{color:#3399FF}.dropdown-toggle{background-color:#fff}}@media (prefers-color-scheme: light){.darkmode{display:none}header{background-color:#fff;border-bottom:1px solid #121733}body,html{color:#121733;background-color:#fff}img{border:thick solid #121733}a,h1,h2,h3,h4,h5{color:#121733}a:hover{color:#0057AD}button.btn-menu{color:#fff;background-color:#121733}button.btn-menu:hover{color:#fff;background-color:#0057AD}.dropdown-item:active,.dropdown-item:focus,.dropdown-item:hover{color:#fff;background-color:#121733 !important}}body{margin-top:50px;font-size:20px;font-family:'Libre Baskerville', serif}img{border-radius:10px}a.underline,a:hover{text-decoration:underline}h3 > a,h4 > a{text-decoration:underline}h1,h2{margin-bottom:0.3rem;margin-top:0.3rem}.header,.header:hover{text-decoration:none}.header-btn,.header-btn:focus,.header-btn:hover{text-decoration:none;align-self:flex-end;font-size:1.3rem;margin-bottom:7px}.profile-pic{display:block;max-width:415px;max-height:313px}.image-sm{width:200px}@media (max-width: 429px){.logo-sm{display:none}}@media (min-width: 430px){.logo-sm{display:inline-block}}@media (max-width: 540px){.header{font-size:28px}.iframe-md,.image-md{width:340px;height:192px}.image-lg{width:340px}}@media (min-width: 541px){.iframe-md,.image-md{width:560px;height:315px}.image-lg{width:800px}}.anchor{position:relative;top:-70px}hr{margin-top:2rem;margin-bottom:2rem}.hr-l{width:50%}.hr-r{width:50%;margin-left:50%}.hr-mid{width:50%;margin-left:25%}.scrolling-img{background-color:#000;background-size:cover;min-height:300px;overflow:hidden;background-attachment:fixed;position:relative;min-width:100vw;margin-left:50%;left:-50vw}.no-webp .mountains-img{background-image:url("/img/mountain-peaks-clouds-and-landscape.jpg")}.webp .mountains-img{background-image:url("/img/mountain-peaks-clouds-and-landscape.webp")}#gameCanvas{margin:0;padding:0;overflow:hidden}.dropdown{margin-bottom:0.5em;margin-top:0.5em}.dropdown > .dropdown-toggle{margin:0.3em}.dropdown > .menu{max-height:0;transition:max-height 0.2s ease-in;outline:none;overflow:hidden;background-color:white;position:absolute;right:0;bottom:auto;top:60px}.dropdown > .menu.show{max-height:20em;transition:max-height 0.3s ease-out;outline:1px black solid}.dropdown > .menu > .dropdown-item{margin:0.3em}</style>
+	<style type="text/css">
+		@media (prefers-color-scheme: dark){.darkmode{display:list-item}header{border-bottom:1px solid rgb(230, 230, 230)}.dropdown-item:active,.dropdown-item:focus,.dropdown-item:hover,body,header,html{color:rgb(230, 230, 230);background-color:#000 !important}img{border:thick solid #fff}button.btn-link,h2,h3,h4,header a,footer a{color:rgb(230, 230, 230)}#index a{color:#fff}a:hover{color:#3399FF}.dropdown-toggle{background-color:#fff}}
+		@media (prefers-color-scheme: light){.darkmode{display:none}header{background-color:#fff;border-bottom:1px solid #121733}body,html{color:#121733;background-color:#fff}img{border:thick solid #121733}a,h1,h2,h3,h4,h5{color:#121733}a:hover{color:#0057AD}button.btn-menu{color:#fff;background-color:#121733}button.btn-menu:hover{color:#fff;background-color:#0057AD}.dropdown-item:active,.dropdown-item:focus,.dropdown-item:hover{color:#fff;background-color:#121733 !important}}
+		body{margin-top:50px;font-size:20px;font-family:'Libre Baskerville', serif}img{border-radius:10px}a.underline,a:hover{text-decoration:underline}h3 > a,h4 > a{text-decoration:underline}h1,h2{margin-bottom:0.3rem;margin-top:0.3rem}.header,footer a,.header:hover,footer a:hover{text-decoration:none}.header-btn,.header-btn:focus,.header-btn:hover{text-decoration:none;align-self:flex-end;font-size:1.3rem;margin-bottom:7px}.profile-pic{display:block;margin-left:auto;margin-right:auto;}
+		@media (max-width: 429px){.logo-sm{display:none}}
+		@media (min-width: 430px){.logo-sm{display:inline-block}}
+		@media (max-width: 540px){.header{font-size:28px}.iframe-md,.image-md{width:340px;height:192px}.image-lg{width:340px}}
+		@media (min-width: 541px){.iframe-md,.image-md{width:560px;height:315px}.image-lg{width:800px}}.anchor{position:relative;top:-70px}hr{margin-top:2rem;margin-bottom:2rem}.hr-l{width:50%}.hr-r{width:50%;margin-left:50%}.hr-mid{width:50%;margin-left:25%}.scrolling-img{background-color:#000;background-size:cover;min-height:300px;overflow:hidden;background-attachment:fixed;position:relative;min-width:100vw;margin-left:50%;left:-50vw}.no-webp .mountains-img{background-image:url("/img/mountain-peaks-clouds-and-landscape.jpg")}.webp .mountains-img{background-image:url("/img/mountain-peaks-clouds-and-landscape.webp")}#gameCanvas{margin:0;padding:0;overflow:hidden}.dropdown{margin-bottom:0.5em;margin-top:0.5em}.dropdown > .dropdown-toggle{margin:0.3em}.dropdown > .menu{max-height:0;transition:max-height 0.2s ease-in;outline:none;overflow:hidden;background-color:white;position:absolute;right:0;bottom:auto;top:60px}.dropdown > .menu.show{max-height:20em;transition:max-height 0.3s ease-out;outline:1px black solid}.dropdown > .menu > .dropdown-item{margin:0.3em}
+	</style>
   </head>
 
   <body>
@@ -99,14 +107,14 @@
       </section>
     </main>
     <footer>
-      <hr />
-      <div class="ml-4">
-        <a href="#" class="local-link" title="Back to top">Back to top</a>
-        <div class="text-center">
-          <h2><a href="/" class="header local-link">&lt;N /&gt;</a></h2>
-        </div>
-      </div>
-      <br />
+		<hr />
+		<div class="ml-4">
+			<a href="#" class="local-link" title="Back to top">Back to top</a>
+			<div class="text-center">
+				<h2><a href="/" class="header local-link">&lt;N /&gt;</a></h2>
+			</div>
+		</div>
+		<br />
     </footer>
     <script src="/js/vendor/lazysizes.min.js" async></script>
     <script src="/js/vendor/modernizr.min.js" async></script>

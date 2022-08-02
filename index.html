@@ -33,7 +33,15 @@
       <link rel="stylesheet" href="/css/bootstrap-neighbors.min.css">
       <link rel="stylesheet" href="/css/main.min.css">
     </noscript>
-    <style type="text/css">@media (prefers-color-scheme: dark){.darkmode{display:list-item}header{border-bottom:1px solid rgb(230, 230, 230)}.dropdown-item:active,.dropdown-item:focus,.dropdown-item:hover,body,header,html{color:rgb(230, 230, 230);background-color:#000 !important}img{border:thick solid #fff}button.btn-link,h2,h3,h4{color:rgb(230, 230, 230)}header a{color:rgb(230, 230, 230)}#index a{color:#fff}a:hover{color:#3399FF}.dropdown-toggle{background-color:#fff}}@media (prefers-color-scheme: light){.darkmode{display:none}header{background-color:#fff;border-bottom:1px solid #121733}body,html{color:#121733;background-color:#fff}img{border:thick solid #121733}a,h1,h2,h3,h4,h5{color:#121733}a:hover{color:#0057AD}button.btn-menu{color:#fff;background-color:#121733}button.btn-menu:hover{color:#fff;background-color:#0057AD}.dropdown-item:active,.dropdown-item:focus,.dropdown-item:hover{color:#fff;background-color:#121733 !important}}body{margin-top:50px;font-size:20px;font-family:'Libre Baskerville', serif}img{border-radius:10px}a.underline,a:hover{text-decoration:underline}h3 > a,h4 > a{text-decoration:underline}h1,h2{margin-bottom:0.3rem;margin-top:0.3rem}.header,.header:hover{text-decoration:none}.header-btn,.header-btn:focus,.header-btn:hover{text-decoration:none;align-self:flex-end;font-size:1.3rem;margin-bottom:7px}.profile-pic{display:block;max-width:415px;max-height:313px}.image-sm{width:200px}@media (max-width: 429px){.logo-sm{display:none}}@media (min-width: 430px){.logo-sm{display:inline-block}}@media (max-width: 540px){.header{font-size:28px}.iframe-md,.image-md{width:340px;height:192px}.image-lg{width:340px}}@media (min-width: 541px){.iframe-md,.image-md{width:560px;height:315px}.image-lg{width:800px}}.anchor{position:relative;top:-70px}hr{margin-top:2rem;margin-bottom:2rem}.hr-l{width:50%}.hr-r{width:50%;margin-left:50%}.hr-mid{width:50%;margin-left:25%}.scrolling-img{background-color:#000;background-size:cover;min-height:300px;overflow:hidden;background-attachment:fixed;position:relative;min-width:100vw;margin-left:50%;left:-50vw}.no-webp .mountains-img{background-image:url("/img/mountain-peaks-clouds-and-landscape.jpg")}.webp .mountains-img{background-image:url("/img/mountain-peaks-clouds-and-landscape.webp")}#gameCanvas{margin:0;padding:0;overflow:hidden}.dropdown{margin-bottom:0.5em;margin-top:0.5em}.dropdown > .dropdown-toggle{margin:0.3em}.dropdown > .menu{max-height:0;transition:max-height 0.2s ease-in;outline:none;overflow:hidden;background-color:white;position:absolute;right:0;bottom:auto;top:60px}.dropdown > .menu.show{max-height:20em;transition:max-height 0.3s ease-out;outline:1px black solid}.dropdown > .menu > .dropdown-item{margin:0.3em}</style>
+    <style type="text/css">
+		@media (prefers-color-scheme: dark){.darkmode{display:list-item}header{border-bottom:1px solid rgb(230, 230, 230)}.dropdown-item:active,.dropdown-item:focus,.dropdown-item:hover,body,header,html{color:rgb(230, 230, 230);background-color:#000 !important}img{border:thick solid #fff}button.btn-link,h2,h3,h4,header a,footer a{color:rgb(230, 230, 230)}#index a{color:#fff}a:hover{color:#3399FF}.dropdown-toggle{background-color:#fff}}
+		@media (prefers-color-scheme: light){.darkmode{display:none}header{background-color:#fff;border-bottom:1px solid #121733}body,html{color:#121733;background-color:#fff}img{border:thick solid #121733}a,h1,h2,h3,h4,h5{color:#121733}a:hover{color:#0057AD}button.btn-menu{color:#fff;background-color:#121733}button.btn-menu:hover{color:#fff;background-color:#0057AD}.dropdown-item:active,.dropdown-item:focus,.dropdown-item:hover{color:#fff;background-color:#121733 !important}}
+		body{margin-top:50px;font-size:20px;font-family:'Libre Baskerville', serif}img{border-radius:10px}a.underline,a:hover{text-decoration:underline}h3 > a,h4 > a{text-decoration:underline}h1,h2{margin-bottom:0.3rem;margin-top:0.3rem}.header,footer a,.header:hover,footer a:hover{text-decoration:none}.header-btn,.header-btn:focus,.header-btn:hover{text-decoration:none;align-self:flex-end;font-size:1.3rem;margin-bottom:7px}.profile-pic{display:block;margin-left:auto;margin-right:auto;}
+		@media (max-width: 429px){.logo-sm{display:none}}
+		@media (min-width: 430px){.logo-sm{display:inline-block}}
+		@media (max-width: 540px){.header{font-size:28px}.iframe-md,.image-md{width:340px;height:192px}.image-lg{width:340px}}
+		@media (min-width: 541px){.iframe-md,.image-md{width:560px;height:315px}.image-lg{width:800px}}.anchor{position:relative;top:-70px}hr{margin-top:2rem;margin-bottom:2rem}.hr-l{width:50%}.hr-r{width:50%;margin-left:50%}.hr-mid{width:50%;margin-left:25%}.scrolling-img{background-color:#000;background-size:cover;min-height:300px;overflow:hidden;background-attachment:fixed;position:relative;min-width:100vw;margin-left:50%;left:-50vw}.no-webp .mountains-img{background-image:url("/img/mountain-peaks-clouds-and-landscape.jpg")}.webp .mountains-img{background-image:url("/img/mountain-peaks-clouds-and-landscape.webp")}#gameCanvas{margin:0;padding:0;overflow:hidden}.dropdown{margin-bottom:0.5em;margin-top:0.5em}.dropdown > .dropdown-toggle{margin:0.3em}.dropdown > .menu{max-height:0;transition:max-height 0.2s ease-in;outline:none;overflow:hidden;background-color:white;position:absolute;right:0;bottom:auto;top:60px}.dropdown > .menu.show{max-height:20em;transition:max-height 0.3s ease-out;outline:1px black solid}.dropdown > .menu > .dropdown-item{margin:0.3em}
+	</style>
   </head>
 
   <body style="margin-top:50px;font-size:20px;font-family:'Libre Baskerville',serif">
@@ -67,7 +75,8 @@
           <picture>
             <source type="image/webp" srcset="/img/justin_stream_4x.webp 960w, /img/justin_stream_3x.webp 720w, /img/justin_stream_2x.webp 480w, /img/justin_stream_1x.webp 240w">
             <source type="image/jpeg" srcset="/img/justin_stream_4x.jpg 960w, /img/justin_stream_3x.jpg 720w, /img/justin_stream_2x.jpg 480w, /img/justin_stream_1x.jpg 240w">
-            <img id="profile-pic" class="mb-3 profile-pic" src="/img/justin_stream_1x.jpg" alt="Justin Neighbors Image" width="99%">
+			<img id="profile-pic" class="mb-3 profile-pic d-md-none" src="/img/justin_stream_1x.jpg" alt="Justin Neighbors Image" width="331px" height="248px">
+			<img id="profile-pic" class="mb-3 profile-pic d-none d-md-block" src="/img/justin_stream_1x.jpg" alt="Justin Neighbors Image" width="414px" height="313px">
           </picture>          
           <ul class="align-self-center pl-3 pl-md-5">
             <li class="mb-2">Senior Software Developer at <a href="https://www.collegesource.com" class="underline" title="CollegeSource, Inc.">CollegeSource, Inc.</a></li>
@@ -178,7 +187,7 @@
                 <picture>
                   <source type="image/webp" srcset="/img/brickbreaker.webp">
                   <source type="image/jpeg" srcset="/img/brickbreaker.png">
-                  <img data-src="/img/brickbreaker.png" alt="Brick Breaker Game" class="lazyload image-sm">
+                  <img data-src="/img/brickbreaker.png" alt="Brick Breaker Game" class="lazyload" style="width:200px;height:104px;">
                 </picture>
               </li>
               <li>
@@ -186,7 +195,7 @@
                 <picture>
                   <source type="image/webp" srcset="/img/snake.webp">
                   <source type="image/jpeg" srcset="/img/snake.png">
-                  <img data-src="/img/snake.png" alt="Snake Game" class="lazyload image-sm">
+                  <img data-src="/img/snake.png" alt="Snake Game" class="lazyload" style="width:200px;height:104px;">
                 </picture>
               </li>
             </ul>
@@ -195,26 +204,26 @@
       </section>
     </main>
     <footer>
-      <hr />
-      <div class="mx-4 d-flex justify-content-between">
-        <a href="#" class="local-link pt-2" title="Back to top">Back to top</a>
-        <div class="text-center">
-          <h2><a href="/" class="header local-link" style="white-space:nowrap;">&lt;N /&gt;</a></h2>&nbsp;
-        </div>
-        <!--
-        <div class="d-none d-md-block">
-          <script type='text/javascript' src='https://ko-fi.com/widgets/widget_2.js'></script>
-          <script type='text/javascript'>kofiwidget2.init('Support Me on Ko-fi', '#5946b8', 'A0A2WE4R');kofiwidget2.draw();</script> 
-          &nbsp;
-          <span style="background-color:white;">
-            <a href="https://dev.to/justintneighbors" title="Dev.To Profile">
-              <img class="lazyload" data-src="https://d2fltix0v2e0sb.cloudfront.net/dev-badge.svg" alt="Justin T Neighbors's DEV Profile" height="30" width="30">
-            </a>
-          </span>
-        </div>
-        -->
-      </div>
-      <br />
+		<hr />
+		<div class="ml-4">
+			<a href="#" class="local-link" title="Back to top">Back to top</a>
+			<div class="text-center">
+				<h2><a href="/" class="header local-link">&lt;N /&gt;</a></h2>
+			</div>
+			<!--
+			<div class="d-none d-md-block">
+				<script type='text/javascript' src='https://ko-fi.com/widgets/widget_2.js'></script>
+				<script type='text/javascript'>kofiwidget2.init('Support Me on Ko-fi', '#5946b8', 'A0A2WE4R');kofiwidget2.draw();</script> 
+				&nbsp;
+				<span style="background-color:white;">
+				<a href="https://dev.to/justintneighbors" title="Dev.To Profile">
+					<img class="lazyload" data-src="https://d2fltix0v2e0sb.cloudfront.net/dev-badge.svg" alt="Justin T Neighbors's DEV Profile" height="30" width="30">
+				</a>
+				</span>
+			</div>
+			-->
+		</div>
+		<br />
     </footer>
     <!--<script type="text/javascript">
       function handleImageWidth() {
@@ -227,7 +236,7 @@
     <script src="/js/vendor/modernizr.min.js" async></script>
     <script src="/js/plugins.js" async></script>
     <script src="/js/custom.js" async></script>
-	<script src="https://canarytokens.com/jwrv1nx9ndrcg3vr88djvej9c/canary.js"></script>
+	<!--<script src="https://canarytokens.com/jwrv1nx9ndrcg3vr88djvej9c/canary.js"></script>-->
   </body>
 
 </html>

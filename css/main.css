@@ -13,9 +13,9 @@
    ========================================================================== */
 
 html {
-  font-size: 1em;
-  line-height: 1.4;
-  scroll-behavior: smooth;
+	font-size: 1em;
+	line-height: 1.4;
+	scroll-behavior: smooth;
 }
 
 /*
@@ -29,13 +29,13 @@ html {
  */
 
 ::-moz-selection {
-  background: #b3d4fc;
-  text-shadow: none;
+	background: #b3d4fc;
+	text-shadow: none;
 }
 
 ::selection {
-  background: #b3d4fc;
-  text-shadow: none;
+	background: #b3d4fc;
+	text-shadow: none;
 }
 
 /*
@@ -43,12 +43,12 @@ html {
  */
 
 hr {
-  display: block;
-  height: 1px;
-  border: 0;
-  border-top: 1px solid #ccc;
-  margin: 1em 0;
-  padding: 0;
+	display: block;
+	height: 1px;
+	border: 0;
+	border-top: 1px solid #ccc;
+	margin: 1em 0;
+	padding: 0;
 }
 
 /*
@@ -63,7 +63,7 @@ iframe,
 img,
 svg,
 video {
-  vertical-align: middle;
+	vertical-align: middle;
 }
 
 /*
@@ -71,9 +71,9 @@ video {
  */
 
 fieldset {
-  border: 0;
-  margin: 0;
-  padding: 0;
+	border: 0;
+	margin: 0;
+	padding: 0;
 }
 
 /*
@@ -81,7 +81,7 @@ fieldset {
  */
 
 textarea {
-  resize: vertical;
+	resize: vertical;
 }
 
 /* ==========================================================================
@@ -89,288 +89,282 @@ textarea {
    ========================================================================== */
 
 .browserupgrade {
-  margin: 0.2em 0;
-  background: #ccc;
-  color: #000;
-  padding: 0.2em 0;
+	margin: 0.2em 0;
+	background: #ccc;
+	color: #000;
+	padding: 0.2em 0;
 }
 
 /* ==========================================================================
    Author's custom styles
    ========================================================================== */
 /*
-   @media (prefers-color-scheme: dark) {
-  .darkmode {
-    display: list-item;
-  }
+@media (prefers-color-scheme: dark) {
+	.darkmode {
+		display: list-item
+	}
 
-  header {
-    border-bottom: 1px solid rgb(230, 230, 230);
-  }
+	header {
+		border-bottom: 1px solid rgb(230, 230, 230)
+	}
 
-  html,
-  body,
-  header,
-  .dropdown-item:active,
-  .dropdown-item:focus,
-  .dropdown-item:hover {
-    color: rgb(230, 230, 230);
-    background-color: #000 !important;
-  }
+	.dropdown-item:active,
+	.dropdown-item:focus,
+	.dropdown-item:hover,
+	body,
+	header,
+	html {
+		color: rgb(230, 230, 230);
+		background-color: #000 !important
+	}
 
-  img {
-    border: thick solid #fff;
-  }
+	img {
+		border: thick solid #fff
+	}
 
-  h2,
-  h3,
-  h4,
-  button.btn-link {
-    color: rgb(230, 230, 230);
-  }
+	button.btn-link,
+	h2,
+	h3,
+	h4,
+	header a,
+	footer a {
+		color: rgb(230, 230, 230)
+	}
 
-  header a {
-    color: rgb(230, 230, 230);
-  }
+	#index a {
+		color: #fff
+	}
 
-  #index a {
-    color: #fff;
-  }
+	a:hover {
+		color: #3399FF
+	}
 
-  a:hover {
-    color: #3399FF;
-  }
-
-  .dropdown-toggle {
-    background-color: #fff;
-  }
+	.dropdown-toggle {
+		background-color: #fff
+	}
 }
 
 @media (prefers-color-scheme: light) {
-  .darkmode {
-    display: none;
-  }
+	.darkmode {
+		display: none
+	}
 
-  header {
-    background-color: #fff;
-    border-bottom: 1px solid #121733;
-  }
+	header {
+		background-color: #fff;
+		border-bottom: 1px solid #121733
+	}
 
-  html,
-  body {
-    color: #121733;
-    background-color: #fff;
-  }
+	body,
+	html {
+		color: #121733;
+		background-color: #fff
+	}
 
-  img {
-    border: thick solid #121733;
-  }
+	img {
+		border: thick solid #121733
+	}
 
-  a,h1,h2,h3,h4,h5 {
-    color: #121733;
-  }
+	a,
+	h1,
+	h2,
+	h3,
+	h4,
+	h5 {
+		color: #121733
+	}
 
-  a:hover {
-    color: #0057AD;
-  }
+	a:hover {
+		color: #0057AD
+	}
 
-  button.btn-menu {
-    color: #fff;
-    background-color: #121733;
-  }
+	button.btn-menu {
+		color: #fff;
+		background-color: #121733
+	}
 
-  button.btn-menu:hover {
-    color: #fff;
-    background-color: #0057AD;
-  }
+	button.btn-menu:hover {
+		color: #fff;
+		background-color: #0057AD
+	}
 
-  .dropdown-item:active,
-  .dropdown-item:focus,
-  .dropdown-item:hover {
-    color: #fff;
-    background-color: #121733 !important;
-  }
-}
-
-@supports(padding: max(0px)) {
-  .post {
-      padding-left: max(12px, env(safe-area-inset-left));
-      padding-right: max(12px, env(safe-area-inset-right));
-  }
+	.dropdown-item:active,
+	.dropdown-item:focus,
+	.dropdown-item:hover {
+		color: #fff;
+		background-color: #121733 !important
+	}
 }
 
 body {
-  margin-top: 50px;
-  font-size:20px;
-  font-family: 'Libre Baskerville', serif;
-}
-
-@font-face {
-  font-family: 'Libre Baskerville';
-  font-style: normal;
-  font-weight: 400;
-  font-display: swap;
-  src: local('Libre Baskerville'), local('LibreBaskerville-Regular'), url(https://fonts.gstatic.com/s/librebaskerville/v9/kmKnZrc3Hgbbcjq75U4uslyuy4kn0qNZaxM.woff2) format('woff2');
+	margin-top: 50px;
+	font-size: 20px;
+	font-family: 'Libre Baskerville', serif
 }
 
 img {
-  border-radius: 10px;
+	border-radius: 10px
 }
 
-a:hover, a.underline {
-  text-decoration: underline;
+a.underline,
+a:hover {
+	text-decoration: underline
 }
 
-h3>a, h4>a {
-  text-decoration: underline;
-}
-*/
-/* START Mobile Menu */
-/*
-.dropdown {
-  margin-bottom: .5em;
-  margin-top: .5em;
+h3>a,
+h4>a {
+	text-decoration: underline
 }
 
-.dropdown>.dropdown-toggle {
-  margin: .3em .3em .3em .3em;
-}
-
-.dropdown>.menu {
-  max-height: 0px;
-  transition: max-height .2s ease-in;
-  outline: none;
-  overflow: hidden;
-  background-color: white;
-  position: absolute;
-  right: 0;
-  bottom: auto;
-  top: 60px;
-}
-
-.dropdown>.menu.show {
-  max-height: 20em;
-  transition: max-height .3s ease-out;
-  outline: 1px black solid;
-}
-
-.dropdown>.menu>.dropdown-item {
-  margin: .3em .3em .3em .3em;
-  margin-top: 0.3em;
-}
-*/
-/* END Mobile Menu */
-/*
-h1,h2 {
-  margin-bottom: .3rem;
-  margin-top: .3rem;
+h1,
+h2 {
+	margin-bottom: 0.3rem;
+	margin-top: 0.3rem
 }
 
 .header,
-.header:hover {
-  text-decoration: none;
+footer a,
+.header:hover,
+footer a:hover {
+	text-decoration: none
 }
 
 .header-btn,
-.header-btn:hover,
-.header-btn:focus {
-  text-decoration: none;
-  align-self: flex-end;
-  font-size: 1.3rem;
-  margin-bottom: 7px;
+.header-btn:focus,
+.header-btn:hover {
+	text-decoration: none;
+	align-self: flex-end;
+	font-size: 1.3rem;
+	margin-bottom: 7px
 }
+
 .profile-pic {
-  display: block;
-  max-width:415px;
-  max-height:313px;
-}
-.image-sm {
-  width: 200px;
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
 }
 
 @media (max-width: 429px) {
-  .logo-sm {
-    display: none;
-  }
+	.logo-sm {
+		display: none
+	}
 }
+
 @media (min-width: 430px) {
-  .logo-sm {
-    display: inline-block;
-  }
+	.logo-sm {
+		display: inline-block
+	}
 }
 
 @media (max-width: 540px) {
-  .header {
-    font-size: 28px;
-  }
-  .image-md,.iframe-md {
-    width: 340px;
-    height: 192px;
-  }
-  .image-lg {
-    width: 340px;
-  }
+	.header {
+		font-size: 28px
+	}
+
+	.iframe-md,
+	.image-md {
+		width: 340px;
+		height: 192px
+	}
+
+	.image-lg {
+		width: 340px
+	}
 }
 
 @media (min-width: 541px) {
-  .image-md,.iframe-md {
-    width: 560px;
-    height: 315px;
-  }
-  .image-lg {
-    width: 800px;
-  }
+
+	.iframe-md,
+	.image-md {
+		width: 560px;
+		height: 315px
+	}
+
+	.image-lg {
+		width: 800px
+	}
 }
 
 .anchor {
-  position: relative;
-  top: -70px;
+	position: relative;
+	top: -70px
 }
 
 hr {
-  margin-top: 2rem;
-  margin-bottom: 2rem;
+	margin-top: 2rem;
+	margin-bottom: 2rem
 }
 
 .hr-l {
-  width: 50%;
+	width: 50%
 }
 
 .hr-r {
-  width: 50%;
-  margin-left: 50%;
+	width: 50%;
+	margin-left: 50%
 }
 
 .hr-mid {
-  width: 50%;
-  margin-left: 25%;
+	width: 50%;
+	margin-left: 25%
 }
 
 .scrolling-img {
-  background-color:#000;
-  background-size: cover;
-  min-height: 300px;
-  overflow: hidden;
-  background-attachment: fixed;
-  position: relative;
-  min-width: 100vw;
-  margin-left: 50%;
-  left: -50vw;
+	background-color: #000;
+	background-size: cover;
+	min-height: 300px;
+	overflow: hidden;
+	background-attachment: fixed;
+	position: relative;
+	min-width: 100vw;
+	margin-left: 50%;
+	left: -50vw
 }
 
 .no-webp .mountains-img {
-  background-image: url(/img/mountain-peaks-clouds-and-landscape.jpg);
+	background-image: url("/img/mountain-peaks-clouds-and-landscape.jpg")
 }
 
 .webp .mountains-img {
-  background-image: url(/img/mountain-peaks-clouds-and-landscape.webp);
+	background-image: url("/img/mountain-peaks-clouds-and-landscape.webp")
 }
 
 #gameCanvas {
-  margin: 0;
-  padding: 0;
-  overflow: hidden;
-}*/
+	margin: 0;
+	padding: 0;
+	overflow: hidden
+}
+
+.dropdown {
+	margin-bottom: 0.5em;
+	margin-top: 0.5em
+}
+
+.dropdown>.dropdown-toggle {
+	margin: 0.3em
+}
+
+.dropdown>.menu {
+	max-height: 0;
+	transition: max-height 0.2s ease-in;
+	outline: none;
+	overflow: hidden;
+	background-color: white;
+	position: absolute;
+	right: 0;
+	bottom: auto;
+	top: 60px
+}
+
+.dropdown>.menu.show {
+	max-height: 20em;
+	transition: max-height 0.3s ease-out;
+	outline: 1px black solid
+}
+
+.dropdown>.menu>.dropdown-item {
+	margin: 0.3em
+}
+*/
 
 /* ==========================================================================
    Helper classes
@@ -380,7 +374,7 @@ hr {
 (-webkit-min-device-pixel-ratio: 1.25),
 (min-resolution: 1.25dppx),
 (min-resolution: 120dpi) {
-  /* Style adjustments for high resolution devices */
+	/* Style adjustments for high resolution devices */
 }
 
 /* ==========================================================================
@@ -391,73 +385,73 @@ hr {
 
 @media print {
 
-  *,
-  *:before,
-  *:after {
-    background: transparent !important;
-    color: #000 !important;
-    /* Black prints faster */
-    -webkit-box-shadow: none !important;
-    box-shadow: none !important;
-    text-shadow: none !important;
-  }
+	*,
+	*:before,
+	*:after {
+		background: transparent !important;
+		color: #000 !important;
+		/* Black prints faster */
+		-webkit-box-shadow: none !important;
+		box-shadow: none !important;
+		text-shadow: none !important;
+	}
 
-  a,
-  a:visited {
-    text-decoration: underline;
-  }
+	a,
+	a:visited {
+		text-decoration: underline;
+	}
 
-  a[href]:after {
-    content: " ("attr(href) ")";
-  }
+	a[href]:after {
+		content: " (" attr(href) ")";
+	}
 
-  abbr[title]:after {
-    content: " ("attr(title) ")";
-  }
+	abbr[title]:after {
+		content: " (" attr(title) ")";
+	}
 
-  /*
+	/*
      * Don't show links that are fragment identifiers,
      * or use the `javascript:` pseudo protocol
      */
 
-  a[href^="#"]:after,
-  a[href^="javascript:"]:after {
-    content: "";
-  }
+	a[href^="#"]:after,
+	a[href^="javascript:"]:after {
+		content: "";
+	}
 
-  pre {
-    white-space: pre-wrap !important;
-  }
+	pre {
+		white-space: pre-wrap !important;
+	}
 
-  pre,
-  blockquote {
-    border: 1px solid #999;
-    page-break-inside: avoid;
-  }
+	pre,
+	blockquote {
+		border: 1px solid #999;
+		page-break-inside: avoid;
+	}
 
-  /*
+	/*
      * Printing Tables:
      * http://css-discuss.incutio.com/wiki/Printing_Tables
      */
 
-  thead {
-    display: table-header-group;
-  }
+	thead {
+		display: table-header-group;
+	}
 
-  tr,
-  img {
-    page-break-inside: avoid;
-  }
+	tr,
+	img {
+		page-break-inside: avoid;
+	}
 
-  p,
-  h2,
-  h3 {
-    orphans: 3;
-    widows: 3;
-  }
+	p,
+	h2,
+	h3 {
+		orphans: 3;
+		widows: 3;
+	}
 
-  h2,
-  h3 {
-    page-break-after: avoid;
-  }
+	h2,
+	h3 {
+		page-break-after: avoid;
+	}
 }
