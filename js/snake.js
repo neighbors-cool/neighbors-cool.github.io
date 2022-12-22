@@ -1,25 +1,25 @@
 const BASE_TAIL = 5;
 const BLOCK_SIZE = 20;
 const APPLE_SIZE = 15;
-var canvas;
-var canvasContext;
-var framesPerSecond = 10;
-var headX = 5;
-var headY = 5;
-var appleX = 15;
-var appleY = 15;
-var speedX = 1;
-var speedY = 0;
-var trail = [];
-var tail = BASE_TAIL;
-var highScore = 0;
-var block_columns = 20;
-var block_rows = 20;
-var started_yet = false;
-var paused = true;
+let canvas;
+let canvasContext;
+let framesPerSecond = 10;
+let headX = 5;
+let headY = 5;
+let appleX = 15;
+let appleY = 15;
+let speedX = 1;
+let speedY = 0;
+let trail = [];
+let tail = BASE_TAIL;
+let highScore = 0;
+let block_columns = 20;
+let block_rows = 20;
+let started_yet = false;
+let paused = true;
 
-var prevX = 0;
-var prevY = 0;
+let prevX = 0;
+let prevY = 0;
 
 window.onload = function() {
   setup();
@@ -43,9 +43,9 @@ window.onload = function() {
     e.stopPropagation();
     e.preventDefault();
 
-    var evt;
-    var diffX = prevX - e.touches[0].clientX;
-    var diffY = prevY - e.touches[0].clientY;
+    let evt;
+    let diffX = prevX - e.touches[0].clientX;
+    let diffY = prevY - e.touches[0].clientY;
     if(Math.max(Math.abs(diffX), Math.abs(diffY)) == Math.abs(diffX)) {
       // X Moved Most
       if(diffX > 0) {
@@ -71,7 +71,7 @@ window.onload = function() {
 
 function setup() {
   canvas = document.getElementById("gameCanvas");
-  var dim = getViewportDimension();
+  let dim = getViewportDimension();
   if(dim.w <= 767) {
     canvas.width = dim.w - 40;
   } else {
@@ -101,7 +101,7 @@ function setText() {
 }
 
 function getViewportDimension() {
-  var e = window, a = "inner";
+  let e = window, a = "inner";
   if(!("innerWidth" in window)) {
     a = "client";
     e = document.documentElement || document.body;
@@ -159,7 +159,7 @@ function drawEverything() {
 
   // Draw body
   canvasContext.fillStyle = "lime";
-  for (var i = 0; i < trail.length; i++) {
+  for (let i = 0; i < trail.length; i++) {
     canvasContext.fillRect(trail[i].x * BLOCK_SIZE, trail[i].y * BLOCK_SIZE, APPLE_SIZE, APPLE_SIZE);
     if(i<trail.length-1 && trail[i].x == headX && trail[i].y == headY) {
       // Hit self
