@@ -10,13 +10,13 @@
     <meta name="keywords" content="justin,neighbors,machine,learning,game,career,education">
     <meta name="robots" content="index,follow">
     <meta name="googlebot" content="index,follow">
-    <meta property="og:title" content="Neighbors - Machine Learning">
+    <meta property="og:title" content="Neighbors - Asteroids">
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://www.neighbors.cool/p/ml.html">
-    <meta property="og:image" content="https://www.neighbors.cool/img/nn-model.png">
+    <meta property="og:url" content="https://www.neighbors.cool/p/asteroids.html">
+    <meta property="og:image" content="https://www.neighbors.cool/img/justin_stream_1x.webp">
 
-    <title>Neighbors - ML</title>
-    <meta name="description" content="Machine Learning Project">
+    <title>Neighbors - Asteroids</title>
+    <meta name="description" content="Asteroids Project">
     <meta name="author" content="Justin Neighbors">
     <meta http-equiv="Cache-Control" content="public" max-age="31536000"/>
     <meta name="msapplication-TileColor" content="#003366">
@@ -73,43 +73,13 @@
         </div>
       </nav>
     </header>
-    <main id="index" class="container-fluid pt-4 px-md-4">
-      <section>
-        <div id="ml" class="anchor"></div>
-        <h2>Machine Learning – Neural Network</h2>
-        <hr />
-        <div class="d-lg-inline-flex">
-          <div class="align-self-center pr-3">
-            When I was in the process of earning my Master’s degree, I took a machine learning course. 
-            In this course, we each had to come up with a class project; I chose to create a neural network. 
-            The neural network that I built tries to guess the university that a student will choose to transfer 
-            to based on data about that student. The neural network learns by looking at a subset of attributes 
-            about a student and their choices. After the neural network has guessed the choice of a student, 
-            it uses the training data to get the correct answer and update each of the nodes that lead it to that 
-            choice, right or wrong, using back-propagation.
-          </div>
-          <div class="pt-3 pt-lg-0">
-            <picture>
-                <source type="image/webp" srcset="/img/nn-model.webp">
-                <source type="image/jpeg" srcset="/img/nn-model.png">
-                <img src="/img/nn-model.png" alt="Neural Network" class="image-md" async />
-            </picture> 
-          </div>
-        </div>
-        <hr class="hr-mid" />
-        To train a neural network, you need a lot of data. I chose to use anonymous student statistics from the 
-        <a href="https://www.transferology.com" title="Transferology.com">Transferology.com</a> website. 
-        I went through several iterations of the neural network before settling on the final project, that video is below.
-        <hr class="hr-mid" />
-        <div class="text-center">
-          Machine Learning – <a href="https://youtu.be/MDt0xys8maM" title="YouTube Video - Using Student Statistics to Guess Transfer Schools">Using Student Statistics to Guess Transfer Schools</a>
-          <br />
-          <iframe class="lazyload iframe-md" data-src="https://www.youtube.com/embed/MDt0xys8maM" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen async></iframe>
-        </div>
-      </section>
+    <main id="index" class="container-fluid pt-2 pl-0">
+        <section>
+            <canvas id="gameCanvas" width="10" height="10" tabindex="0"></canvas>
+        </section>
     </main>
     <footer>
-		<hr />
+		<hr class="my-0">
 		<div class="ml-4">
 			<a href="#" class="local-link" title="Back to top">Back to top</a>
 			<div class="text-center">
@@ -122,6 +92,7 @@
     <script src="/js/vendor/modernizr.min.js" async></script>
     <script src="/js/plugins.js" async></script>
     <script src="/js/custom.js" async></script>
+    <script src="/js/asteroids.js" async></script>
   </body>
 
 </html>
