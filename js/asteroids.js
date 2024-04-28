@@ -7,7 +7,7 @@ let started_yet = false;
 let paused = true;
 const asteroids = [];
 const numberOfAsteroids = 10;
-const minAsteroidSize = 3;
+const minAsteroidSize = 6;
 const maxAsteroidSize = 10;
 const asteroidSizeMultiplier = 4;
 const minAsteroidSpeed = 50;
@@ -217,9 +217,8 @@ class Asteroid {
         newA.vel = new Vector(this.vel.x, this.vel.y);
         newA.rads = this.rads;
         newA.speed = this.speed;
-        newA.shape = this.shape;
         for(let i = 0; i < this.shape.length; i++) {
-            newA.push(new Vector(this.shape[i].x, this.shape[i].y));
+            newA.shape.push(new Vector(this.shape[i].x, this.shape[i].y));
         }
         newA.color = 'red';
         return newA;
@@ -284,6 +283,7 @@ class Asteroid {
         return false;
     }
 
+    // TODO keep asteroid size when resetting
 	reset() {
         this.size = Math.floor(getRandomFloat(minAsteroidSize, maxAsteroidSize));
 		this.radius = this.size * asteroidSizeMultiplier;
