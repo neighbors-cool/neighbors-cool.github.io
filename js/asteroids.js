@@ -231,12 +231,9 @@ class Asteroid {
         canvasContext.fillStyle = this.color;
 		canvasContext.beginPath();
 
-        for(let i = 0; i < this.shape.length; i += 1) {
-            if(i == 0) {
-                canvasContext.moveTo(this.shape[i].x, this.shape[i].y);
-            } else {
-                canvasContext.lineTo(this.shape[i].x, this.shape[i].y);
-            }
+        canvasContext.moveTo(this.shape[0].x, this.shape[0].y);
+        for(let i = 1; i < this.shape.length; i += 1) {
+            canvasContext.lineTo(this.shape[i].x, this.shape[i].y);
         }
         canvasContext.fill();
 	}
