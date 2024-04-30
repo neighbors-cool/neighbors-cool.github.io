@@ -5,8 +5,10 @@ let centerScreenX;
 let centerScreenY;
 let started_yet = false;
 let paused = true;
+let score = 0;
+let win = false;
 const asteroids = [];
-const numberOfAsteroids = 10;
+const numberOfAsteroids = 1;
 const minAsteroidSize = 6;
 const maxAsteroidSize = 10;
 const asteroidSizeMultiplier = 4;
@@ -205,7 +207,7 @@ class Asteroid {
         this.color = asteroidsColor; // String
         this.removed = false; // Boolean
         if(populate) {
-            this.reset();
+            this.reset(true);
         }
 	}
 
@@ -217,10 +219,10 @@ class Asteroid {
         newA.vel = new Vector(this.vel.x, this.vel.y);
         newA.rads = this.rads;
         newA.speed = this.speed;
+        newA.color = this.color;
         for(let i = 0; i < this.shape.length; i++) {
             newA.shape.push(new Vector(this.shape[i].x, this.shape[i].y));
         }
-        newA.color = 'red';
         return newA;
     }
 
@@ -248,7 +250,7 @@ class Asteroid {
         }
 
         if(this.checkForBoarderHit()) {
-            this.reset();
+            this.reset(false);
         }
 
         // if(this.pos.x > canvas.width + 5) {
@@ -269,6 +271,7 @@ class Asteroid {
         for(let i = 0; i < ship.bullets.length; i++) {
             let b = ship.bullets[i];
             if(this.checkForBulletHit(b)) {
+                score += this.size;
                 b.removed = true;
                 this.size = this.size - 1;
                 if(this.size < minAsteroidSize) {
@@ -283,9 +286,10 @@ class Asteroid {
         return false;
     }
 
-    // TODO keep asteroid size when resetting
-	reset() {
-        this.size = Math.floor(getRandomFloat(minAsteroidSize, maxAsteroidSize));
+	reset(resetSize) {
+        if(resetSize) {
+            this.size = Math.floor(getRandomFloat(minAsteroidSize, maxAsteroidSize));
+        }
 		this.radius = this.size * asteroidSizeMultiplier;
 
         if(Math.random() < 0.5) {
@@ -358,6 +362,7 @@ function setup() {
 }
 
 function moveEverything() {
+    if(win) return;
     let tempLength = asteroids.length;
     for(let i = 0; i < tempLength; i++) {
         let a = asteroids[i];
@@ -376,7 +381,7 @@ function moveEverything() {
                                   (Math.sin(newA.rads)*newA.speed/framesPerSecond));
             asteroids.push(newA);
             
-            a.rads += Math.PI/0.25;
+            a.rads += (Math.random() > 0.5 ? Math.PI/Math.random() : Math.PI*Math.random());
             a.vel = new Vector((Math.cos(a.rads)*a.speed/framesPerSecond),
                                   (Math.sin(a.rads)*a.speed/framesPerSecond));
         }
@@ -401,20 +406,36 @@ function drawEverything() {
     // Draw background
     canvasContext.fillStyle = backgroundColor;
     canvasContext.fillRect(0, 0, canvas.width, canvas.height);
-    asteroids.forEach(asteroid => asteroid.draw());
-    ship.bullets.forEach(bullet => bullet.draw());
+    if(!win) {
+        asteroids.forEach(asteroid => asteroid.draw());
+        ship.bullets.forEach(bullet => bullet.draw());
+    }
     ship.draw();
+    canvasContext.fillText('Score: ' + score, 30, 60);
 
 	if (paused) {
 		if(started_yet) {
 			canvasContext.fillText('Paused', centerScreenX - 30, centerScreenY + 50);
 		} else {
-			canvasContext.fillText("Click/Enter to Start/Pause!", centerScreenX - 100, centerScreenY + 50);
+			canvasContext.fillText("Click/Enter to Start/Pause!", centerScreenX - 150, centerScreenY + 50);
 		}
 	} else if(asteroids.length <= 0) {
-        // TODO "You win"
-        // reset
+        canvasContext.fillText("You Win!", centerScreenX - 60, centerScreenY + 50);
+        canvasContext.fillText("Click/Enter to Restart!", centerScreenX - 120, centerScreenY + 80);
+        win = true;
     }
+}
+
+function restart() {
+    for(let i = 0; i < numberOfAsteroids; i++) {
+        asteroids.push(new Asteroid(true));
+    }
+    moveEverything();
+    drawEverything();
+    win = false;
+    score = 0;
+    ship.bullets = [];
+
 }
 
 let keyStatusMap = {};
@@ -471,6 +492,10 @@ function setText() {
 
 function handlePause() {
   started_yet = true;
+  if(win) {
+    restart();
+    return;
+  }
   if(paused) {
     paused = false;
     disableScroll();
