@@ -9,7 +9,7 @@ let numBalls = 1;
 let paddle;
 let level = 1;
 let score = 0;
-let angle = 0.3;
+let angle = 0.1;
 let rewardScore = 0;
 
 let showingWinScreen = false;
@@ -114,7 +114,7 @@ function moveEverything() {
 	for(let i = 0; i < balls.length; i++) {
 		let ball = balls[i];
 		ball.move();
-		//ball.checkForBrickHit();
+		ball.checkForBrickHit();
 		ball.checkForPaddleHit();
 		ball.checkForBoarderHit();
 		if(ball.checkForBottomScreenHit()) {
@@ -371,64 +371,13 @@ class Ball {
 		if (this.vel.y === 0) {
 			this.vel.y--;
 		}
-		
-		let xTarget = (this.pos.x + this.vel.x);
-		let yTarget = (this.pos.y + this.vel.y);
 
 		// Set the max magnitude
 		let hyp = Math.hypot(this.vel.x, this.vel.y);
-		if(hyp !== 0 || hyp > 9) {
-			xTarget = (this.pos.x + constrain(((this.vel.x / hyp) * 9), -6, 6));
-			yTarget = (this.pos.y + constrain(((this.vel.y / hyp) * 9), -6, 6));
-		}
+		this.pos.x = (this.pos.x + constrain(((this.vel.x / hyp) * 4), -4, 4));
+		this.pos.y = (this.pos.y + constrain(((this.vel.y / hyp) * 4), -4, 4));
 
-		// If ball is at brick height, use pixel perfect-ish
-		if(this.top <= lowestBrick) {
-			let testingPixelPerfect = true;
-
-			while(testingPixelPerfect) {
-				if(this.vel.x > 0) {
-					if(this.pos.x < xTarget) {
-						this.pos.x += 0.1;
-					} else {
-						this.pos.x = xTarget;
-					}
-				} else {
-					if(this.pos.x > xTarget) {
-						this.pos.x -= 0.1;
-					} else {
-						this.pos.x = xTarget;
-					}
-				}
-				
-				if(this.vel.y > 0) {
-					if(this.pos.y < yTarget) {
-						this.pos.y += 0.1;
-					} else {
-						this.pos.y = yTarget;
-					}
-				} else {
-					if(this.pos.y > yTarget) {
-						this.pos.y -= 0.1;
-					} else {
-						this.pos.y = yTarget;
-					}
-				}
-				
-				this.setBallBoarder();
-
-				// If the ball hit something or if its where its supposed to be
-				if(this.checkForBrickHit()
-					|| (this.pos.x === xTarget && this.pos.y === yTarget)
-					|| (this.top > lowestBrick)) {
-						testingPixelPerfect = false;
-				}
-			}
-		} else {
-			this.pos.x += this.vel.x;
-			this.pos.y += this.vel.y;
-			this.setBallBoarder();
-		}
+		this.setBallBoarder();
 	}
 
 	reset() {
@@ -485,7 +434,7 @@ class Ball {
 			&& this.bottom >= paddle.pos.y - (paddle.height / 2)) {
 			// Ball is colliding with paddle
 			this.vel.y = -Math.abs(this.vel.y);
-			let deltaX = this.pos.x - (paddle.pos.x + paddle.halfWidth);
+			let deltaX = this.pos.x - (paddle.pos.x + paddle.halfWidth - (paddle.halfWidth / 6));
 			this.vel.x = Math.round(deltaX * angle);
 			return true;
 		}
