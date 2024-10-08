@@ -4,9 +4,9 @@ let framesPerSecond = 60;
 let centerScreenX;
 let centerScreenY;
 const stars = [];
-const numberOfStars = 200;
-const maxStarSize = 5;
-const maxStarSpeed = 400;
+const numberOfStars = 150;
+const maxStarSize = 4;
+const maxStarSpeed = 300;
 const backgroundColor = "black";
 
 window.onload = function() {
@@ -64,6 +64,11 @@ function angle(cx, cy, ex, ey) {
     return theta;
 }
 
+// Scale min/max to a/b, return scaled X
+function scale(x, a, b, min, max) {
+    return (((b-a)*(x-min))/(max-min)) + a;
+}
+
 class Vector {
 	constructor(x, y) {
 		this.x = (x ? x : 0);
@@ -89,8 +94,15 @@ class Star {
 		this.right = this.pos.x + this.radius;
 	}
 
+    updateColor() {
+        const hue = scale(this.radius, 130, 255, 0.01, maxStarSize);
+        const light = scale(this.radius, 1, 100, 0.01, maxStarSize)
+        this.color = 'hsl(' + hue + ', 50%, ' + light + '%)';
+    }
+
 	// Draw Star
 	draw() {
+        this.updateColor();
 		canvasContext.fillStyle = this.color;
 		canvasContext.beginPath();
 		// centerX, centerY, radius, startDraw, endDraw, counterClockwise
@@ -119,7 +131,7 @@ class Star {
 
 	reset() {
 		this.radius = getRandomFloat(0.01, maxStarSize / 4);
-		this.color = 'hsl(0, 0%, ' + (this.radius * (100 / this.radius)) + '%)';
+        this.updateColor();
         this.speed = 1;
         this.pos.x = getRandomFloat(0, canvas.width);
         this.pos.y = getRandomFloat(0, canvas.height);
