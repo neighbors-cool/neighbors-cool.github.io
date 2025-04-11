@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "[![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-v1.4%20adopted-ff69b4.svg)](code-of-conduct.md)\r [![ko-fi](https://www.ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/A0A2WE4R)",
   "main": ".eslintrc.js",
+  "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -10,6 +11,8 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@eslint/js": "^9.24.0",
+    "globals": "^16.0.0",
     "prettier": "^3.5.3"
   }
 }

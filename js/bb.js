@@ -30,13 +30,7 @@ let lowestBrick = 0;
 
 let centerScreenX;
 let centerScreenY;
-let clientRectLeft;
 let distanceFromRight = 300;
-
-// Mobile Buttons
-let leftButtonX = 0;
-let buttonY = 0;
-let rightButtonX = 0;
 
 window.onload = function () {
   setup();
@@ -185,7 +179,7 @@ function checkForWin() {
 }
 
 // 'click/tap' to start/pause
-function handleClick(evt) {
+function handleClick() {
   if (showingWinScreen) {
     if (level % 2 === 0 && lives !== 0) {
       // Give an extra life on odd levels > 1

@@ -11,7 +11,7 @@ if ('serviceWorker' in navigator) {
 window.addEventListener('load', () => {
   var anchors = document.getElementsByTagName('a');
   if (!!anchors && !!anchors.length) {
-    for (var i = 0; i < anchors.length; i++) {
+    for (let i = 0; i < anchors.length; i++) {
       if (!anchors[i].classList.contains('local-link')) {
         anchors[i].target = '_blank';
         anchors[i].rel = 'noopener noreferrer';
@@ -20,7 +20,7 @@ window.addEventListener('load', () => {
   }
   byId('menuButton').addEventListener('click', toggleMenu);
   var dditems = document.getElementsByClassName('dropdown-item');
-  for (var i = 0; i < dditems.length; i++) {
+  for (let i = 0; i < dditems.length; i++) {
     dditems[i].addEventListener('click', toggleMenu);
   }
   if (byId('menuDiv').offsetHeight > 0) {
