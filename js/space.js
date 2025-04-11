@@ -10,12 +10,20 @@ const maxStarSpeed = 300;
 const backgroundColor = "black";
 
 window.onload = function () {
-  setup();
-  setInterval(function () {
+    setup();
+    // Initialize stars
+    while (stars.length < numberOfStars) {
+        stars.push(new Star());
+    }
+    // Start animation loop
+    requestAnimationFrame(gameLoop);
+};
+
+function gameLoop(timestamp) {
     drawEverything();
     moveEverything();
-  }, 1000 / framesPerSecond);
-};
+    requestAnimationFrame(gameLoop);
+}
 
 function getViewportDimension() {
   let e = window,
@@ -48,9 +56,6 @@ function drawEverything() {
   // Draw background
   canvasContext.fillStyle = backgroundColor;
   canvasContext.fillRect(0, 0, canvas.width, canvas.height);
-  if (stars.length <= numberOfStars) {
-    stars.push(new Star());
-  }
   stars.forEach((star) => star.draw());
 }
 

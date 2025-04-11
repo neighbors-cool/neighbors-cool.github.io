@@ -1,9 +1,17 @@
 let canvas;
 let canvasContext;
-let framesPerSecond = 90;
+let framesPerSecond = 60; // Set to fixed 60 FPS
+let frameInterval = 1000 / framesPerSecond;
 const BACKGROUND_COLOR = "black";
+const BASE_BALL_SPEED = 4; // Base speed for small screens
+const MAX_BALL_SPEED = 7;  // Max speed for large screens
+const REFERENCE_HEIGHT = 800; // Reference height for speed scaling
 
-//let ball = new Ball();
+let fpsCounter = 0;
+let lastFpsUpdate = 0;
+let currentFps = 0;
+const FPS_UPDATE_INTERVAL = 500;
+
 let balls = [];
 let numBalls = 1;
 let paddle;
@@ -32,23 +40,13 @@ let centerScreenX;
 let centerScreenY;
 let distanceFromRight = 300;
 
+let lastTimestamp = 0;
+
 window.onload = function () {
   setup();
   let clientRectLeft = canvas.getBoundingClientRect().left - document.documentElement.scrollLeft;
 
-  /*setText("white");
-	canvasContext.font = "8px Roboto";
-	for(let i = 10; i < 1000; i=i+10) {
-		canvasContext.fillText(i, 0, i);
-	}
-	for(let i = 20; i < 1000; i=i+20) {
-		canvasContext.fillText(i, i, 5);
-	}*/
-
-  setInterval(function () {
-    moveEverything();
-    drawEverything();
-  }, 1000 / framesPerSecond);
+  requestAnimationFrame(gameLoop);
 
   canvas.addEventListener("mousemove", function (event) {
     paddle.pos.x = event.clientX - clientRectLeft - paddle.halfWidth;
@@ -89,6 +87,7 @@ function setup() {
     canvas.width = dim.w - 60;
   }
   canvas.height = dim.h - 220;
+  
   canvasContext = canvas.getContext("2d");
   centerScreenX = canvas.width / 2;
   centerScreenY = canvas.height / 2;
@@ -102,6 +101,19 @@ function setup() {
   createBalls();
   createBricks();
   rewardScore = 1000 * level;
+}
+
+function gameLoop(timestamp) {
+  // Calculate time elapsed since last frame
+  const elapsed = timestamp - lastTimestamp;
+
+  // Only update if enough time has passed
+  if (elapsed > frameInterval) {
+    moveEverything();
+    drawEverything();
+    lastTimestamp = timestamp - (elapsed % frameInterval);
+  }
+  requestAnimationFrame(gameLoop);
 }
 
 function moveEverything() {
@@ -127,11 +139,27 @@ function moveEverything() {
 }
 
 function drawEverything() {
+  // Update FPS counter
+  fpsCounter++;
+  const now = performance.now();
+  if (now - lastFpsUpdate > FPS_UPDATE_INTERVAL) {
+    currentFps = Math.round((fpsCounter * 1000) / (now - lastFpsUpdate));
+    lastFpsUpdate = now;
+    fpsCounter = 0;
+  }
+
   // Draw Background
   colorRect(0, 0, canvas.width, canvas.height, BACKGROUND_COLOR);
 
-  // Show lives
+  // Draw FPS counter
   setText("white");
+  canvasContext.font = "16px Roboto"; // Smaller font for FPS
+  canvasContext.fillText(currentFps + " FPS", canvas.width - 70, canvas.height - 25);
+  
+  // Reset font for other text
+  setText("white");
+
+  // Show lives
   canvasContext.fillText("Level: " + level + " -  Lives: " + lives, canvas.width - distanceFromRight, 25);
   canvasContext.fillText("Score: " + score, 5, 25);
 
@@ -335,6 +363,8 @@ class Ball {
     this.colorControl = 0;
     this.color = "";
     this.setBallBoarder();
+    // Calculate speed multiplier based on screen height
+    this.speedMultiplier = BASE_BALL_SPEED + (Math.min(canvas.height, REFERENCE_HEIGHT) / REFERENCE_HEIGHT) * (MAX_BALL_SPEED - BASE_BALL_SPEED);
   }
 
   setBallBoarder() {
@@ -368,10 +398,10 @@ class Ball {
       this.vel.y--;
     }
 
-    // Set the max magnitude
+    // Set the max magnitude using screen-size based speed
     let hyp = Math.hypot(this.vel.x, this.vel.y);
-    this.pos.x = this.pos.x + constrain((this.vel.x / hyp) * 4, -4, 4);
-    this.pos.y = this.pos.y + constrain((this.vel.y / hyp) * 4, -4, 4);
+    this.pos.x = this.pos.x + constrain((this.vel.x / hyp) * this.speedMultiplier, -this.speedMultiplier, this.speedMultiplier);
+    this.pos.y = this.pos.y + constrain((this.vel.y / hyp) * this.speedMultiplier, -this.speedMultiplier, this.speedMultiplier);
 
     this.setBallBoarder();
   }
@@ -381,6 +411,8 @@ class Ball {
     this.vel.y = getRandomInt(-3, -4) - level;
     this.pos.x = centerScreenX - this.radius;
     this.pos.y = canvas.height - paddle.padding - paddle.height - this.radius - 10;
+    // Recalculate speed multiplier on reset in case window was resized
+    this.speedMultiplier = BASE_BALL_SPEED + (Math.min(canvas.height, REFERENCE_HEIGHT) / REFERENCE_HEIGHT) * (MAX_BALL_SPEED - BASE_BALL_SPEED);
   }
 
   checkForBrickHit() {

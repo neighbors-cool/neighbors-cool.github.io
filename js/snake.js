@@ -21,14 +21,12 @@ let paused = true;
 let prevX = 0;
 let prevY = 0;
 
+let lastTimestamp = 0;
+const frameInterval = 1000 / framesPerSecond;
+
 window.onload = function () {
   setup();
-  setInterval(function () {
-    if (!paused) {
-      moveEverything();
-      drawEverything();
-    }
-  }, 1000 / framesPerSecond);
+  requestAnimationFrame(gameLoop);
   canvas.addEventListener("keydown", keyPush);
   canvas.addEventListener("click", handleClick);
   document.addEventListener("touchstart", function (e) {
@@ -242,4 +240,20 @@ function keyPush(evt) {
     case " ": //Space
       handlePause();
   }
+}
+
+function gameLoop(timestamp) {
+  // Calculate time elapsed since last frame
+  const elapsed = timestamp - lastTimestamp;
+
+  // Only update if enough time has passed
+  if (elapsed > frameInterval) {
+    if (!paused) {
+      moveEverything();
+      drawEverything();
+    }
+    lastTimestamp = timestamp - (elapsed % frameInterval);
+  }
+
+  requestAnimationFrame(gameLoop);
 }

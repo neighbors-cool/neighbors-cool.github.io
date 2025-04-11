@@ -30,15 +30,12 @@ let touchShootDelay = 0;
 const touchShootInterval = 20; // Frames between auto-shooting while touching
 
 let ship;
+let lastTimestamp = 0;
+const frameInterval = 1000 / framesPerSecond;
 
 window.onload = function () {
   setup();
-  setInterval(function () {
-    if (!paused) {
-      moveEverything();
-    }
-    drawEverything();
-  }, 1000 / framesPerSecond);
+  requestAnimationFrame(gameLoop);
   canvas.addEventListener("click", handleClick);
   canvas.addEventListener("keydown", keyUpdate);
   canvas.addEventListener("keyup", keyUpdate);
@@ -469,7 +466,7 @@ function getMiddle(a, b) {
 }
 
 function disableScroll() {
-  scrollTop = document.documentElement.scrollTop;
+  let scrollTop = document.documentElement.scrollTop;
   window.onscroll = function () {
     window.scrollTo(0, scrollTop);
   };
@@ -562,4 +559,20 @@ function handleTouchEnd(evt) {
   evt.preventDefault();
   isTouching = false;
   touchShootDelay = 0;
+}
+
+function gameLoop(timestamp) {
+  // Calculate time elapsed since last frame
+  const elapsed = timestamp - lastTimestamp;
+
+  // Only update if enough time has passed
+  if (elapsed > frameInterval) {
+    if (!paused) {
+      moveEverything();
+    }
+    drawEverything();
+    lastTimestamp = timestamp - (elapsed % frameInterval);
+  }
+
+  requestAnimationFrame(gameLoop);
 }
