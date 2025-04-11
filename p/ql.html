@@ -2,58 +2,59 @@
 layout: default
 title: Q Learning
 ---
+
 <main id="index" class="container-fluid pt-4 px-md-4">
   <section>
     <div id="ql" class="anchor"></div>
     <h2>Q Learning and Snake</h2>
     <hr />
     <div class="d-lg-inline-flex">
-        <div class="align-self-center pr-3">
-            I recently watched tutorials by <a href="https://www.youtube.com/user/sentdex" title="Sentdex YouTube Channel">Sentdex</a> on <a href="https://www.youtube.com" title="YouTube Website">YouTube</a> about <a href="https://en.wikipedia.org/wiki/Q-learning" title="Q Learning">Q Learning</a>; I recommend his channel if you are
-            used to following along with fast-paced tutorials. After watching the first four tutorials,
-            I decided that I could implement this technique into the game of snake. I had written snake for fun in
-            JavaScript, so I rewrote it in Python and applied the techniques I learned. The video above is the output of
-            letting the snake play 500k games on a 30×30 board.
-        </div>
-        <div class="pt-3 pt-lg-0">
-            <picture>
-                <source type="image/webp" srcset="/img/q-learning.webp">
-                <source type="image/jpeg" srcset="/img/q-learning.png">
-                <img src="/img/q-learning.png" alt="Q Learning with Snake" class="image-md" async loading="lazy" decoding="async"/>
-            </picture>
-        </div>
+      <div class="align-self-center pr-3">
+        I recently watched tutorials by
+        <a href="https://www.youtube.com/user/sentdex" title="Sentdex YouTube Channel">Sentdex</a>
+        on <a href="https://www.youtube.com" title="YouTube Website">YouTube</a> about <a href="https://en.wikipedia.org/wiki/Q-learning" title="Q Learning">Q Learning</a>; I recommend his channel if
+        you are used to following along with fast-paced tutorials. After watching the first four tutorials, I decided that I could implement this technique into the game of snake. I had written snake
+        for fun in JavaScript, so I rewrote it in Python and applied the techniques I learned. The video above is the output of letting the snake play 500k games on a 30×30 board.
+      </div>
+      <div class="pt-3 pt-lg-0">
+        <picture>
+          <source type="image/webp" srcset="/img/q-learning.webp" />
+          <source type="image/jpeg" srcset="/img/q-learning.png" />
+          <img src="/img/q-learning.png" alt="Q Learning with Snake" class="image-md" async loading="lazy" decoding="async" />
+        </picture>
+      </div>
     </div>
     <hr class="hr-mid" />
-    In Q Learning, you first have to initialize your array with random weights, so the more inputs you have means,
-    the longer it will take to learn. For example, in this Snake implementation, the 'head' square checks its top,
-    left, bottom, and right sides for clear spaces, and it calculates, relatively, how far away the red apple is.
-    This means that there are six inputs (binary inputs for the four sides and an X and Y relative distance) that
-    create a lookup array with just as many dimensions. And each final cell contains four outputs that are weighted
-    initially between -5 and 0 (but are updated during the training process). These six inputs and four answers mean
-    that to populate the array initially, the program will need to create (30x30x2x2x2x2x4) 57,600 random floats,
-    or zero fill the array. The estimated answer at any one location in the grid is the index containing the max value
-    at the location in the array specified by the current context of the 'head' square. The key is calculated to be
-    np.argmax((food_delta_y, food_delta_x), top_blocked, left_blocked, down_blocked, right_blocked).
+    In Q Learning, you first have to initialize your array with random weights, so the more inputs you have means, the longer it will take to learn. For example, in this Snake implementation, the
+    'head' square checks its top, left, bottom, and right sides for clear spaces, and it calculates, relatively, how far away the red apple is. This means that there are six inputs (binary inputs for
+    the four sides and an X and Y relative distance) that create a lookup array with just as many dimensions. And each final cell contains four outputs that are weighted initially between -5 and 0
+    (but are updated during the training process). These six inputs and four answers mean that to populate the array initially, the program will need to create (30x30x2x2x2x2x4) 57,600 random floats,
+    or zero fill the array. The estimated answer at any one location in the grid is the index containing the max value at the location in the array specified by the current context of the 'head'
+    square. The key is calculated to be np.argmax((food_delta_y, food_delta_x), top_blocked, left_blocked, down_blocked, right_blocked).
     <hr class="hr-mid" />
-    The training of the snake occurs when the snake performs a lookup in the array for its current context,
-    executes the answer, then updates that cell with how well that answer performed. In this case, if the
-    snake just moved a space and nothing else occurred, the chosen answer's float is decreased by 1, if the snake
-    hits its own body, the chosen answer's float is reduced by 300, and if the snake finds an apple, the chosen
-    answer's float is increased by 100. Because all of the 'answers' are randomly initialized, the snake moves
-    chaotically for a long time until it makes an awful decision or an excellent decision.
+    The training of the snake occurs when the snake performs a lookup in the array for its current context, executes the answer, then updates that cell with how well that answer performed. In this
+    case, if the snake just moved a space and nothing else occurred, the chosen answer's float is decreased by 1, if the snake hits its own body, the chosen answer's float is reduced by 300, and if
+    the snake finds an apple, the chosen answer's float is increased by 100. Because all of the 'answers' are randomly initialized, the snake moves chaotically for a long time until it makes an awful
+    decision or an excellent decision.
     <hr class="hr-mid" />
-    In this video, the snake has 'learned' to move toward the red apple in ways that seem unnatural to human decisions.
-    This is because the snake only knows the relative distance to the apple and has figured out that the screen wraps on the edges.
-    The snake does some impressive moves using the screen wrap that is fun to watch.
+    In this video, the snake has 'learned' to move toward the red apple in ways that seem unnatural to human decisions. This is because the snake only knows the relative distance to the apple and has
+    figured out that the screen wraps on the edges. The snake does some impressive moves using the screen wrap that is fun to watch.
     <hr class="hr-mid" />
     <div class="text-center">
-        <iframe class="lazyload iframe-md" data-src="https://www.youtube.com/embed/5MamOP1J03k" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen async></iframe>
-        <br />
-        <a href="https://youtu.be/5MamOP1J03k" title="YouTube - Snake plays itself with Q Learning">Snake plays itself with Q Learning</a>
+      <iframe
+        class="lazyload iframe-md"
+        data-src="https://www.youtube.com/embed/5MamOP1J03k"
+        frameborder="0"
+        allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen
+        async
+      ></iframe>
+      <br />
+      <a href="https://youtu.be/5MamOP1J03k" title="YouTube - Snake plays itself with Q Learning">Snake plays itself with Q Learning</a>
     </div>
     <hr class="hr-mid" />
     <div class="text-center">
-        <a href="/g/snake.html" class="local-link" title="Play Snake Game">Play Snake Here</a>
+      <a href="/g/snake.html" class="local-link" title="Play Snake Game">Play Snake Here</a>
     </div>
   </section>
 </main>

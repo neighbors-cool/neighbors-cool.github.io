@@ -2,35 +2,36 @@
 layout: default
 title: Page Not Found
 ---
+
 <style>
-    #pendulum-canvas {
-        position: fixed;
-        top: 0;
-        left: 0;
-        z-index: -1;
-    }
-    .error-content {
-        color: white;
-        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-        position: relative;
-        z-index: 1;
-    }
+  #pendulum-canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: -1;
+  }
+  .error-content {
+    color: white;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    position: relative;
+    z-index: 1;
+  }
 </style>
 
 <canvas id="pendulum-canvas"></canvas>
 <main id="index" class="container-fluid pt-4 px-md-4 text-center">
-    <section class="error-content">
-        <h2>Page Not Found</h2>
-        <p>Sorry, but the page you were trying to view does not exist.</p>
-    </section>
+  <section class="error-content">
+    <h2>Page Not Found</h2>
+    <p>Sorry, but the page you were trying to view does not exist.</p>
+  </section>
 </main>
 
 <script src="/js/404.js"></script>
 <script>
-    document.addEventListener('DOMContentLoaded', () => {
-        const canvas = document.getElementById('pendulum-canvas');
-        const pendulum = new TriplePendulum(canvas);
-        pendulum.init();
-    });
+  document.addEventListener('DOMContentLoaded', () => {
+    const canvas = document.getElementById('pendulum-canvas');
+    const pendulum = new TriplePendulum(canvas);
+    pendulum.init();
+  });
 </script>
 <!-- IE needs 512+ bytes: https://blogs.msdn.microsoft.com/ieinternals/2010/08/18/friendly-http-error-pages/ -->

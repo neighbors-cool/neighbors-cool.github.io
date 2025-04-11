@@ -10,9 +10,9 @@ if ('serviceWorker' in navigator) {
 }
 window.addEventListener('load', () => {
   var anchors = document.getElementsByTagName('a');
-  if(!!anchors && !!anchors.length) {
-    for(var i = 0; i < anchors.length; i++) {
-      if(!anchors[i].classList.contains('local-link')) {
+  if (!!anchors && !!anchors.length) {
+    for (var i = 0; i < anchors.length; i++) {
+      if (!anchors[i].classList.contains('local-link')) {
         anchors[i].target = '_blank';
         anchors[i].rel = 'noopener noreferrer';
       }
@@ -20,17 +20,17 @@ window.addEventListener('load', () => {
   }
   byId('menuButton').addEventListener('click', toggleMenu);
   var dditems = document.getElementsByClassName('dropdown-item');
-  for(var i = 0; i < dditems.length; i++) {
+  for (var i = 0; i < dditems.length; i++) {
     dditems[i].addEventListener('click', toggleMenu);
   }
-  if(byId('menuDiv').offsetHeight > 0) {
+  if (byId('menuDiv').offsetHeight > 0) {
     byId('menuDiv').setAttribute('aria-hidden', false);
   }
 });
 
 function toggleMenu() {
   var menu = byId('menu');
-  if(menu.classList.contains('show')) {
+  if (menu.classList.contains('show')) {
     menu.classList.remove('show');
     menu.setAttribute('aria-hidden', true);
     byId('menuButton').setAttribute('aria-expanded', false);

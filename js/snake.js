@@ -21,10 +21,10 @@ let paused = true;
 let prevX = 0;
 let prevY = 0;
 
-window.onload = function() {
+window.onload = function () {
   setup();
-  setInterval(function() {
-    if(!paused) {
+  setInterval(function () {
+    if (!paused) {
       moveEverything();
       drawEverything();
     }
@@ -38,47 +38,51 @@ window.onload = function() {
     prevX = e.touches[0].clientX;
     prevY = e.touches[0].clientY;
   });
-  canvas.addEventListener('touchmove', function (e) {
-    // stop touch event
-    e.stopPropagation();
-    e.preventDefault();
+  canvas.addEventListener(
+    'touchmove',
+    function (e) {
+      // stop touch event
+      e.stopPropagation();
+      e.preventDefault();
 
-    let evt;
-    let diffX = prevX - e.touches[0].clientX;
-    let diffY = prevY - e.touches[0].clientY;
-    if(Math.max(Math.abs(diffX), Math.abs(diffY)) == Math.abs(diffX)) {
-      // X Moved Most
-      if(diffX > 0) {
-        // Move Left
-        evt = new KeyboardEvent('keydown', {'key': 'ArrowLeft'}); 
+      let evt;
+      let diffX = prevX - e.touches[0].clientX;
+      let diffY = prevY - e.touches[0].clientY;
+      if (Math.max(Math.abs(diffX), Math.abs(diffY)) == Math.abs(diffX)) {
+        // X Moved Most
+        if (diffX > 0) {
+          // Move Left
+          evt = new KeyboardEvent('keydown', { key: 'ArrowLeft' });
+        } else {
+          // Move Right
+          evt = new KeyboardEvent('keydown', { key: 'ArrowRight' });
+        }
       } else {
-        // Move Right
-        evt = new KeyboardEvent('keydown', {'key': 'ArrowRight'}); 
+        // Y Moved Most
+        if (diffY > 0) {
+          // Move Up
+          evt = new KeyboardEvent('keydown', { key: 'ArrowUp' });
+        } else {
+          // Move Down
+          evt = new KeyboardEvent('keydown', { key: 'ArrowDown' });
+        }
       }
-    } else {
-      // Y Moved Most
-      if(diffY > 0) {
-        // Move Up
-        evt = new KeyboardEvent('keydown', {'key': 'ArrowUp'}); 
-      } else {
-        // Move Down
-        evt = new KeyboardEvent('keydown', {'key': 'ArrowDown'}); 
-      }
-    }
-    canvas.dispatchEvent(evt);
-  }, false);
+      canvas.dispatchEvent(evt);
+    },
+    false
+  );
 };
 
 function setup() {
-  canvas = document.getElementById("gameCanvas");
+  canvas = document.getElementById('gameCanvas');
   let dim = getViewportDimension();
-  if(dim.w <= 767) {
+  if (dim.w <= 767) {
     canvas.width = dim.w - 40;
   } else {
     canvas.width = dim.w - 60;
   }
   canvas.height = dim.h - 220;
-  canvasContext = canvas.getContext("2d");
+  canvasContext = canvas.getContext('2d');
   block_columns = Math.floor(canvas.width / BLOCK_SIZE);
   block_rows = Math.floor(canvas.height / BLOCK_SIZE);
 
@@ -93,32 +97,33 @@ function setup() {
 
 function setText() {
   canvasContext.fillStyle = 'white';
-  if(canvas.width >= 556) {
-    canvasContext.font = "30px Roboto";
+  if (canvas.width >= 556) {
+    canvasContext.font = '30px Roboto';
   } else {
-    canvasContext.font = "22px Roboto";
+    canvasContext.font = '22px Roboto';
   }
 }
 
 function getViewportDimension() {
-  let e = window, a = "inner";
-  if(!("innerWidth" in window)) {
-    a = "client";
+  let e = window,
+    a = 'inner';
+  if (!('innerWidth' in window)) {
+    a = 'client';
     e = document.documentElement || document.body;
   }
-  return {w: e[a + "Width"], h: e[a + "Height"]};
+  return { w: e[a + 'Width'], h: e[a + 'Height'] };
 }
 
-function disableScroll() { 
-	scrollTop = document.documentElement.scrollTop;
-  window.onscroll = function() { 
-    window.scrollTo(0, scrollTop); 
+function disableScroll() {
+  scrollTop = document.documentElement.scrollTop;
+  window.onscroll = function () {
+    window.scrollTo(0, scrollTop);
   };
-} 
+}
 
-function enableScroll() { 
-	window.onscroll = function() {}; 
-} 
+function enableScroll() {
+  window.onscroll = function () {};
+}
 
 function moveEverything() {
   // Update the head location
@@ -126,21 +131,21 @@ function moveEverything() {
   headY += speedY;
 
   // Wrap the screen if necessary
-  if(headX < 0) {
+  if (headX < 0) {
     headX = block_columns - 1;
   }
-  if(headX > block_columns - 1) {
+  if (headX > block_columns - 1) {
     headX = 0;
   }
-  if(headY < 0) {
+  if (headY < 0) {
     headY = block_rows - 1;
   }
-  if(headY > block_rows - 1) {
+  if (headY > block_rows - 1) {
     headY = 0;
   }
 
   // Move head forward
-  trail.push({x:headX, y:headY});
+  trail.push({ x: headX, y: headY });
 
   // 'move tail forward' (remove where tail used to be)
   while (trail.length > tail) {
@@ -150,7 +155,7 @@ function moveEverything() {
 
 function drawEverything() {
   // Draw background
-  canvasContext.fillStyle = "black";
+  canvasContext.fillStyle = 'black';
   canvasContext.fillRect(0, 0, canvas.width, canvas.height);
 
   // Draw Score
@@ -158,46 +163,46 @@ function drawEverything() {
   canvasContext.fillText((tail - BASE_TAIL).toLocaleString() + ' : ' + highScore.toLocaleString(), 40, 40);
 
   // Draw body
-  canvasContext.fillStyle = "lime";
+  canvasContext.fillStyle = 'lime';
   for (let i = 0; i < trail.length; i++) {
     canvasContext.fillRect(trail[i].x * BLOCK_SIZE, trail[i].y * BLOCK_SIZE, APPLE_SIZE, APPLE_SIZE);
-    if(i<trail.length-1 && trail[i].x == headX && trail[i].y == headY) {
+    if (i < trail.length - 1 && trail[i].x == headX && trail[i].y == headY) {
       // Hit self
-      if((tail - BASE_TAIL) > highScore) {
-        highScore = (tail - BASE_TAIL);
+      if (tail - BASE_TAIL > highScore) {
+        highScore = tail - BASE_TAIL;
       }
       tail = BASE_TAIL;
     }
   }
 
   // Found Apple!
-  if(appleX == headX && appleY == headY) {
+  if (appleX == headX && appleY == headY) {
     tail++;
     appleX = Math.floor(Math.random() * block_columns);
     appleY = Math.floor(Math.random() * block_rows);
   }
 
   // Draw Apple
-  canvasContext.fillStyle = "red";
+  canvasContext.fillStyle = 'red';
   canvasContext.fillRect(appleX * BLOCK_SIZE, appleY * BLOCK_SIZE, APPLE_SIZE, APPLE_SIZE);
 
-  if(paused) {
+  if (paused) {
     setText();
-    if(!started_yet) {
-      canvasContext.fillText("Click/Tap to Start/Pause!", (canvas.width / 2) - 130, (block_rows / 3) * BLOCK_SIZE);
+    if (!started_yet) {
+      canvasContext.fillText('Click/Tap to Start/Pause!', canvas.width / 2 - 130, (block_rows / 3) * BLOCK_SIZE);
     }
   }
 }
 
 function handlePause() {
   started_yet = true;
-  if(paused) {
+  if (paused) {
     paused = false;
     disableScroll();
   } else {
     paused = true;
     setText();
-    canvasContext.fillText("Paused", (canvas.width / 2) - 40, (block_rows / 3) * BLOCK_SIZE);
+    canvasContext.fillText('Paused', canvas.width / 2 - 40, (block_rows / 3) * BLOCK_SIZE);
     enableScroll();
   }
 }
@@ -211,25 +216,25 @@ function keyPush(evt) {
   evt.preventDefault();
   switch (evt.key) {
     case 'ArrowLeft':
-      if(speedX !== 1) {
+      if (speedX !== 1) {
         speedX = -1;
         speedY = 0;
       }
       break;
     case 'ArrowUp':
-      if(speedY !== 1) {
+      if (speedY !== 1) {
         speedX = 0;
         speedY = -1;
       }
       break;
     case 'ArrowRight':
-      if(speedX !== -1) {
+      if (speedX !== -1) {
         speedX = 1;
         speedY = 0;
       }
       break;
     case 'ArrowDown':
-      if(speedY !== -1) {
+      if (speedY !== -1) {
         speedX = 0;
         speedY = 1;
       }
