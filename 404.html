@@ -1,60 +1,37 @@
-<!doctype html>
-<html lang="en">
-<head>
-    <meta charset="utf-8">
-    <title>Page Not Found</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <style>
+---
+layout: default
+title: Page Not Found
+---
 
-        * {
-            line-height: 1.2;
-            margin: 0;
-        }
+<style>
+  #pendulum-canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: -1;
+  }
+  .error-content {
+    color: white;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    position: relative;
+    z-index: 1;
+  }
+</style>
 
-        html {
-            color: #888;
-            display: table;
-            font-family: sans-serif;
-            height: 100%;
-            text-align: center;
-            width: 100%;
-        }
-
-        body {
-            display: table-cell;
-            vertical-align: middle;
-            margin: 2em auto;
-        }
-
-        h1 {
-            color: #555;
-            font-size: 2em;
-            font-weight: 400;
-        }
-
-        p {
-            margin: 0 auto;
-            width: 280px;
-        }
-
-        @media only screen and (max-width: 280px) {
-
-            body, p {
-                width: 95%;
-            }
-
-            h1 {
-                font-size: 1.5em;
-                margin: 0 0 0.3em;
-            }
-
-        }
-
-    </style>
-</head>
-<body>
-    <h1>Page Not Found</h1>
+<canvas id="pendulum-canvas"></canvas>
+<main id="index" class="container-fluid pt-4 px-md-4 text-center">
+  <section class="error-content">
+    <h2>Page Not Found</h2>
     <p>Sorry, but the page you were trying to view does not exist.</p>
-</body>
-</html>
+  </section>
+</main>
+
+<script src="/js/404.js"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const canvas = document.getElementById('pendulum-canvas');
+    const pendulum = new TriplePendulum(canvas);
+    pendulum.init();
+  });
+</script>
 <!-- IE needs 512+ bytes: https://blogs.msdn.microsoft.com/ieinternals/2010/08/18/friendly-http-error-pages/ -->
