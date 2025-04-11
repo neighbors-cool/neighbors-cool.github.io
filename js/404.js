@@ -1,5 +1,5 @@
 // Create a canvas element and append it to the document body
-const canvas = document.createElement('canvas');
+const canvas = document.createElement("canvas");
 document.body.appendChild(canvas);
 
 // Instantiate and initialize the TriplePendulum class
@@ -8,7 +8,7 @@ pendulum.init();
 class TriplePendulum {
   constructor(canvas) {
     this.canvas = canvas;
-    this.ctx = canvas.getContext('2d');
+    this.ctx = canvas.getContext("2d");
     this.time = 0;
     this.animate = this.animate.bind(this);
 
@@ -23,7 +23,7 @@ class TriplePendulum {
 
   init() {
     this.resize();
-    window.addEventListener('resize', () => this.resize());
+    window.addEventListener("resize", () => this.resize());
     this.animate();
   }
 
@@ -82,7 +82,7 @@ class TriplePendulum {
     this.ctx.lineTo(x1, y1);
     this.ctx.lineTo(x2, y2);
     this.ctx.lineTo(x3, y3);
-    this.ctx.strokeStyle = '#fff';
+    this.ctx.strokeStyle = "#fff";
     this.ctx.lineWidth = 2;
     this.ctx.stroke();
 
@@ -102,7 +102,7 @@ class TriplePendulum {
 
   animate() {
     // Clear canvas completely each frame
-    this.ctx.fillStyle = 'rgba(0, 0, 0, 1)';
+    this.ctx.fillStyle = "rgba(0, 0, 0, 1)";
     this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
 
     this.updatePhysics();

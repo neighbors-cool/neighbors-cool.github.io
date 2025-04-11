@@ -7,7 +7,7 @@ const stars = [];
 const numberOfStars = 150;
 const maxStarSize = 4;
 const maxStarSpeed = 300;
-const backgroundColor = 'black';
+const backgroundColor = "black";
 
 window.onload = function () {
   setup();
@@ -19,20 +19,20 @@ window.onload = function () {
 
 function getViewportDimension() {
   let e = window,
-    a = 'inner';
-  if (!('innerWidth' in window)) {
-    a = 'client';
+    a = "inner";
+  if (!("innerWidth" in window)) {
+    a = "client";
     e = document.documentElement || document.body;
   }
-  return { w: e[a + 'Width'], h: e[a + 'Height'] };
+  return { w: e[a + "Width"], h: e[a + "Height"] };
 }
 
 function setup() {
-  canvas = document.getElementById('gameCanvas');
+  canvas = document.getElementById("gameCanvas");
   let dim = getViewportDimension();
   canvas.width = dim.w;
   canvas.height = dim.h - 220;
-  canvasContext = canvas.getContext('2d');
+  canvasContext = canvas.getContext("2d");
   centerScreenX = canvas.width / 2;
   centerScreenY = canvas.height / 2;
 
@@ -59,9 +59,9 @@ function getRandomFloat(min, max) {
 }
 
 function angle(cx, cy, ex, ey) {
-  var dy = ey - cy;
-  var dx = ex - cx;
-  var theta = Math.atan2(dy, dx); // range (-PI, PI]
+  let dy = ey - cy;
+  let dx = ex - cx;
+  let theta = Math.atan2(dy, dx); // range (-PI, PI]
   return theta;
 }
 
@@ -98,7 +98,7 @@ class Star {
   updateColor() {
     const hue = scale(this.radius, 130, 255, 0.01, maxStarSize);
     const light = scale(this.radius, 1, 100, 0.01, maxStarSize);
-    this.color = 'hsl(' + hue + ', 50%, ' + light + '%)';
+    this.color = "hsl(" + hue + ", 50%, " + light + "%)";
   }
 
   // Draw Star

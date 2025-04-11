@@ -29,9 +29,9 @@ window.onload = function () {
       drawEverything();
     }
   }, 1000 / framesPerSecond);
-  canvas.addEventListener('keydown', keyPush);
-  canvas.addEventListener('click', handleClick);
-  document.addEventListener('touchstart', function (e) {
+  canvas.addEventListener("keydown", keyPush);
+  canvas.addEventListener("click", handleClick);
+  document.addEventListener("touchstart", function (e) {
     // stop touch event
     e.stopPropagation();
     e.preventDefault();
@@ -39,7 +39,7 @@ window.onload = function () {
     prevY = e.touches[0].clientY;
   });
   canvas.addEventListener(
-    'touchmove',
+    "touchmove",
     function (e) {
       // stop touch event
       e.stopPropagation();
@@ -52,19 +52,19 @@ window.onload = function () {
         // X Moved Most
         if (diffX > 0) {
           // Move Left
-          evt = new KeyboardEvent('keydown', { key: 'ArrowLeft' });
+          evt = new KeyboardEvent("keydown", { key: "ArrowLeft" });
         } else {
           // Move Right
-          evt = new KeyboardEvent('keydown', { key: 'ArrowRight' });
+          evt = new KeyboardEvent("keydown", { key: "ArrowRight" });
         }
       } else {
         // Y Moved Most
         if (diffY > 0) {
           // Move Up
-          evt = new KeyboardEvent('keydown', { key: 'ArrowUp' });
+          evt = new KeyboardEvent("keydown", { key: "ArrowUp" });
         } else {
           // Move Down
-          evt = new KeyboardEvent('keydown', { key: 'ArrowDown' });
+          evt = new KeyboardEvent("keydown", { key: "ArrowDown" });
         }
       }
       canvas.dispatchEvent(evt);
@@ -74,7 +74,7 @@ window.onload = function () {
 };
 
 function setup() {
-  canvas = document.getElementById('gameCanvas');
+  canvas = document.getElementById("gameCanvas");
   let dim = getViewportDimension();
   if (dim.w <= 767) {
     canvas.width = dim.w - 40;
@@ -82,7 +82,7 @@ function setup() {
     canvas.width = dim.w - 60;
   }
   canvas.height = dim.h - 220;
-  canvasContext = canvas.getContext('2d');
+  canvasContext = canvas.getContext("2d");
   block_columns = Math.floor(canvas.width / BLOCK_SIZE);
   block_rows = Math.floor(canvas.height / BLOCK_SIZE);
 
@@ -96,22 +96,22 @@ function setup() {
 }
 
 function setText() {
-  canvasContext.fillStyle = 'white';
+  canvasContext.fillStyle = "white";
   if (canvas.width >= 556) {
-    canvasContext.font = '30px Roboto';
+    canvasContext.font = "30px Roboto";
   } else {
-    canvasContext.font = '22px Roboto';
+    canvasContext.font = "22px Roboto";
   }
 }
 
 function getViewportDimension() {
   let e = window,
-    a = 'inner';
-  if (!('innerWidth' in window)) {
-    a = 'client';
+    a = "inner";
+  if (!("innerWidth" in window)) {
+    a = "client";
     e = document.documentElement || document.body;
   }
-  return { w: e[a + 'Width'], h: e[a + 'Height'] };
+  return { w: e[a + "Width"], h: e[a + "Height"] };
 }
 
 function disableScroll() {
@@ -155,15 +155,15 @@ function moveEverything() {
 
 function drawEverything() {
   // Draw background
-  canvasContext.fillStyle = 'black';
+  canvasContext.fillStyle = "black";
   canvasContext.fillRect(0, 0, canvas.width, canvas.height);
 
   // Draw Score
   setText();
-  canvasContext.fillText((tail - BASE_TAIL).toLocaleString() + ' : ' + highScore.toLocaleString(), 40, 40);
+  canvasContext.fillText((tail - BASE_TAIL).toLocaleString() + " : " + highScore.toLocaleString(), 40, 40);
 
   // Draw body
-  canvasContext.fillStyle = 'lime';
+  canvasContext.fillStyle = "lime";
   for (let i = 0; i < trail.length; i++) {
     canvasContext.fillRect(trail[i].x * BLOCK_SIZE, trail[i].y * BLOCK_SIZE, APPLE_SIZE, APPLE_SIZE);
     if (i < trail.length - 1 && trail[i].x == headX && trail[i].y == headY) {
@@ -183,13 +183,13 @@ function drawEverything() {
   }
 
   // Draw Apple
-  canvasContext.fillStyle = 'red';
+  canvasContext.fillStyle = "red";
   canvasContext.fillRect(appleX * BLOCK_SIZE, appleY * BLOCK_SIZE, APPLE_SIZE, APPLE_SIZE);
 
   if (paused) {
     setText();
     if (!started_yet) {
-      canvasContext.fillText('Click/Tap to Start/Pause!', canvas.width / 2 - 130, (block_rows / 3) * BLOCK_SIZE);
+      canvasContext.fillText("Click/Tap to Start/Pause!", canvas.width / 2 - 130, (block_rows / 3) * BLOCK_SIZE);
     }
   }
 }
@@ -202,7 +202,7 @@ function handlePause() {
   } else {
     paused = true;
     setText();
-    canvasContext.fillText('Paused', canvas.width / 2 - 40, (block_rows / 3) * BLOCK_SIZE);
+    canvasContext.fillText("Paused", canvas.width / 2 - 40, (block_rows / 3) * BLOCK_SIZE);
     enableScroll();
   }
 }
@@ -215,31 +215,31 @@ function handleClick(evt) {
 function keyPush(evt) {
   evt.preventDefault();
   switch (evt.key) {
-    case 'ArrowLeft':
+    case "ArrowLeft":
       if (speedX !== 1) {
         speedX = -1;
         speedY = 0;
       }
       break;
-    case 'ArrowUp':
+    case "ArrowUp":
       if (speedY !== 1) {
         speedX = 0;
         speedY = -1;
       }
       break;
-    case 'ArrowRight':
+    case "ArrowRight":
       if (speedX !== -1) {
         speedX = 1;
         speedY = 0;
       }
       break;
-    case 'ArrowDown':
+    case "ArrowDown":
       if (speedY !== -1) {
         speedX = 0;
         speedY = 1;
       }
       break;
-    case ' ': //Space
+    case " ": //Space
       handlePause();
   }
 }

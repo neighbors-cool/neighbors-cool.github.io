@@ -1,7 +1,7 @@
 let canvas;
 let canvasContext;
 let framesPerSecond = 90;
-const BACKGROUND_COLOR = 'black';
+const BACKGROUND_COLOR = "black";
 
 //let ball = new Ball();
 let balls = [];
@@ -50,20 +50,20 @@ window.onload = function () {
     drawEverything();
   }, 1000 / framesPerSecond);
 
-  canvas.addEventListener('mousemove', function (event) {
+  canvas.addEventListener("mousemove", function (event) {
     paddle.pos.x = event.clientX - clientRectLeft - paddle.halfWidth;
   });
-  canvas.addEventListener('click', handleClick);
+  canvas.addEventListener("click", handleClick);
   // Convert a touch move into a mousemove
   canvas.addEventListener(
-    'touchmove',
+    "touchmove",
     function (e) {
       // stop touch event
       e.stopPropagation();
       e.preventDefault();
 
       // translate to mouse event
-      var clkEvt = new MouseEvent('mousemove', {
+      let clkEvt = new MouseEvent("mousemove", {
         bubbles: true,
         cancelable: true,
         view: window,
@@ -80,7 +80,7 @@ window.onload = function () {
 };
 
 function setup() {
-  canvas = document.getElementById('gameCanvas');
+  canvas = document.getElementById("gameCanvas");
   paddle = new Paddle();
   let dim = getViewportDimension();
   if (dim.w <= 767) {
@@ -89,7 +89,7 @@ function setup() {
     canvas.width = dim.w - 60;
   }
   canvas.height = dim.h - 220;
-  canvasContext = canvas.getContext('2d');
+  canvasContext = canvas.getContext("2d");
   centerScreenX = canvas.width / 2;
   centerScreenY = canvas.height / 2;
 
@@ -131,9 +131,9 @@ function drawEverything() {
   colorRect(0, 0, canvas.width, canvas.height, BACKGROUND_COLOR);
 
   // Show lives
-  setText('white');
-  canvasContext.fillText('Level: ' + level + ' -  Lives: ' + lives, canvas.width - distanceFromRight, 25);
-  canvasContext.fillText('Score: ' + score, 5, 25);
+  setText("white");
+  canvasContext.fillText("Level: " + level + " -  Lives: " + lives, canvas.width - distanceFromRight, 25);
+  canvasContext.fillText("Score: " + score, 5, 25);
 
   // Draw bricks
   for (let i = 0; i < bricks.length; i++) {
@@ -141,22 +141,22 @@ function drawEverything() {
   }
 
   if (showingWinScreen) {
-    setText('white');
+    setText("white");
     started_yet = false;
-    canvasContext.fillText('Next Level!', centerScreenX - 60, centerScreenY);
-    canvasContext.fillText('Click to Continue', centerScreenX - 90, centerScreenY + 50);
+    canvasContext.fillText("Next Level!", centerScreenX - 60, centerScreenY);
+    canvasContext.fillText("Click to Continue", centerScreenX - 90, centerScreenY + 50);
     return;
   }
 
   if (showingLoseScreen) {
-    setText('white');
+    setText("white");
     started_yet = false;
     if (lives === 0) {
-      canvasContext.fillText('You lose... Score: ' + score, centerScreenX - 90, centerScreenY + 20);
+      canvasContext.fillText("You lose... Score: " + score, centerScreenX - 90, centerScreenY + 20);
     } else {
-      canvasContext.fillText(lives + ' More Li' + (lives % 2 == 0 ? 'ves' : 'fe') + '!', centerScreenX - 90, centerScreenY + 20);
+      canvasContext.fillText(lives + " More Li" + (lives % 2 == 0 ? "ves" : "fe") + "!", centerScreenX - 90, centerScreenY + 20);
     }
-    canvasContext.fillText('Click to Continue', centerScreenX - 90, centerScreenY + 70);
+    canvasContext.fillText("Click to Continue", centerScreenX - 90, centerScreenY + 70);
     return;
   }
 
@@ -167,9 +167,9 @@ function drawEverything() {
 
   if (paused) {
     if (started_yet) {
-      canvasContext.fillText('Paused', centerScreenX - 30, centerScreenY + 50);
+      canvasContext.fillText("Paused", centerScreenX - 30, centerScreenY + 50);
     } else {
-      canvasContext.fillText('Click/Tap to Start/Pause!', centerScreenX - 100, centerScreenY + 50);
+      canvasContext.fillText("Click/Tap to Start/Pause!", centerScreenX - 100, centerScreenY + 50);
     }
   }
 }
@@ -217,12 +217,12 @@ function handleClick() {
 
 function getViewportDimension() {
   let e = window,
-    a = 'inner';
-  if (!('innerWidth' in window)) {
-    a = 'client';
+    a = "inner";
+  if (!("innerWidth" in window)) {
+    a = "client";
     e = document.documentElement || document.body;
   }
-  return { w: e[a + 'Width'], h: e[a + 'Height'] };
+  return { w: e[a + "Width"], h: e[a + "Height"] };
 }
 
 // p5js constrain
@@ -233,10 +233,10 @@ function constrain(n, low, high) {
 function setText(color) {
   canvasContext.fillStyle = color;
   if (canvas.width >= 556) {
-    canvasContext.font = '30px Roboto';
+    canvasContext.font = "30px Roboto";
     distanceFromRight = 300;
   } else {
-    canvasContext.font = '22px Roboto';
+    canvasContext.font = "22px Roboto";
     distanceFromRight = 200;
   }
 }
@@ -257,7 +257,7 @@ function createBricks() {
   let hue = getRandomInt(0, 360);
   let modifyer = getRandomInt(0, 1) ? -20 : 20;
   for (let j = 1; j <= brick_rows; j++) {
-    let color = 'hsl(' + hue + ', 100%, 50%)';
+    let color = "hsl(" + hue + ", 100%, 50%)";
     for (let k = 0; k < brick_columns; k++) {
       bricks.push(new Brick(k * (BRICK_WIDTH + BRICK_WIDTH_PADDING) + leftPad, j * (BRICK_HEIGHT + BRICK_HEIGHT_PADDING) + topPad, color));
     }
@@ -286,7 +286,7 @@ class Vector {
     this.y = y ? y : 0;
   }
   toString() {
-    return 'x:' + this.x + ', y:' + this.y;
+    return "x:" + this.x + ", y:" + this.y;
   }
 }
 
@@ -323,7 +323,7 @@ class Paddle {
   }
   // Draw Paddle
   draw() {
-    colorRect(this.pos.x, this.pos.y, this.width, this.height, 'white');
+    colorRect(this.pos.x, this.pos.y, this.width, this.height, "white");
   }
 }
 
@@ -333,7 +333,7 @@ class Ball {
     this.vel = new Vector();
     this.radius = 10;
     this.colorControl = 0;
-    this.color = '';
+    this.color = "";
     this.setBallBoarder();
   }
 
@@ -347,7 +347,7 @@ class Ball {
   // Draw Ball
   draw() {
     if (this.colorControl % (framesPerSecond / 5) === 0) {
-      this.color = 'hsl(' + getRandomInt(0, 360) + ', 100%, 50%)';
+      this.color = "hsl(" + getRandomInt(0, 360) + ", 100%, 50%)";
       this.colorControl = 0;
     }
     this.colorControl++;

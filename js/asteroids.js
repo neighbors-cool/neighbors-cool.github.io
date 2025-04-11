@@ -17,8 +17,8 @@ const lowAsteroidSpeed = -100;
 const highAsteroidSpeed = 100;
 const maxShipSpeed = 200;
 const maxBulletCount = 10;
-const backgroundColor = 'black';
-const asteroidsColor = 'white';
+const backgroundColor = "black";
+const asteroidsColor = "white";
 
 // Touch control variables
 let touchStartX = 0;
@@ -39,14 +39,14 @@ window.onload = function () {
     }
     drawEverything();
   }, 1000 / framesPerSecond);
-  canvas.addEventListener('click', handleClick);
-  canvas.addEventListener('keydown', keyUpdate);
-  canvas.addEventListener('keyup', keyUpdate);
+  canvas.addEventListener("click", handleClick);
+  canvas.addEventListener("keydown", keyUpdate);
+  canvas.addEventListener("keyup", keyUpdate);
 
   // Add touch controls
-  canvas.addEventListener('touchstart', handleTouchStart, false);
-  canvas.addEventListener('touchmove', handleTouchMove, false);
-  canvas.addEventListener('touchend', handleTouchEnd, false);
+  canvas.addEventListener("touchstart", handleTouchStart, false);
+  canvas.addEventListener("touchmove", handleTouchMove, false);
+  canvas.addEventListener("touchend", handleTouchEnd, false);
 };
 
 class Vector {
@@ -96,7 +96,7 @@ class Ship {
     }
 
     // Fire bullet if less than maxBulletCount on screen
-    if (keyStatusMap[' '] && this.bullets.length <= maxBulletCount && this.currentInterval == 0) {
+    if (keyStatusMap[" "] && this.bullets.length <= maxBulletCount && this.currentInterval == 0) {
       this.fire();
       this.currentInterval = this.fireInterval;
     }
@@ -121,7 +121,7 @@ class Ship {
     canvasContext.fill();
 
     canvasContext.beginPath();
-    canvasContext.fillStyle = 'red';
+    canvasContext.fillStyle = "red";
     // centerX, centerY, radius, startDraw, endDraw, counterClockwise
     canvasContext.arc(this.pos.x, this.pos.y, 2, 0, Math.PI * 2, true);
     canvasContext.fill();
@@ -130,10 +130,10 @@ class Ship {
 
   // arrow key press will adjust the facing and speed in the appropriate direction over time (small adjustment in this call)
   updateVelocity() {
-    if (keyStatusMap['ArrowLeft']) {
+    if (keyStatusMap["ArrowLeft"]) {
       this.rads += -0.05;
     }
-    if (keyStatusMap['ArrowRight']) {
+    if (keyStatusMap["ArrowRight"]) {
       this.rads += 0.05;
     }
     if (this.rads > Math.PI * 2) {
@@ -143,11 +143,11 @@ class Ship {
     }
 
     // Slow down
-    if (keyStatusMap['ArrowDown'] && this.speed > 2) {
+    if (keyStatusMap["ArrowDown"] && this.speed > 2) {
       this.speed += -2;
     }
     // Speed up while up arrow is pressed
-    if (this.speed < maxShipSpeed && keyStatusMap['ArrowUp']) {
+    if (this.speed < maxShipSpeed && keyStatusMap["ArrowUp"]) {
       this.speed += 1;
     } else if (this.speed > 1) {
       this.speed += -1;
@@ -342,20 +342,20 @@ class Asteroid {
 
 function getViewportDimension() {
   let e = window,
-    a = 'inner';
-  if (!('innerWidth' in window)) {
-    a = 'client';
+    a = "inner";
+  if (!("innerWidth" in window)) {
+    a = "client";
     e = document.documentElement || document.body;
   }
-  return { w: e[a + 'Width'], h: e[a + 'Height'] };
+  return { w: e[a + "Width"], h: e[a + "Height"] };
 }
 
 function setup() {
-  canvas = document.getElementById('gameCanvas');
+  canvas = document.getElementById("gameCanvas");
   let dim = getViewportDimension();
   canvas.width = dim.w;
   canvas.height = dim.h - 220;
-  canvasContext = canvas.getContext('2d');
+  canvasContext = canvas.getContext("2d");
   centerScreenX = canvas.width / 2;
   centerScreenY = canvas.height / 2;
   setText();
@@ -415,17 +415,17 @@ function drawEverything() {
     ship.bullets.forEach((bullet) => bullet.draw());
   }
   ship.draw();
-  canvasContext.fillText('Score: ' + score, 30, 60);
+  canvasContext.fillText("Score: " + score, 30, 60);
 
   if (paused) {
     if (started_yet) {
-      canvasContext.fillText('Paused', centerScreenX - 30, centerScreenY + 50);
+      canvasContext.fillText("Paused", centerScreenX - 30, centerScreenY + 50);
     } else {
-      canvasContext.fillText('Click/Enter to Start/Pause!', centerScreenX - 150, centerScreenY + 50);
+      canvasContext.fillText("Click/Enter to Start/Pause!", centerScreenX - 150, centerScreenY + 50);
     }
   } else if (asteroids.length <= 0) {
-    canvasContext.fillText('You Win!', centerScreenX - 60, centerScreenY + 50);
-    canvasContext.fillText('Click/Enter to Restart!', centerScreenX - 120, centerScreenY + 80);
+    canvasContext.fillText("You Win!", centerScreenX - 60, centerScreenY + 50);
+    canvasContext.fillText("Click/Enter to Restart!", centerScreenX - 120, centerScreenY + 80);
     win = true;
   }
 }
@@ -444,13 +444,13 @@ function restart() {
 let keyStatusMap = {};
 function keyUpdate(evt) {
   evt.preventDefault();
-  if (evt.type === 'keydown' || evt.type === 'keyup') {
-    if (evt.type === 'keydown' && evt.key === 'Enter') {
+  if (evt.type === "keydown" || evt.type === "keyup") {
+    if (evt.type === "keydown" && evt.key === "Enter") {
       return;
-    } else if (evt.type === 'keyup' && evt.key === 'Enter') {
+    } else if (evt.type === "keyup" && evt.key === "Enter") {
       handlePause();
     } else if (!paused) {
-      keyStatusMap[evt.key] = evt.type === 'keydown';
+      keyStatusMap[evt.key] = evt.type === "keydown";
     }
   }
 }
@@ -485,11 +485,11 @@ function handleClick(evt) {
 }
 
 function setText() {
-  canvasContext.fillStyle = 'white';
+  canvasContext.fillStyle = "white";
   if (canvas.width >= 556) {
-    canvasContext.font = '30px Roboto';
+    canvasContext.font = "30px Roboto";
   } else {
-    canvasContext.font = '22px Roboto';
+    canvasContext.font = "22px Roboto";
   }
 }
 
