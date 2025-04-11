@@ -113,7 +113,7 @@ function getViewportDimension() {
 }
 
 function disableScroll() {
-  scrollTop = document.documentElement.scrollTop;
+  let scrollTop = document.documentElement.scrollTop;
   window.onscroll = function () {
     window.scrollTo(0, scrollTop);
   };

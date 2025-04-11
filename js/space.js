@@ -19,7 +19,7 @@ window.onload = function () {
     requestAnimationFrame(gameLoop);
 };
 
-function gameLoop(timestamp) {
+function gameLoop() {
     drawEverything();
     moveEverything();
     requestAnimationFrame(gameLoop);

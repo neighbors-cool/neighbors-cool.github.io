@@ -17,8 +17,7 @@ export default [
         $: true,
         localStorage: true,
         sessionStorage: true,
-        scrollTop: true,
-        workbox: true
+		workbox: true
       }
     },
     rules: {

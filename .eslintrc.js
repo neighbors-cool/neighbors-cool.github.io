@@ -1,4 +1,5 @@
 module.exports = {
+  ignorePatterns: ["node_modules/**", "_site/**", "**/*.min.js", "js/vendor/**"],
   env: {
     browser: true,
     es2021: true,
@@ -27,6 +28,7 @@ module.exports = {
     "document": true,
     "$": true,
     "localStorage": true,
-    "sessionStorage": true
+    "sessionStorage": true,
+	"workbox": true
   }
 };
