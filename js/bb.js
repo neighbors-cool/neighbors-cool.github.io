@@ -1,11 +1,26 @@
 let canvas;
 let canvasContext;
-let framesPerSecond = 60; // Set to fixed 60 FPS
+let framesPerSecond = 144; // Set to fixed 144 FPS
 let frameInterval = 1000 / framesPerSecond;
 const BACKGROUND_COLOR = "black";
-const BASE_BALL_SPEED = 4; // Base speed for small screens
-const MAX_BALL_SPEED = 7;  // Max speed for large screens
+const BASE_BALL_SPEED = 4; // Base speed without FPS scaling
+const MAX_BALL_SPEED = 7; // Max speed without FPS scaling
 const REFERENCE_HEIGHT = 800; // Reference height for speed scaling
+
+// Try to enable high refresh rate mode
+if (window.matchMedia) {
+    // Check if the browser supports high refresh rate
+    const highRefreshRate = window.matchMedia('(refresh-rate: 144)');
+    if (!highRefreshRate.matches) {
+        // If 144Hz not available, try for anything higher than 60Hz
+        const mediumRefreshRate = window.matchMedia('(refresh-rate: higher-than-60)');
+        if (mediumRefreshRate.matches) {
+            // Adjust FPS to match the screen's actual refresh rate if we can't get 144Hz
+            framesPerSecond = 120;
+            frameInterval = 1000 / framesPerSecond;
+        }
+    }
+}
 
 let fpsCounter = 0;
 let lastFpsUpdate = 0;
@@ -40,7 +55,6 @@ let centerScreenX;
 let centerScreenY;
 let distanceFromRight = 300;
 
-let lastTimestamp = 0;
 
 window.onload = function () {
   setup();
@@ -88,7 +102,21 @@ function setup() {
   }
   canvas.height = dim.h - 220;
   
-  canvasContext = canvas.getContext("2d");
+  // Enable high performance rendering with explicit sync policy
+  const ctx_options = {
+    alpha: false,
+    desynchronized: true,
+    antialias: false,
+    powerPreference: "high-performance",
+  };
+  
+  canvasContext = canvas.getContext("2d", ctx_options);
+  
+  // Request browser to match display refresh rate
+  if (canvas.style) {
+    canvas.style.imageRendering = "pixelated";
+  }
+  
   centerScreenX = canvas.width / 2;
   centerScreenY = canvas.height / 2;
 
@@ -103,17 +131,13 @@ function setup() {
   rewardScore = 1000 * level;
 }
 
-function gameLoop(timestamp) {
-  // Calculate time elapsed since last frame
-  const elapsed = timestamp - lastTimestamp;
+function gameLoop() {
+    // Request next frame immediately to minimize delay
+    requestAnimationFrame(gameLoop);
 
-  // Only update if enough time has passed
-  if (elapsed > frameInterval) {
+    // Update and draw
     moveEverything();
     drawEverything();
-    lastTimestamp = timestamp - (elapsed % frameInterval);
-  }
-  requestAnimationFrame(gameLoop);
 }
 
 function moveEverything() {
@@ -363,8 +387,14 @@ class Ball {
     this.colorControl = 0;
     this.color = "";
     this.setBallBoarder();
-    // Calculate speed multiplier based on screen height
-    this.speedMultiplier = BASE_BALL_SPEED + (Math.min(canvas.height, REFERENCE_HEIGHT) / REFERENCE_HEIGHT) * (MAX_BALL_SPEED - BASE_BALL_SPEED);
+    this.baseSpeed = BASE_BALL_SPEED;
+    this.maxSpeed = MAX_BALL_SPEED;
+    this.updateSpeedMultiplier();
+  }
+
+  updateSpeedMultiplier() {
+    // Scale speed based on screen height but keep original speed scale
+    this.speedMultiplier = this.baseSpeed + (Math.min(canvas.height, REFERENCE_HEIGHT) / REFERENCE_HEIGHT) * (this.maxSpeed - this.baseSpeed);
   }
 
   setBallBoarder() {
@@ -398,10 +428,12 @@ class Ball {
       this.vel.y--;
     }
 
-    // Set the max magnitude using screen-size based speed
+    // Normalize the velocity vector
     let hyp = Math.hypot(this.vel.x, this.vel.y);
-    this.pos.x = this.pos.x + constrain((this.vel.x / hyp) * this.speedMultiplier, -this.speedMultiplier, this.speedMultiplier);
-    this.pos.y = this.pos.y + constrain((this.vel.y / hyp) * this.speedMultiplier, -this.speedMultiplier, this.speedMultiplier);
+    
+    // Move ball based on normalized direction and speed
+    this.pos.x += (this.vel.x / hyp) * this.speedMultiplier;
+    this.pos.y += (this.vel.y / hyp) * this.speedMultiplier;
 
     this.setBallBoarder();
   }
@@ -411,8 +443,7 @@ class Ball {
     this.vel.y = getRandomInt(-3, -4) - level;
     this.pos.x = centerScreenX - this.radius;
     this.pos.y = canvas.height - paddle.padding - paddle.height - this.radius - 10;
-    // Recalculate speed multiplier on reset in case window was resized
-    this.speedMultiplier = BASE_BALL_SPEED + (Math.min(canvas.height, REFERENCE_HEIGHT) / REFERENCE_HEIGHT) * (MAX_BALL_SPEED - BASE_BALL_SPEED);
+    this.updateSpeedMultiplier();
   }
 
   checkForBrickHit() {
