@@ -4,7 +4,7 @@ let framesPerSecond = 144; // Set to fixed 144 FPS
 let frameInterval = 1000 / framesPerSecond;
 const BACKGROUND_COLOR = "black";
 const BASE_BALL_SPEED = 4; // Base speed without FPS scaling
-const MAX_BALL_SPEED = 7; // Max speed without FPS scaling
+const MAX_BALL_SPEED = 6; // Max speed without FPS scaling
 const REFERENCE_HEIGHT = 800; // Reference height for speed scaling
 
 // Try to enable high refresh rate mode
@@ -18,7 +18,11 @@ if (window.matchMedia) {
             // Adjust FPS to match the screen's actual refresh rate if we can't get 144Hz
             framesPerSecond = 120;
             frameInterval = 1000 / framesPerSecond;
-        }
+        } else {
+			// Default to 60Hz if no higher refresh rate is available
+			framesPerSecond = 60;
+			frameInterval = 1000 / framesPerSecond;
+		}
     }
 }
 
@@ -128,16 +132,25 @@ function setup() {
 
   createBalls();
   createBricks();
-  rewardScore = 1000 * level;
+  rewardScore = 100 * level;
 }
 
-function gameLoop() {
-    // Request next frame immediately to minimize delay
-    requestAnimationFrame(gameLoop);
+let lastTimestamp = 0;
 
-    // Update and draw
-    moveEverything();
+function gameLoop(timestamp) {
+    // Calculate time elapsed since last frame
+    const elapsed = timestamp - lastTimestamp;
+
+    // Only update if enough time has passed
+    if (elapsed > frameInterval) {
+        moveEverything();
+        lastTimestamp = timestamp - (elapsed % frameInterval);
+    }
+    
+    // Always draw every frame for smooth animation
     drawEverything();
+
+    requestAnimationFrame(gameLoop);
 }
 
 function moveEverything() {
@@ -238,7 +251,7 @@ function handleClick() {
       lives++;
     }
     level++;
-    rewardScore = 1000 * level;
+    rewardScore = 100 * level;
     showingWinScreen = false;
     paused = true;
     for (let ball of balls) {
@@ -254,7 +267,7 @@ function handleClick() {
       started_yet = false;
       level = 1;
       score = 0;
-      rewardScore = 1000 * level;
+      rewardScore = 100 * level;
       lives = NUMBER_OF_LIVES;
       for (let ball of balls) {
         ball.reset();
@@ -304,7 +317,7 @@ function colorRect(leftX, topY, width, height, drawColor) {
 
 function createBricks() {
   bricks = [];
-  let leftPad = (canvas.width - brick_columns * (BRICK_WIDTH + BRICK_WIDTH_PADDING) + BRICK_WIDTH_PADDING) / 2;
+  let leftPad = (canvas.width - brick_columns * (BRICK_WIDTH + BRICK_WIDTH_PADDING) + BRICK_WIDTH_PADDING) / 1.5;
   let topPad = 10;
   let hue = getRandomInt(0, 360);
   let modifyer = getRandomInt(0, 1) ? -20 : 20;
@@ -390,11 +403,17 @@ class Ball {
     this.baseSpeed = BASE_BALL_SPEED;
     this.maxSpeed = MAX_BALL_SPEED;
     this.updateSpeedMultiplier();
+    this.lastColorChange = performance.now();
+    this.COLOR_CHANGE_INTERVAL = 250;
   }
 
   updateSpeedMultiplier() {
-    // Scale speed based on screen height but keep original speed scale
-    this.speedMultiplier = this.baseSpeed + (Math.min(canvas.height, REFERENCE_HEIGHT) / REFERENCE_HEIGHT) * (this.maxSpeed - this.baseSpeed);
+    // Scale speed based on screen height and FPS
+    const fpsScale = framesPerSecond / 60; // Scale relative to 60 FPS as baseline
+    const heightScale = Math.min(canvas.height, REFERENCE_HEIGHT) / REFERENCE_HEIGHT;
+    
+    // Combine both scaling factors and apply to speed range
+    this.speedMultiplier = (this.baseSpeed + heightScale * (this.maxSpeed - this.baseSpeed)) / fpsScale;
   }
 
   setBallBoarder() {
@@ -406,11 +425,12 @@ class Ball {
 
   // Draw Ball
   draw() {
-    if (this.colorControl % (framesPerSecond / 5) === 0) {
+    const now = performance.now();
+    if (now - this.lastColorChange >= this.COLOR_CHANGE_INTERVAL) {
       this.color = "hsl(" + getRandomInt(0, 360) + ", 100%, 50%)";
-      this.colorControl = 0;
+      this.lastColorChange = now;
     }
-    this.colorControl++;
+    
     canvasContext.fillStyle = this.color;
     canvasContext.beginPath();
     // centerX, centerY, radius, startDraw, endDraw, counterClockwise
