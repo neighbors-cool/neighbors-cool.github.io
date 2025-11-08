@@ -8,8 +8,10 @@ layout: default
       <picture>
         <source type="image/webp" srcset="/img/justin_stream_4x.webp 960w, /img/justin_stream_3x.webp 720w, /img/justin_stream_2x.webp 480w, /img/justin_stream_1x.webp 240w" />
         <source type="image/jpeg" srcset="/img/justin_stream_4x.jpg 960w, /img/justin_stream_3x.jpg 720w, /img/justin_stream_2x.jpg 480w, /img/justin_stream_1x.jpg 240w" />
-        <img id="profile-pic-small" class="mb-3 profile-pic d-md-none" src="/img/justin_stream_1x.jpg" alt="Justin Neighbors Image" width="330px" height="248px" />
-        <img id="profile-pic-medium" class="mb-3 profile-pic d-none d-md-block" src="/img/justin_stream_1x.jpg" alt="Justin Neighbors Image" width="414px" height="313px" />
+        <!-- Use a single responsive img inside picture; width/height reflect the src image's intrinsic size -->
+        <img id="profile-pic" class="mb-3 profile-pic" src="/img/justin_stream_1x.jpg" alt="Justin Neighbors Image" width="240" height="180"
+          srcset="/img/justin_stream_1x.jpg 240w, /img/justin_stream_2x.jpg 480w, /img/justin_stream_3x.jpg 720w, /img/justin_stream_4x.jpg 960w"
+          sizes="(max-width: 767px) 330px, (max-width: 1199px) 414px, 480px" loading="lazy" decoding="async" />
       </picture>
       <ul class="align-self-center pl-3 pl-md-5">
         <li class="mb-2">
@@ -154,7 +156,7 @@ layout: default
             <picture>
               <source type="image/webp" srcset="/img/brickbreaker.webp" />
               <source type="image/jpeg" srcset="/img/brickbreaker.png" />
-              <img data-src="/img/brickbreaker.png" alt="Brick Breaker Game" class="lazyload fixed-img-size" loading="lazy" decoding="async" />
+              <img src="/img/brickbreaker.png" alt="Brick Breaker Game" class="fixed-img-size" loading="lazy" decoding="async" />
             </picture>
           </li>
           <li>
@@ -164,15 +166,12 @@ layout: default
             <picture>
               <source type="image/webp" srcset="/img/snake.webp" />
               <source type="image/jpeg" srcset="/img/snake.png" />
-              <img data-src="/img/snake.png" alt="Snake Game" class="lazyload fixed-img-size" loading="lazy" decoding="async" />
+              <img src="/img/snake.png" alt="Snake Game" class="fixed-img-size" loading="lazy" decoding="async" />
             </picture>
           </li>
         </ul>
       </li>
     </ul>
   </section>
-  <script src="/js/vendor/lazysizes.min.js" async></script>
-  <script src="/js/vendor/modernizr.min.js" async></script>
-  <script src="/js/plugins.js" async></script>
-  <script src="/js/custom.js" async></script>
+  <!-- Scripts are loaded from the layout to avoid duplicates -->
 </main>

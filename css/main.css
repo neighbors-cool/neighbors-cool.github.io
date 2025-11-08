@@ -34,7 +34,7 @@ html {
     background-color: #000 !important;
   }
   img {
-    border: thick solid #fff;
+    border: 4px solid #fff; /* reduce very thick border to 4px */
   }
   button.btn-link,
   h2,
@@ -68,7 +68,7 @@ html {
     background-color: #fff;
   }
   img {
-    border: thick solid #121733;
+    border: 4px solid #121733; /* reduce very thick border to 4px */
   }
   a,
   h1,
@@ -98,7 +98,8 @@ html {
 }
 body {
   margin-top: 50px;
-  font-size: 20px;
+  /* standard readable base font-size for accessibility */
+  font-size: 16px;
   font-family: 'Libre Baskerville', serif;
 }
 header h1 {
@@ -241,10 +242,12 @@ hr {
   margin: 0.3em;
 }
 
+/* fixed image size for specific elements */
 .fixed-img-size {
   width: 200px;
   height: 104px;
 }
+
 /*
  * Remove text-shadow in selection highlight:
  * https://twitter.com/miketaylr/status/12228805301
