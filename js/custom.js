@@ -17,7 +17,7 @@ window.addEventListener("load", () => {
         const a = anchors[i];
         const href = a.getAttribute('href') || '';
         const isLocal = a.classList.contains("local-link") || href.startsWith('/') || href.startsWith('#');
-        const isSpecial = href.startsWith('mailto:') || href.startsWith('tel:') || href.startsWith('javascript:');
+        const isSpecial = href.startsWith('mailto:') || href.startsWith('tel:') || href.startsWith('javascript:') || href.startsWith('data:') || href.startsWith('vbscript:');
         if (!isLocal && !isSpecial) {
           a.target = "_blank";
           a.rel = "noopener noreferrer";
