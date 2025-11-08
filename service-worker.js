@@ -5,6 +5,18 @@ if (!!workbox) {
     modulePathPrefix: "/js/vendor/workbox/",
     debug: false,
   });
+  // Manually precache core assets for offline support. Update revisions when assets change.
+  workbox.precaching.precacheAndRoute([
+    { url: '/', revision: 'v1' },
+    { url: '/index.html', revision: 'v1' },
+    { url: '/css/bootstrap-neighbors.css', revision: 'v1' },
+    { url: '/css/main.css', revision: 'v1' },
+    { url: '/js/custom.js', revision: 'v1' },
+    { url: '/js/plugins.js', revision: 'v1' },
+    { url: '/js/vendor/lazysizes.min.js', revision: 'v1' },
+    { url: '/img/justin_stream_2x.jpg', revision: 'v1' },
+    { url: '/img/justin_stream_4x.jpg', revision: 'v1' }
+  ]);
   const { registerRoute } = workbox.routing;
   const { CacheFirst, StaleWhileRevalidate } = workbox.strategies;
   const { ExpirationPlugin } = workbox.expiration;
